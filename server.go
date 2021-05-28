@@ -12,8 +12,8 @@ func main() {
 
 	http.HandleFunc("/", handlers.Home)
 	http.HandleFunc("/categories", handlers.Categories)
-	http.HandleFunc("/posts/", handlers.Posts)
-	http.HandleFunc("/profil/", handlers.Profil)
+	http.HandleFunc("/posts", handlers.Posts)
+	http.HandleFunc("/profil", handlers.Profil)
 
 	http.ListenAndServe(":8080", nil)
 }
