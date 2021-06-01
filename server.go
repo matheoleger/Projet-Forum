@@ -20,7 +20,7 @@ func main() {
 	http.HandleFunc("/posts", handlers.Posts)
 	http.HandleFunc("/profil", handlers.Profil)
 
-	fmt.Println(string(white), "[SERVER_READY] : on http://localhost:8000 ✅ ")
+	fmt.Println(string(white), "[SERVER_READY] : on http://localhost:8080 ✅ ")
 	fmt.Println(string(yellow), "[SERVER_INFO] : To stop the program : Ctrl + c")
 	http.ListenAndServe(":8080", nil)
 }
