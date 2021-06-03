@@ -1,4 +1,9 @@
 #colorfooter {
     padding:50px;
     background-color:#39332a;
+    color: rgb(200, 200, 200);
   }
+
+.SMOOSTER {
+visibility : hidden;
+}
