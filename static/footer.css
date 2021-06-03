@@ -6,3 +6,7 @@ footer {
   color: rgb(200, 200, 200);
   position: absolute;
 }
+
+#colorfooter {
+  font-family: "Montserrat";
+}
