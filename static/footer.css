@@ -8,6 +8,12 @@ footer {
   margin-top: 100%;
 }
 
-#colorfooter {
-  font-family: "Montserrat";
+#project {
+  color:rgb(200, 200, 200);
+  column-count: 4;
+}
+
+#credits {
+  color:rgb(200, 200, 200);
+  column-count: 2;
 }
