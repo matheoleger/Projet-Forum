@@ -21,6 +21,17 @@
     position: absolute right;
 }
 
+#navbar_menu {
+    display: block;
+    position: absolute;
+    box-shadow: 10px 10px 2px 1px rgba(50, 50, 50, 0.685); 
+    background-color: #DDC5A3;
+    left: 0px;
+    height: 100%;
+    width: 15%;
+    top: 50px;
+}   
+
 .navbar {
     display: block; 
     width: 120px;
@@ -29,6 +40,8 @@
     padding: 3px 10px;
     position: absolute;
     font-weight: bold;
+    font-size: 20px;
+    padding-top: 50px;
 }
 
 .navbar a {
