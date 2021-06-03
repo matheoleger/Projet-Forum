@@ -6,17 +6,51 @@
     width: 350px;
     height: 100px;
     text-align: center;
-
 }
 
 .navbar_button {
+    background-color: #d3b58c;
     height: 100px;
     width: 100px;
-
+    overflow: hidden;
 }
 
 .user_button {
     height: 100px;
     width: 100px;
+    position: absolute right;
+}
 
+.navbar {
+    display: block; 
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    padding: 3px 10px;
+    position: absolute;
+    font-weight: bold;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    background-color: #DDC5A3;
+    font-weight: bold;
+    display: block; 
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    padding: 3px 10px;
+    
+}
+
+.navbar a:hover {
+    background-color: #d3b58c;
+    color: #f2f2f2;
+}
+  
+  
+.navbar a.on-click {
+    background-color: #d3b58c;
+    color: #f2f2f2;
 }
