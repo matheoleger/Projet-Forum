@@ -1,14 +1,23 @@
 {{ define "body" }}
-<div class="container">
-    <label for="uname"><b>Nom d'utilisateur</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
 
-    <label for="psw"><b>Mot de passe</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+<form action="/connexion" method="POST">
+  <div class="container">
+      <label for="loginName"><b>Nom d'utilisateur</b></label>
+      <input type="text" placeholder="Enter Username" name="loginName" required>
 
-    <button type="submit">Se connecter</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-</div>
+      <label for="loginPassword"><b>Mot de passe</b></label>
+      <input type="password" placeholder="Enter Password" name="loginPassword" required>
+
+      <button type="submit">Se connecter</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+  </div>
+</form>
+
+<br>
+<br>
+<br>
+<br>
+
 {{ end }}
