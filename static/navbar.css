@@ -13,7 +13,6 @@
 }
 
 .navbar_button {
-    background-color: #d3b58c;
     height: 50px;
     width: 50px;
     /* overflow: hidden; */
@@ -55,12 +54,12 @@
     display: block; 
     width: 120px;
     height: 30px;
-    line-height: 30px;
+    /* line-height: 30px; */
     padding: 3px 10px;
     position: absolute;
     font-weight: bold;
     font-size: 20px;
-    padding-top: 50px;
+    padding-top: 70px;
 }
 
 .navbar_elements a {
@@ -82,7 +81,7 @@
 }
   
   
-.navbar_elements a.on-click {
-    background-color: #d3b58c;
+.navbar_elements:active {
+    background-color: #442a05;
     color: #f2f2f2;
 }
