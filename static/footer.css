@@ -1,0 +1,13 @@
+footer {
+  width: 100%;
+  padding: 20px 0 ;
+  background-color:#39332a;
+  color: rgb(200, 200, 200);
+  /* position: absolute; */
+  z-index: 1;
+  margin-top: 100%;
+}
+
+#colorfooter {
+  font-family: "Montserrat";
+}

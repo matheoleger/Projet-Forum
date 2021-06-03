@@ -1,0 +1,88 @@
+#header {
+    background-color: #DDC5A3;
+    box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#logo {
+    width: 350px;
+    height: 100px;
+    text-align: center;
+}
+
+.navbar_button {
+    background-color: #d3b58c;
+    height: 50px;
+    width: 50px;
+    /* overflow: hidden; */
+    margin-left: 20px;
+    margin-top: 20px;
+    z-index: 10;
+}
+
+.user_button {
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+#navbar_menu {
+    display: block;
+    position: absolute;
+    box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
+    background-color: #DDC5A3;
+    left: 0px;
+    height: 100%;
+    width: 25%;
+
+    /* test  */
+    visibility: hidden;
+    transition-duration: 0.3s;
+
+    top: 0px;
+    z-index: 5;
+
+}   
+
+.navbar_elements {
+    /* test  */
+    visibility: hidden;
+    transition-duration: 0.3s;
+
+    display: block; 
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    padding: 3px 10px;
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 50px;
+}
+
+.navbar_elements a {
+    float: left;
+    color: #f2f2f2;
+    background-color: #DDC5A3;
+    font-weight: bold;
+    display: block; 
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    padding: 3px 10px;
+    
+}
+
+.navbar_elements a:hover {
+    background-color: #d3b58c;
+    color: #f2f2f2;
+}
+  
+  
+.navbar_elements a.on-click {
+    background-color: #d3b58c;
+    color: #f2f2f2;
+}
