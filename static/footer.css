@@ -1,12 +1,8 @@
 footer {
   width: 100%;
-  padding: 20px 10px ;
+  margin: -0.40%;
+  padding: 20px 0 ;
   background-color:#39332a;
   color: rgb(200, 200, 200);
   position: absolute;
-}
-
-
-.SMOOSTER {
-visibility : hidden;
 }
