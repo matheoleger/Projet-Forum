@@ -1,9 +1,11 @@
-#colorfooter {
-    padding:50px;
-    background-color:#39332a;
-    color: rgb(200, 200, 200);
-    position: absolute;
-  }
+footer {
+  width: 100%;
+  padding: 20px 10px ;
+  background-color:#39332a;
+  color: rgb(200, 200, 200);
+  position: absolute;
+}
+
 
 .SMOOSTER {
 visibility : hidden;
