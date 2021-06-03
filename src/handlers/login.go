@@ -30,9 +30,9 @@ func GetLogin(w http.ResponseWriter, r *http.Request) {
 	}
 	name := r.PostFormValue("loginName")
 	passWord := r.PostFormValue("loginPassword")
+	passWordsecure := PasswordHash(w, r, passWord)
 	var result string = "\n Votre login est " + name + " et votre mot de passe est " + passWord
-
-	var resultHash string = "\n Votre login est " + name + " et votre mot de passes hashé est " + PasswordHash(w, r, passWord)
+	var resultHash string = "\n Votre login est " + name + " et votre mot de passes hashé est " + passWordsecure
 
 	if len(name) == 0 && len(passWord) == 0 {
 		fmt.Println("Votre mot de passe n'a pas été enregistré")
