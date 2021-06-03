@@ -40,6 +40,7 @@ func GetLogin(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(string("\033[1;37m\033[0m"), result)
 		fmt.Println(string("\033[1;37m\033[0m"), resultHash)
 	}
+	// Redirection page d'accueil
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
