@@ -1,23 +1,39 @@
 package handlers
 
 import (
-	"fmt"
+	"html/template"
+	"log"
 	"net/http"
 )
 
-func CodeErreur(w http.ResponseWriter, r *http.Request, status int, message string) {
+func CodeErreur(w http.ResponseWriter, r *http.Request, status int) {
+	//var errorType string
 	const colorRed = "\033[31m"
 
-	if status == 404 {
-		http.Error(w, "404 not found", http.StatusNotFound)
-		fmt.Println(string(colorRed), message)
+	files := findPathFiles("./templates/error.html")
+
+	t, err := template.ParseFiles(files...)
+
+	if err != nil {
+		log.Fatal(err)
 	}
+	t.Execute(w, ErrorType(w, r, t, status))
+
+}
+
+func ErrorType(w http.ResponseWriter, t *http.Request, err *template.Template, status int) string {
+	var errorstr string
 	if status == 400 {
-		http.Error(w, "400 Bad request", http.StatusBadRequest)
-		fmt.Println(string(colorRed), message)
+		errorstr = `Error 400 : Bad Request `
+		//err.Execute(w, `<h1> Error 400 : Bad Request </h1>`)
+	}
+	if status == 404 {
+		errorstr = `Error 404 : Page Not Found`
+		//err.Execute(w, `<h1> Error 404 : Page Not Found </h1>`)
 	}
 	if status == 500 {
-		http.Error(w, "500 Internal Server", http.StatusInternalServerError)
-		fmt.Println(string(colorRed), message)
+		errorstr = `Error 500 : Internal Server Error`
+		//err.Execute(w, `<h1> Error 500 : Internal Server Error </h1>`)
 	}
+	return errorstr
 }
