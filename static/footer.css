@@ -8,12 +8,22 @@ footer {
   margin-top: 10%;
 }
 
-#project {
-  color:rgb(200, 200, 200);
-  column-count: 4;
+#colorfooter {
+  font-family: "Montserrat";
 }
 
-#credits {
-  color:rgb(200, 200, 200);
-  column-count: 2;
+.campus {
+  margin-left: 41%;
+}
+
+.year_of_creation {
+  margin-left: 46%;
+}
+
+.credits {
+  margin-left: 10px;
+}
+
+.members_name {
+  margin-left: 10px;
 }
