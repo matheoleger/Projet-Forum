@@ -17,5 +17,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		CodeErreur(w, r, 500, "[Server_Alert] - Error 500 : Template not found -> home.html")
 	}
 
+	AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
+	DataBase()
+	
 	ts.Execute(w, nil)
 }
