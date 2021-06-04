@@ -1,9 +1,9 @@
 #header {
-    background-color: #DDC5A3;
-    box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
     display: flex;
     justify-content: space-between;
 
+    background-color: #DDC5A3;
+    box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
 }
 
 #logo {
@@ -12,10 +12,9 @@
     text-align: center;
 }
 
-.navbar_button {
+.headerToNavbar_button {
     height: 50px;
     width: 50px;
-    /* overflow: hidden; */
     margin-left: 20px;
     margin-top: 20px;
     z-index: 10;
@@ -28,60 +27,88 @@
     margin-top: 10px;
 }
 
-#navbar_menu {
+#navbar_wrapper {
     display: block;
     position: absolute;
+    visibility: hidden;
+
     box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
     background-color: #DDC5A3;
+
     left: 0px;
-    height: 100%;
-    width: 25%;
-
-    /* test  */
-    visibility: hidden;
-    transition-duration: 0.3s;
-
     top: 0px;
+    height: 200%;
+    width: 20%;
     z-index: 5;
+}
 
-}   
+ul {
+    list-style-type: none;
+    margin-top: 100px;
+    margin-left: 35px;
+    width: 200px;
+    background-color: #f1f1f1;
+  }
 
-.navbar_elements {
-    /* test  */
+li:item_home {
     visibility: hidden;
-    transition-duration: 0.3s;
-
     display: block; 
-    width: 120px;
-    height: 30px;
-    /* line-height: 30px; */
-    padding: 3px 10px;
     position: absolute;
     font-weight: bold;
     font-size: 20px;
+
+    width: 120px;
+    height: 30px;
+    padding: 3px 10px;
     padding-top: 70px;
 }
 
-.navbar_elements a {
+li:item_categories {
+    visibility: hidden;
+    display: block; 
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+
+    width: 120px;
+    height: 30px;
+    padding: 3px 10px;
+    padding-top: 70px;
+}
+
+li:item_profil {
+    visibility: hidden;
+    display: block; 
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+
+    width: 120px;
+    height: 30px;
+    padding: 3px 10px;
+    padding-top: 70px;
+}
+  
+li a {
+    display: block; 
     float: left;
+    font-weight: bold;
+    
     color: #f2f2f2;
     background-color: #DDC5A3;
-    font-weight: bold;
-    display: block; 
+    
     width: 120px;
     height: 30px;
     line-height: 30px;
     padding: 3px 10px;
-    
 }
-
-.navbar_elements a:hover {
+  
+li a:hover {
     background-color: #d3b58c;
     color: #f2f2f2;
 }
-  
-  
-.navbar_elements:active {
+
+li a:active {
     background-color: #442a05;
     color: #f2f2f2;
 }

@@ -4,18 +4,18 @@
     <div id="header">
 
         <!-- <button type ="checkbox" class="navbar_button" onclick="showDiv()" ><img src="../../static/img/navbar-btn.png" alt="menu" width="50" height=">50"></button> -->
-        <img src="../../static/img/navbar-btn.png" class="navbar_button" alt="menu" width="50" height="50" onclick="showDiv()">
+        <img src="../../static/img/navbar-btn.png" class="headerToNavbar_button" alt="menu" width="50" height="50" onclick="showDiv()">
         <img id="logo" src="../../static/img/y_forum_logo.png" alt="logo"> 
         <a href="/profil" class="user_button" >  <img class="user_button" src="../../static/img/user-btn.png" alt="profil">  </a>
 
     </div>
     
-    <div id="navbar_menu">
-        <div class="navbar_elements">
-            <a href="/">Home</a>
-            <a href="/categories">Catégories</a>
-            <a href="/profil">Profil</a>
-        </div>
+    <div id="navbar_wrapper">
+        <ul>
+            <li class="item_home"><a href="/">Home</a></li>
+            <li class="item_categories"><a href="/categories">Catégories</a></li>
+            <li class="item_profil"><a href="/profil">Profil</a></li>
+        </ul>
     </div>
     
 </header>
