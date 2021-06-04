@@ -1,6 +1,7 @@
 #header {
     display: flex;
     justify-content: space-between;
+    top: 0px;
 
     background-color: #DDC5A3;
     box-shadow: 0px 10px 10px 5px rgba(50, 50, 50, 0.685); 
@@ -29,15 +30,17 @@
 
 #navbar_wrapper {
     display: block;
-    position: absolute;
     visibility: hidden;
+    position: fixed;
+
+
 
     box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
     background-color: #DDC5A3;
 
     left: 0px;
     top: 0px;
-    height: 150%;
+    height: 100%;
     width: 20%;
     z-index: 5;
 }
@@ -47,7 +50,6 @@ ul {
     margin-top: 100px;
     margin-left: 35px;
     width: 200px;
-    /* background-color: #f1f1f1; */
   }
 
 li:item_home {
@@ -95,7 +97,6 @@ li a {
     font-weight: bold;
     
     color: #f2f2f2;
-    /* background-color: #DDC5A3; */
     
     width: 120px;
     height: 30px;
@@ -104,12 +105,11 @@ li a {
 }
   
 li a:hover {
-    /* background-color: #d3b58c; */
     color: #595D3C;
     transition-duration: 0.4s;
 }
 
 li a:active {
-    background-color: #442a05;
-    color: #f2f2f2;
+    color: #181a10;
+
 }
