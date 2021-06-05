@@ -8,7 +8,7 @@ import (
 )
 
 func AddUser(user string, pw string, mail string) {
-	db, err := sql.Open("sqlite3", "../../BDD/BDD_Forum")
+	db, err := sql.Open("sqlite3", "BDD/BDD_Forum")
 
 	if err != nil {
 		fmt.Println("error")
@@ -16,11 +16,17 @@ func AddUser(user string, pw string, mail string) {
 	}
 
 	statement, err := db.Prepare("INSERT INTO user (username, password, mail) VALUES (?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error")
+		return
+	}
+
 	statement.Exec(user, pw, mail)
 }
 
 func DeleteUser(user string) {
-	db, err := sql.Open("sqlite3", "../../BDD/BDD_Forum")
+	db, err := sql.Open("sqlite3", "BDD/BDD_Forum")
 
 	if err != nil {
 		fmt.Println("error")
@@ -39,14 +45,20 @@ func DeleteUser(user string) {
 }
 
 func DataBase() {
-	db, err := sql.Open("sqlite3", "../../BDD/BDD_Forum")
+	db, err := sql.Open("sqlite3", "BDD/BDD_Forum")
 
 	if err != nil {
-		fmt.Println("error")
+		fmt.Println("error open")
 		return
 	}
 
 	result, err := db.Query("SELECT password, mail FROM user WHERE username = \"JohnBibi\"")
+
+	if err != nil {
+		fmt.Println("error query")
+		return
+	}
+
 	var password string
 	var email string
 	for result.Next() {
