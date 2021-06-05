@@ -3,7 +3,9 @@
     justify-content: space-between;
     top: 0px;
     width: 100%;
-    position:fixed;
+    
+    /* position:fixed; */ 
+    /* fixed = header bien mais bouton en dessous */
     
     background-color: #DDC5A3;
     box-shadow: 0px 10px 10px 5px rgba(50, 50, 50, 0.685); 
@@ -20,7 +22,8 @@
     width: 50px;
     margin-left: 20px;
     margin-top: 20px;
-    z-index: 10;
+
+    z-index: 10; /* highest */
 }
 
 .user_button {
@@ -31,39 +34,55 @@
 }
 
 #navbar_wrapper {
-    display: flex;
+    display: block;
+    visibility: hidden;
     position: fixed;
 
-    box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685);
+    box-shadow: 10px 10px 10px 5px rgba(50, 50, 50, 0.685); 
     background-color: #DDC5A3;
-    border-right: 1px solid black;
 
     left: 0px;
-    top: 150px;
-    height: 60%;
-    width: 2%;
-    
+    top: 0px;
+    height: 100%;
+    width: 20%;
     z-index: 5;
 }
 
-.enlargeDiv {
-    width: 25%;
-    transition: transition-duration 3s;
-}
-
-.reduceDiv {
-    width: 15px;
-    transition: translate;
-}
-
 ul {
+    display: sticky;
+
     list-style-type: none;
+
     margin-top: 100px;
     margin-left: 35px;
     width: 200px;
+
+    z-index: 4; /* 4th highest */
 }
 
-li:item_home {
+li a {
+    display: block; 
+    float: left;
+    font-weight: bold;
+    
+    color: #f2f2f2;
+    
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    padding: 3px 10px;
+}
+  
+li a:hover {
+    color: #595D3C;
+    transition-duration: 0.4s;
+}
+
+li a:active {
+    color: #181a10;
+}
+
+/* li:item_home {
     visibility: hidden;
     display: block; 
     position: absolute;
@@ -100,28 +119,4 @@ li:item_profil {
     height: 30px;
     padding: 3px 10px;
     padding-top: 70px;
-}
-  
-li a {
-    display: block; 
-    float: left;
-    font-weight: bold;
-    
-    /*color: #f2f2f2;*/
-    color: #3b0707;
-    
-    width: 120px;
-    height: 30px;
-    line-height: 30px;
-    padding: 3px 10px;
-}
-  
-li a:hover {
-    color: #595D3C;
-    transition-duration: 0.4s;
-}
-
-li a:active {
-    color: #181a10;
-
-}
+} */

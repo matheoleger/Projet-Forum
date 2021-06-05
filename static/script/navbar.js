@@ -1,4 +1,3 @@
-/*
 let flipflop = true;
 
 function showDiv() {
@@ -15,34 +14,4 @@ function showDiv() {
 
 
     }
- }
-*/
-
-function enlargeDiv (
-    menu_slider = document.getElementById('navbar_wrapper');
-)
-
-$(menu_slider.addClass(".enlargeDiv"));
-
-function reduceDiv (
-    menu_slider = document.getElementById('navbar_wrapper');
-)
-
-$(menu_slider.addClass(".reduceDiv"));
-
-
-// $(menu_slider.removeClass(".enlargeDiv"));
-
-/*
-function enlargeDiv() {
-    menu_slider.addClass(".enlargeDiv")
-    menu_slider.removeClass(".enlargeDiv")
-    menu_slider = true
 }
-
-function reduceDiv() {
-    menu_slider.removeClass(".enlargeDiv")
-    menu_slider.addClass(".reduceDiv")
-    menu_slider = false
-}
-*/
