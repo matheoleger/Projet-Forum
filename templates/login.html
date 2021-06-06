@@ -2,6 +2,8 @@
 
 
 <div class="login-elements">
+
+  <img src="../static/img/user-logo-coloring2.png">
   <div class="btn-choice">
     <button onclick="showLoginOrRegister(true)" id="choice_login_btn">Connexion</button>
     <button onclick="showLoginOrRegister(false)" id="choice_register_btn">Inscription</button>  
@@ -18,7 +20,7 @@
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
 
-    <button type="submit">Se connecter</button>
+    <button type="submit" id="submit_btn">Se connecter</button>
   </form>
   
   <form action="./inscription" method="POST" class="registerForm" style="display: none;">
@@ -38,7 +40,7 @@
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
 
-    <button type="submit">S'inscrire</button>
+    <button type="submit" id="submit_btn">S'inscrire</button>
 
   </form>
 </div>

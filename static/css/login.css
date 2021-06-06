@@ -6,6 +6,12 @@
     /* background-color: #DED2C0; */
 }
 
+.login-elements img {
+    margin: 0 75px;
+    width: 150px;
+    height: auto;
+}
+
 .login-elements form {
 
     background-color: #DED2C0;
@@ -50,7 +56,6 @@
     color:#888073;
     font-size: 20px;
     font-weight: 500;
-    margin-left: 10px;
     margin-bottom: 10px;
 }
 
@@ -61,4 +66,12 @@
 .btn-choice {
     display: flex;
     align-items: center;
+
+}
+
+.btn-choice button {
+    margin-left: 12px;
+}
+
+#submit_btn {
 }
