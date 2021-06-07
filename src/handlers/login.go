@@ -97,19 +97,6 @@ func GetLogin(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-// func PasswordHash(w http.ResponseWriter, r *http.Request, password string) string {
-// 	// Trasnformation du mot de passe en tableau de byte
-// 	passWordByte := []byte(password)
-
-// 	// On hash le mot de passe
-// 	hash, err := bcrypt.GenerateFromPassword(passWordByte, bcrypt.MinCost)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-
-// 	return string(hash)
-// }
-
 func PasswordHash(password string) string {
 	// Trasnformation du mot de passe en tableau de byte
 	passWordByte := []byte(password)
