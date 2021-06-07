@@ -64,13 +64,15 @@ li a {
     display: block; 
     float: left;
     font-weight: bold;
+    font-size: 22px;
+    text-decoration: none;
     
     color: #f2f2f2;
     
     width: 120px;
     height: 30px;
     line-height: 30px;
-    padding: 3px 10px;
+    padding: 20px 20px;
 }
   
 li a:hover {
@@ -82,41 +84,3 @@ li a:active {
     color: #181a10;
 }
 
-/* li:item_home {
-    visibility: hidden;
-    display: block; 
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-
-    width: 120px;
-    height: 30px;
-    padding: 3px 10px;
-    padding-top: 70px;
-}
-
-li:item_categories {
-    visibility: hidden;
-    display: block; 
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-
-    width: 120px;
-    height: 30px;
-    padding: 3px 10px;
-    padding-top: 70px;
-}
-
-li:item_profil {
-    visibility: hidden;
-    display: block; 
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-
-    width: 120px;
-    height: 30px;
-    padding: 3px 10px;
-    padding-top: 70px;
-} */
