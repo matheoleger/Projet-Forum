@@ -115,6 +115,7 @@ func PasswordHash(password string) string {
 	return string(hash)
 }
 
+//On compte le nombre d'élément obligatoire
 func SecurisationPassword(passWord string) bool {
 	passWordRune := []rune(passWord)
 	punct := 0
@@ -146,10 +147,10 @@ func SecurisationPassword(passWord string) bool {
 			}
 		}
 	}
-	return VerificationPassWord(punct, num, maj, min)
+	return VerificationNumberElementPassword(punct, num, maj, min)
 }
 
-func VerificationPassWord(punct, num, maj, min int) bool {
+func VerificationNumberElementPassword(punct, num, maj, min int) bool {
 	var result bool = true
 	var redColor = "\033[31m"
 	var greenColor = "\033[32m"
@@ -159,19 +160,19 @@ func VerificationPassWord(punct, num, maj, min int) bool {
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de ponctuation.")
 	}
-	if num <= 1 {
+	if num < 1 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de chiffre.")
 		result = false
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de chiffres.")
 	}
-	if maj < 1 {
+	if maj < 2 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de majuscule.")
 		result = false
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de majuscule.")
 	}
-	if min < 1 {
+	if min < 2 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de minuscule.")
 		result = false
 	} else {
