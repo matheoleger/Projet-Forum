@@ -80,23 +80,26 @@ func GetLogin(w http.ResponseWriter, r *http.Request) {
 	}
 	name := r.PostFormValue("loginName")
 	passWord := r.PostFormValue("loginPassword")
-	SecurisationPassword(passWord)
-	passWordsecure := PasswordHash(passWord)
-	doublePassWordSercure := PasswordHash(passWordsecure)
-	var result string = "\n Votre login est " + name + " et votre mot de passe est " + passWord
-	var resultHash string = "\n Votre login est " + name + " et votre mot de passes hashé est " + passWordsecure
-	var doubleResultHash string = "\n Votre login est " + name + " et votre mot de passe hashé est " + doublePassWordSercure
-
-	if len(name) == 0 && len(passWord) == 0 {
-		fmt.Println("⚠️ Votre mot de passe n'a pas été enregistré")
-	} else {
-		fmt.Println(string("\033[1;37m\033[0m"), result)
-		fmt.Println(string("\033[1;37m\033[0m"), resultHash)
-		fmt.Println(string("\033[1;37m\033[0m"), doubleResultHash)
-	}
+	PasswordAccess(name, passWord)
 
 	// Redirection page d'accueil
 	http.Redirect(w, r, "/login", http.StatusSeeOther)
+}
+
+func PasswordAccess(name, passWord string) {
+	if SecurisationPassword(passWord) {
+		passWordsecure := PasswordHash(passWord)
+		doublePassWordSercure := PasswordHash(passWordsecure)
+		var result string = "\n Votre login est " + name + " et votre mot de passe est " + passWord
+		var resultHash string = "\n Votre login est " + name + " et votre mot de passes hashé est " + passWordsecure
+		var doubleResultHash string = "\n Votre login est " + name + " et votre mot de passe hashé est " + doublePassWordSercure
+		fmt.Println(string("\033[1;37m\033[0m"), result)
+		fmt.Println(string("\033[1;37m\033[0m"), resultHash)
+		fmt.Println(string("\033[1;37m\033[0m"), doubleResultHash)
+	} else {
+		var redColor = "\033[31m"
+		fmt.Println(string(redColor), "Votre mot de passe n'a pas passé tout les tests. \n \n")
+	}
 }
 
 func PasswordHash(password string) string {
@@ -112,12 +115,12 @@ func PasswordHash(password string) string {
 	return string(hash)
 }
 
-func SecurisationPassword(passWord string) {
+func SecurisationPassword(passWord string) bool {
 	passWordRune := []rune(passWord)
 	punct := 0
+	num := 0
 	maj := 0
 	min := 0
-	num := 0
 
 	if len(passWord) <= 8 {
 		fmt.Println("⚠️  Votre mot de passe n'est pas assez long, votre mot de passe contient " + strconv.Itoa(len(passWord)) + " caractères , veuillez réessayer")
@@ -143,30 +146,36 @@ func SecurisationPassword(passWord string) {
 			}
 		}
 	}
-	VerificationPassWord(punct, num, maj, min)
+	return VerificationPassWord(punct, num, maj, min)
 }
 
-func VerificationPassWord(punct, num, maj, min int) {
+func VerificationPassWord(punct, num, maj, min int) bool {
+	var result bool = true
 	var redColor = "\033[31m"
 	var greenColor = "\033[32m"
 	if punct < 1 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de ponctuation.")
+		result = false
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de ponctuation.")
 	}
-	if num <= 2 {
+	if num <= 1 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de chiffre.")
+		result = false
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de chiffres.")
 	}
-	if maj <= 1 {
+	if maj < 1 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de majuscule.")
+		result = false
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de majuscule.")
 	}
-	if min <= 1 {
+	if min < 1 {
 		fmt.Println(string(redColor), "⚠️  Error : Votre mot de passe ne contient pas assez de minuscule.")
+		result = false
 	} else {
 		fmt.Println(string(greenColor), "✔️  Votre mot de passe contient assez de minuscule.")
 	}
+	return result
 }
