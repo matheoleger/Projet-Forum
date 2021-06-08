@@ -67,3 +67,28 @@ func DataBase() {
 		fmt.Println(password + " " + email)
 	}
 }
+
+func GetPassWord(user string) string {
+	db, err := sql.Open("sqlite3", "BDD/BDD_Forum")
+
+	if err != nil {
+		fmt.Println("error open")
+		return "error open"
+	}
+
+	result, err := db.Query("SELECT password FROM user WHERE username = \"JohnBibi\"")
+
+	if err != nil {
+		fmt.Println("error query")
+		return "error query"
+	}
+
+	var password string
+	for result.Next() {
+		result.Scan(&password)
+		/* Faire quelque chose avec cette ligne */
+		fmt.Println(password)
+	}
+
+	return password
+}
