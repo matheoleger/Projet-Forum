@@ -48,7 +48,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		password := r.PostFormValue("registerPassword")
 		email := r.PostFormValue("registerMail")
 
-		if VerificationPassword(password) {
+		if VerificationPassword(password) && VerificationEmail(email) {
 			hashedPW := PasswordHash(password)
 
 			AddUser(name, hashedPW, email)
@@ -208,19 +208,30 @@ func VerificationPassword(password string) bool {
 	// }
 
 	if !regexMaj.Match([]byte(password)) || !regexMin.Match([]byte(password)) {
-		fmt.Println("tout va mal")
+		fmt.Println("Le nombre de Majuscule et minuscule doivent être supérieurs à 2")
 		return false
 	}
 
 	if !regexDigit.Match([]byte(password)) || !regexSpeChar.Match([]byte(password)) {
-		fmt.Println("tout va mal")
+		fmt.Println("Le nombre de chiffre doit être supérieurs à 2 et il doit y avoir au moins 1 caractères spéciales")
 		return false
 	}
 
 	if !regexLength.Match([]byte(password)) {
-		fmt.Println("tout va mal")
+		fmt.Println("La longueur doit être de 8 caractères")
 		return false
 	}
 
 	return true
+}
+
+func VerificationEmail(email string) bool {
+	var re = regexp.MustCompile(`(?mi)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}`)
+
+	if re.Match([]byte(email)) {
+		return true
+	} else {
+		fmt.Println("Email non valide")
+		return false
+	}
 }
