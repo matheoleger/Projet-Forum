@@ -17,11 +17,11 @@ func AddUser(user string, pw string, mail string) {
 
 	statement, err := db.Prepare("INSERT INTO user (id_username, password, email) VALUES (?, ?, ?)")
 
+	//Error TO DO
 	if err != nil {
 		fmt.Println("error prepare")
 		return
 	}
-
 	statement.Exec(user, pw, mail)
 }
 
@@ -29,7 +29,7 @@ func DeleteUser(user string) {
 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
 
 	if err != nil {
-		fmt.Println("error")
+		fmt.Println("error open 1")
 		return
 	}
 
@@ -44,36 +44,37 @@ func DeleteUser(user string) {
 	// }
 }
 
-func DataBase() {
-	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
+// func DataBase() {
+// 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
 
-	if err != nil {
-		fmt.Println("error open")
-		return
-	}
+// 	if err != nil {
+// 		fmt.Println("error open2")
+// 		return
+// 	}
 
-	result, err := db.Query("SELECT password, mail FROM user WHERE username = \"JohnBibi\"")
+// 	result, err := db.Query("SELECT password, email FROM user WHERE id_username = \"JohnBibi\"")
 
-	if err != nil {
-		fmt.Println("error query")
-		return
-	}
+// 	// Error TO DO
+// 	if err != nil {
+// 		fmt.Println("error query data base")
+// 		return
+// 	}
 
-	var password string
-	var email string
-	for result.Next() {
-		result.Scan(&password, &email)
-		/* Faire quelque chose avec cette ligne */
-		fmt.Println(password + " " + email)
-	}
-}
+// 	var password string
+// 	var email string
+// 	for result.Next() {
+// 		result.Scan(&password, &email)
+// 		/* Faire quelque chose avec cette ligne */
+// 		fmt.Println(password + " " + email)
+// 	}
+// }
 
 func GetPassWord(user string) string {
 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
 
 	if err != nil {
 		fmt.Println("error open")
-		return "error open"
+		return "error open3"
 	}
 
 	statement, err := db.Prepare("SELECT password FROM user WHERE id_username = ?")

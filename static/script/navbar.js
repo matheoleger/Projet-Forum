@@ -16,4 +16,5 @@ function showDiv() {
         document.querySelector('.navbar_wrapper').classList.remove('navbar_wrapper_appear')
         flipflop = true
     }
- }
+}
+
