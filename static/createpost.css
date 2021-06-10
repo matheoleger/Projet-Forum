@@ -1,20 +1,36 @@
-
-
 #titlecreation {
     margin-top: 10%;
     color: #6B8E23;
     text-align: center;
     font-size: 75px;
 }
-.creationForm {
-    display: block;
-    text-align: center;
-}
-
-#formulaire {
-    display: block;
+.square {
+    width: 100%;
+    height: 100%;
+    padding-top: 10%;
+    background-color: #ccc;
+    position: relative;
 }
 
 .postcontent {
+    position: absolute;
+    padding-top: 50%;
+    left: 0;
     height: 180px;
 }
+
+.titlePost {
+    /* padding: 12px; */
+    width: 100px;
+    margin-left: 40%;
+    text-align: center;
+    position: fixed;
+}
+
+.categoryPost {
+    /* padding: 12px; */
+    margin-left: 60%;
+    margin-bottom: 5%;
+    position: fixed;
+}
+
