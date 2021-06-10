@@ -3,6 +3,27 @@
 <div id="creation">
 
     <h1>Creationpost</h1>
+    <form action="/creation" method="POST" class="creationForm">
+        <label for="titlepost"><b>Titre</b></label>
+        <input type="text" name="titlepost" placeholder="Enter title of post">
+
+        <label for="category-select"><b>Category</b></label>
+        <select name="category" id="category-select">
+            <option value="Sport">Sport</option>
+            <option value="Politique">Politique</option>
+            <option value="Actu">Actu</option>
+            <option value="Technology">Technologie</option>
+            <option value="Nourritures">Nourritures</option>
+            <option value="Animals">Animal</option>
+            <option value="Other">Autre</option>
+        </select>
+        
+        <label for="postcontent">Content</label>
+        <input type="text" name="postcontent" placeholder="Enter content of your post" required>
+    
+        <button type="submit" id="submit_btn">PublYsh</button>
+    </form>
+
 
 </div>
 
