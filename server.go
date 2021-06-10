@@ -19,7 +19,7 @@ func main() {
 	http.HandleFunc("/categories", handlers.Categories)
 	http.HandleFunc("/posts", handlers.Posts)
 	http.HandleFunc("/profil", handlers.Profil)
-	http.HandleFunc("/login", handlers.Login)
+	http.HandleFunc("/login/", handlers.Login)
 	http.HandleFunc("/connexion", handlers.GetLogin)
 
 	fmt.Println(string(white), "[SERVER_READY] : on http://localhost:8080 ✅ ")
