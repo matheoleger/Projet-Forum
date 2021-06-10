@@ -44,8 +44,8 @@ func DeleteUser(user string) {
 	// }
 }
 
-func DataBase() {
-	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
+// func DataBase() {
+// 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
 
 // 	if err != nil {
 // 		fmt.Println("error open2")
