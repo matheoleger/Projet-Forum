@@ -22,7 +22,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		ts.Execute(w, nil)
-
 	} else if r.URL.Path == "/login/connexion" {
 
 		name := r.PostFormValue("loginName")
@@ -37,6 +36,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		if errHashed != nil {
 			fmt.Println(errHashed)
 			http.Redirect(w, r, "/login/", http.StatusSeeOther)
+
 		} else {
 			fmt.Println("right PW ", passwordDB)
 			http.Redirect(w, r, "/", http.StatusSeeOther)
