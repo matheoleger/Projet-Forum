@@ -19,9 +19,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
-	DeleteUser("JohnBibi")
-	DataBase()
+	// AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
+	// DeleteUser("JohnBibi")
+	// DataBase()
 
 	ts.Execute(w, nil)
 }
