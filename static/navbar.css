@@ -17,11 +17,13 @@
 }
 
 .headerToNavbar_button {
-    position: fixed;
+    /* display: flex; */
+    position: relative;
     height: 50px;
     width: 50px;
+    right: 650px;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
     z-index: 10;
 }
 
@@ -154,9 +156,3 @@ li a:active {
 
 }
 
-#Ypost {
-    visibility: hidden;
-    height: 100px;
-    color: red;
-    text-align: right;
-}

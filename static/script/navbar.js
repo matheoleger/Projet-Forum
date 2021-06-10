@@ -1,5 +1,4 @@
 let flipflop = true;
-let postBool = true;
 
 function showDiv() {
 
@@ -16,22 +15,6 @@ function showDiv() {
 
         document.querySelector('.navbar_wrapper').classList.remove('navbar_wrapper_appear')
         flipflop = true
-    }
-}
-
-function displayPost() {
-    if (postBool == true) {
-        postBool = false
-        console.log("true")
-        document.querySelector('.Ypost').style.visibility = "visible"
-        
-        //console.log("true")
-    } else {
-        postBool = true
-        console.log("false")
-        document.querySelector('.Ypost').style.visibility = "hidden"
-        
-        
     }
 }
 
