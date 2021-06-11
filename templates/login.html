@@ -1,0 +1,51 @@
+{{ define "body" }}
+
+
+<div class="login-elements">
+
+  <img src="../static/img/user-logo-coloring2.png">
+  <div class="btn-choice">
+    <button onclick="showLoginOrRegister(true)" id="choice_login_btn">Connexion</button>
+    <button onclick="showLoginOrRegister(false)" id="choice_register_btn">Inscription</button>  
+  </div>
+  
+  <form action="./connexion" method="POST" class="loginForm">
+    <label for="loginName"><b>Nom d'utilisateur</b></label>
+    <input type="text" placeholder="Enter Username" name="loginName" required>
+
+    <label for="loginPassword"><b>Mot de passe</b></label>
+    <input type="password" placeholder="Enter Password" name="loginPassword" required>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+
+    <button type="submit" id="submit_btn">Se connecter</button>
+  </form>
+  
+  <form action="./inscription" method="POST" class="registerForm" style="display: none;">
+    <label for="registerName"><b>Nom d'utilisateur</b></label>
+    <input type="text" placeholder="Enter Username" name="registerName" required>
+
+    <label for="registerMail"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="registerMail" required>
+  
+    <label for="registerPassword"><b>Mot de passe</b></label>
+    <input type="password" placeholder="Enter Password" name="registerPassword" required>
+  
+    <label for="registerConfirmPassword"><b>Confirmation</b></label>
+    <input type="password" placeholder="Enter Password" name="registerConfirmPassword" required>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+
+    <button type="submit" id="submit_btn">S'inscrire</button>
+
+  </form>
+</div>
+
+
+<script src="../static/script/login.js"></script>
+
+{{ end }}

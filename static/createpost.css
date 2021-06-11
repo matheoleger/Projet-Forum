@@ -1,0 +1,20 @@
+
+
+#titlecreation {
+    margin-top: 10%;
+    color: #6B8E23;
+    text-align: center;
+    font-size: 75px;
+}
+.creationForm {
+    display: block;
+    text-align: center;
+}
+
+#formulaire {
+    display: block;
+}
+
+.postcontent {
+    height: 180px;
+}
