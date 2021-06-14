@@ -6,11 +6,11 @@ import (
 	"github.com/google/uuid"
 )
 
-func createCookie() {
+// func CreateCookie() {
 
-}
+// }
 
-func set(w http.ResponseWriter, r *http.Request) {
+func CreateCookie(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{
 		Name:  "heyy",
 		Value: "how many money ?",
@@ -19,7 +19,7 @@ func set(w http.ResponseWriter, r *http.Request) {
 	println("\033[0;32m", "[cookies] : we cooked your cookies, yummy !")
 }
 
-func read(w http.ResponseWriter, r *http.Request) {
+func ReadCookie(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("heyy")
 	if err != nil {
 		http.Error(w, http.StatusText(400), http.StatusBadRequest)
@@ -29,7 +29,7 @@ func read(w http.ResponseWriter, r *http.Request) {
 	println("\033[0;32m", "[cookies] : here are the chocolat chips in your cookies :", c.Value)
 }
 
-func expire(w http.ResponseWriter, r *http.Request) {
+func ExpireCookie(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("heyy")
 	if err != nil {
 		http.Redirect(w, r, "/nop", http.StatusSeeOther) // /set
@@ -42,12 +42,14 @@ func expire(w http.ResponseWriter, r *http.Request) {
 	// http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
+func SessionCookie(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("session")
 	var stringID string
 	if err != nil {
+		println("\033[0;96m", "[cookies] : can't find session cookies :", err)
 		id, err := uuid.NewRandom()
 		if err != nil {
+			println("\033[1;31m", "[cookies] : can't create uuid :", err)
 		}
 		cookie = &http.Cookie{
 			Name:     "session",
@@ -61,4 +63,15 @@ func index(w http.ResponseWriter, r *http.Request) {
 		stringID = id.String()
 	}
 	println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
+}
+
+func ExpireSession(w http.ResponseWriter, r *http.Request) {
+	c, err := r.Cookie("session")
+	if err != nil {
+		println("\033[1;31m", "[cookies] : expire session error :", err)
+		return
+	}
+	println("\033[0;32m", "[cookies] : all the session cookies where ate :")
+	c.MaxAge = -1 // delete cookie
+	http.SetCookie(w, c)
 }
