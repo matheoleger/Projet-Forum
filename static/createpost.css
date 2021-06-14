@@ -1,10 +1,36 @@
+.creationpost-bg {
+    background-color: #A89C62;
+    color: #595D3C;
 
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.creation-post-element {
+    overflow: hidden;
+    height: 500px;
+    width: 800px;
+    background-color: #A89C62;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    position: fixed;
+}
 
 #titlecreation {
     margin-top: 10%;
-    color: #6B8E23;
+    color: #595D3C;
     text-align: center;
-    font-size: 75px;
+    font-size: 40px;
 }
 .creationForm {
     display: block;
@@ -18,3 +44,4 @@
 .postcontent {
     height: 180px;
 }
+

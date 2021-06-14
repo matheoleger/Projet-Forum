@@ -1,29 +1,34 @@
-{{define "body"}}
+{{define "createpost"}}
 
-
-<h1 id="titlecreation">Creationpost</h1>
-<div id="formulaire">
-    <form action="/creation" method="POST" class="creationForm">
-    <label for="titlepost"><b>Titre</b></label>
-    <input type="text" name="titlepost" placeholder="Enter title of post">
-
-    <label for="category-select" id="categorieslabel"><b>Category</b></label>
-    <select name="category" id="category-select">
-        <option value="Sport">Sport</option>
-        <option value="Politique">Politique</option>
-        <option value="Actu">Actu</option>
-        <option value="Technology">Technologie</option>
-        <option value="Nourritures">Nourritures</option>
-        <option value="Animals">Animal</option>
-        <option value="Other">Autre</option>
-    </select>
-
-    <label for="postcontent"><b>Content</b></label>
-    <input type="text" name="postcontent" placeholder="Enter content of your post" required>
-
-    <button type="submit" id="submit_btn">PublYsh</button>
-    </form>
+<div class="creationpost-bg">
+    <div class="creation-post-element">
+        <h1 id="titlecreation">Creationpost</h1>
+        <div id="formulaire">
+            <form action="/creation" method="POST" class="creationForm">
+            <label for="titlepost"><b>Titre</b></label>
+            <input type="text" name="titlepost" placeholder="Enter title of post">
+        
+            <label for="category-select" id="categorieslabel"><b>Category</b></label>
+            <select name="category" id="category-select">
+                <option value="Sport">Sport</option>
+                <option value="Politique">Politique</option>
+                <option value="Actu">Actu</option>
+                <option value="Technology">Technologie</option>
+                <option value="Nourritures">Nourritures</option>
+                <option value="Animals">Animal</option>
+                <option value="Other">Autre</option>
+            </select>
+        
+            <label for="postcontent"><b>Content</b></label>
+            <input type="text" name="postcontent" placeholder="Enter content of your post" required>
+        
+            <button type="submit" id="submit_btn">PublYsh</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+
 
 
 

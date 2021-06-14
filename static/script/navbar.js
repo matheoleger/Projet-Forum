@@ -18,3 +18,12 @@ function showDiv() {
     }
 }
 
+let isShowCreatePost = false;
+
+function showCreatePost() {
+    
+    if(!isShowCreatePost) {
+        
+    }
+}
+
