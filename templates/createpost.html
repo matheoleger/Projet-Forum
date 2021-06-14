@@ -4,7 +4,7 @@
     <div class="creation-post-element">
         <div class="profil-create-post">
             <img src="../static/img/user-logo-coloring2.png">
-            <h1 id="titlecreation">Creationpost</h1>
+            <h1 id="profil-name-create-post">Username</h1>
         </div>
         <div id="formulaire">
             <form action="/creation" method="POST" class="creationForm">
@@ -23,8 +23,7 @@
                         <option value="Other">Autre</option>
                     </select>
                 </div>
-                <label for="postcontent"><b>Content</b></label>
-                <input type="text" name="postcontent" placeholder="Enter content of your post" required>
+                <textarea name="postcontent" placeholder="Enter content of your post" required></textarea> 
             
                 <button type="submit" id="submit_btn">PublYsh</button>
             </form>
