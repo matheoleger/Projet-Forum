@@ -9,12 +9,18 @@ function reduceDiv () {
     document.querySelector('.navbar_wrapper').classList.remove('navbar_wrapper_appear')
     console.log("cya")
 
-let isShowCreatePost = false;
+}
+
+let isShowCreatePost = true;
 
 function showCreatePost() {
     
     if(!isShowCreatePost) {
-        
+        document.querySelector('.creationpost-bg').style.display = "none";
+        isShowCreatePost = true;
+    } else {
+        document.querySelector('.creationpost-bg').style.display = "flex";
+        isShowCreatePost = false;
     }
 }
 

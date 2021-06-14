@@ -1,36 +1,47 @@
+.creationpost-bg {
+    background-color: #A89C62;
+    color: #595D3C;
+
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);;
+    position: absolute;
+    top: 0;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.creation-post-element {
+    overflow: hidden;
+    height: 500px;
+    width: 800px;
+    background-color: #A89C62;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    position: fixed;
+}
+
 #titlecreation {
     margin-top: 10%;
     color: #595D3C;
     text-align: center;
     font-size: 40px;
 }
-.square {
-    width: 100%;
-    height: 100%;
-    padding-top: 10%;
-    background-color: #ccc;
-    position: relative;
+.creationForm {
+    display: block;
+    text-align: center;
+}
+
+#formulaire {
+    display: block;
 }
 
 .postcontent {
-    position: absolute;
-    padding-top: 50%;
-    left: 0;
     height: 180px;
-}
-
-.titlePost {
-    /* padding: 12px; */
-    width: 100px;
-    margin-left: 40%;
-    text-align: center;
-    position: fixed;
-}
-
-.categoryPost {
-    /* padding: 12px; */
-    margin-left: 60%;
-    margin-bottom: 5%;
-    position: fixed;
 }
 
