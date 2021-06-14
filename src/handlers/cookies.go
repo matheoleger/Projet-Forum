@@ -15,14 +15,15 @@ func CreateCookie(w http.ResponseWriter, r *http.Request, name string, value str
 	println("\033[0;32m", "[cookies] : we cooked your cookies, yummy !")
 }
 
-func ReadCookie(w http.ResponseWriter, r *http.Request, name string) {
+func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
 	c, err := r.Cookie(name)
 	if err != nil {
 		http.Error(w, http.StatusText(400), http.StatusBadRequest)
 		println("\033[1;31m", "[cookies] : reading error", err)
-		return
+		return "empty"
 	}
 	println("\033[0;32m", "[cookies] : here are the chocolat chips in your cookies :", c.Value)
+	return c.Value
 }
 
 func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) {
@@ -73,13 +74,15 @@ func ExpireSession(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, c)
 }
 
-func launchSession(w http.ResponseWriter, r *http.Request, uuid string, username string) {
+func launchSession(w http.ResponseWriter, r *http.Request, username string) {
 	SessionCookie(w, r)
+	var uuid = ReadCookie(w, r, "session")
 	AddSession(uuid, username)
 }
 
-func endSession(w http.ResponseWriter, r *http.Request, uuid string, username string) {
+func endSession(w http.ResponseWriter, r *http.Request) {
 	ExpireSession(w, r)
+	var uuid = ReadCookie(w, r, "session")
 	DeleteSession(uuid)
 
 }

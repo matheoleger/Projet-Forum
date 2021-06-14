@@ -24,7 +24,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	// DataBase()
 
 	// SessionCookie(w, r)
-	CreateCookie(w, r, "salu", "how many money")
+	// CreateCookie(w, r, "salu", "how many money")
+
+	launchSession(w, r, "Alex77")
 
 	ts.Execute(w, nil)
 }

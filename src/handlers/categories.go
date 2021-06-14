@@ -20,8 +20,9 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// ExpireSession(w, r)
-	ReadCookie(w, r, "salu")
-	ExpireCookie(w, r, "salu")
+	// ReadCookie(w, r, "salu")
+	// ExpireCookie(w, r, "salu")
+	ExpireSession(w, r)
 
 	ts.Execute(w, nil)
 }
