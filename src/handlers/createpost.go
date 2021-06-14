@@ -34,7 +34,7 @@ func GetElementOfPost(w http.ResponseWriter, r *http.Request) {
 	category := r.PostFormValue("category")
 	content := r.PostFormValue("postcontent")
 
-	fmt.Println("Votre titre est :" + title + " vous catégorie est " + category + " votre contenu est " + content)
+	fmt.Println("Votre titre est : " + title + " et votre catégorie est :" + category + " puis votre contenu est :" + content)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
