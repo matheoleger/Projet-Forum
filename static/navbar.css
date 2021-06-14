@@ -68,46 +68,6 @@ ul {
     width: 200px;
   }
 
-  
-/* li:item_home {
-    visibility: hidden;
-    display: block; 
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-
-    width: 120px;
-    height: 30px;
-    padding: 3px 10px;
-    padding-top: 70px;
-} */
-
-/* li:item_categories {
-    visibility: hidden;
-    display: block; 
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-
-    width: 120px;
-    height: 30px;
-    padding: 3px 10px;
-    padding-top: 70px;
-}
-
-li:item_profil {
-    visibility: hidden;
-    display: block; 
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-
-    width: 120px;
-    height: 30px;
-    padding: 3px 10px;
-    padding-top: 70px;
-} */
-  
 li a {
     transition: ease 0.4s;
     display: block; 
@@ -153,6 +113,6 @@ li a:hover {
 
 li a:active {
     color: #181a10;
-
 }
+
 
