@@ -8,7 +8,7 @@ import (
 )
 
 func AddUser(user string, pw string, mail string) {
-	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
+	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
 
 	if err != nil {
 		fmt.Println("error open")
@@ -26,7 +26,7 @@ func AddUser(user string, pw string, mail string) {
 }
 
 func DeleteUser(user string) {
-	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
+	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
 
 	if err != nil {
 		fmt.Println("error open 1")
@@ -70,7 +70,7 @@ func DeleteUser(user string) {
 // }
 
 func GetPassWord(user string) string {
-	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
+	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
 
 	if err != nil {
 		fmt.Println("error open")
