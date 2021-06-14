@@ -95,3 +95,35 @@ func GetPassWord(user string) string {
 
 	return password
 }
+
+//	---------- uuid ----------
+
+func AddSession(uuid string, user_name string) {
+	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+
+	if err != nil {
+		fmt.Println("error open")
+		return
+	}
+
+	statement, err := db.Prepare("INSERT INTO session (uuid, username) VALUES (?, ?)")
+
+	//Error TO DO
+	if err != nil {
+		fmt.Println("error prepare")
+		return
+	}
+	statement.Exec(uuid, user_name)
+}
+
+func DeleteSession(uuid string) {
+	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+
+	if err != nil {
+		fmt.Println("error open 1")
+		return
+	}
+
+	statement, err := db.Prepare("DELETE FROM session WHERE uuid = ?")
+	statement.Exec(uuid)
+}

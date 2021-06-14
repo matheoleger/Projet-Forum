@@ -23,7 +23,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	// DeleteUser("JohnBibi")
 	// DataBase()
 
-	SessionCookie(w, r)
+	// SessionCookie(w, r)
+	CreateCookie(w, r, "salu", "how many money")
 
 	ts.Execute(w, nil)
 }
