@@ -17,8 +17,9 @@
 }
 
 .headerToNavbar_button {
-    /* display: flex; */
     position: fixed;
+    cursor: pointer;
+
     height: 50px;
     width: 50px;
     top : 0px;
@@ -29,6 +30,7 @@
 
 .user_button {
     position: fixed;
+
     height: 50px;
     width: 50px;
     margin-right: 20px;
@@ -36,13 +38,12 @@
     right: 0;
 }
 
-
 .navbar_wrapper {
-    transition: 1s;
     display: block;
     visibility: hidden;
     position: fixed;
 
+    transition: 1s;
     box-shadow: 5px 5px 40px 5px rgba(50, 50, 50, 0.685); 
     background-color: #DDC5A3;
 
@@ -55,17 +56,18 @@
 }
 
 .navbar_wrapper_appear {
-    visibility:visible;
+    visibility: visible;
     transition: 1s;
+
     width: 350px;
     opacity: 100%;
 }
 
 ul {
     list-style-type: none;
-    margin-top: 200px;
+    margin-top: 150px;
     margin-left: 35px;
-    width: 200px;
+    width: 50px;
   }
 
 li a {
@@ -81,25 +83,26 @@ li a {
     color: #f2f2f2;
     
     width: 120px;
-    height: 30px;
-    line-height: 30px;
     padding: 3px 10px;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 li a::before {
     transform: scaleX(0);
     transform-origin: bottom right;
+    transition: transform .3s ease;
 
     content: " ";
     display: block;
+    position: relative;
+
     height:30px;
     width: 115px;
-    position: relative;
-    top: 45px; right: 0; bottom: 0; left: 0;
-    background: #A89C62;
+    top: 50px; right: 0; bottom: 0; left: 0;
     z-index: -1;
-    transition: transform .3s ease;
+
+    background: #A89C62;
 }
 
 li a:hover::before {
@@ -117,19 +120,21 @@ li a:active {
 
 ul button {
     transition: ease 0.5s;
-    margin-top: 60px;
-    margin-left: 10px;
-    padding: 10px;
-    font-family: 'Montserrat';
-    font-size: 24px;
+    cursor: pointer;
     font-weight: bold;
     border: none;
     border-radius: 20px;
+
+    margin-top: 60px;
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 24px;
+    
+    font-family: 'Montserrat';
     background-color: #595D3C;
     color:#FFF5E6;
 }
 
 ul button:hover {
     background-color: #A89C62;
-    /* color:#FFF5E6; */
 }
