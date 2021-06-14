@@ -115,4 +115,21 @@ li a:active {
     color: #181a10;
 }
 
+ul button {
+    transition: ease 0.5s;
+    margin-top: 60px;
+    margin-left: 10px;
+    padding: 10px;
+    font-family: 'Montserrat';
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    background-color: #595D3C;
+    color:#FFF5E6;
+}
 
+ul button:hover {
+    background-color: #A89C62;
+    /* color:#FFF5E6; */
+}
