@@ -22,7 +22,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		ts.Execute(w, nil)
-	} else if r.URL.Path == "/login/connexion" {
 
 	} else if r.URL.Path == "/login/connexion" {
 

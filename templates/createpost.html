@@ -1,13 +1,16 @@
-{{define "createpost"}}
+{{define "body"}}
 
-<div class="creationpost-bg">
-    <div class="creation-post-element">
-        <h1 id="titlecreation">Creationpost</h1>
-        <div id="formulaire">
-            <form action="/creation" method="POST" class="creationForm">
+
+<h1 id="titlecreation">Creationpost</h1>
+
+<div class="square">
+    <form action="/creation" method="POST">
+        <div class="titlePost">
             <label for="titlepost"><b>Titre</b></label>
             <input type="text" name="titlepost" placeholder="Enter title of post">
-        
+        </div>
+
+        <div class="categoryPost">
             <label for="category-select" id="categorieslabel"><b>Category</b></label>
             <select name="category" id="category-select">
                 <option value="Sport">Sport</option>
@@ -18,14 +21,15 @@
                 <option value="Animals">Animal</option>
                 <option value="Other">Autre</option>
             </select>
-        
+        </div>
+            
+        <div class="contentPost">
             <label for="postcontent"><b>Content</b></label>
             <input type="text" name="postcontent" placeholder="Enter content of your post" required>
-        
-            <button type="submit" id="submit_btn">PublYsh</button>
-            </form>
         </div>
-    </div>
+
+        <button type="submit" id="submit_btn">PublYsh</button>
+    </form>
 </div>
 
 
