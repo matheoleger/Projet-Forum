@@ -38,6 +38,7 @@ func DeleteUser(user string) {
 	// 	fmt.Println("error open 1")
 	// 	return
 	// }
+	//
 
 	db := OpenDataBase()
 
