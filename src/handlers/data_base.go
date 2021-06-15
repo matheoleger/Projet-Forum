@@ -7,15 +7,19 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func AddUser(user string, pw string, mail string) {
-	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+func OpenDataBase() *sql.DB {
+	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
 
 	if err != nil {
 		fmt.Println("error open")
-		return
 	}
+	return db
+}
 
-	statement, err := db.Prepare("INSERT INTO user (id_username, password, email) VALUES (?, ?, ?)")
+func AddUser(user string, pw string, mail string) {
+
+	db := OpenDataBase()
+	statement, err := db.Prepare("INSERT INTO user (username, password, email) VALUES (?, ?, ?)")
 
 	//Error TO DO
 	if err != nil {
@@ -23,17 +27,27 @@ func AddUser(user string, pw string, mail string) {
 		return
 	}
 	statement.Exec(user, pw, mail)
+
+	defer db.Close()
 }
 
 func DeleteUser(user string) {
-	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+	// db, err := sql.Open("sqlite3", "BDD/BBD_Final")
 
+	// if err != nil {
+	// 	fmt.Println("error open 1")
+	// 	return
+	// }
+	//
+
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("DELETE FROM user WHERE id_username = ?")
 	if err != nil {
-		fmt.Println("error open 1")
+		fmt.Println("error prepare")
 		return
 	}
 
-	statement, err := db.Prepare("DELETE FROM user WHERE id_username = ?")
 	statement.Exec(user)
 	// var password string
 	// var email string
@@ -69,15 +83,10 @@ func DeleteUser(user string) {
 // 	}
 // }
 
-func GetPassWord(user string) string {
-	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+func GetElement(user, element string) string {
+	db := OpenDataBase()
 
-	if err != nil {
-		fmt.Println("error open")
-		return "error open3"
-	}
-
-	statement, err := db.Prepare("SELECT password FROM user WHERE id_username = ?")
+	statement, err := db.Prepare("SELECT " + element + " FROM user WHERE username = ?")
 	result, err2 := statement.Query(user)
 
 	if err != nil || err2 != nil {
@@ -92,6 +101,8 @@ func GetPassWord(user string) string {
 		/* Faire quelque chose avec cette ligne */
 		fmt.Println(password)
 	}
+
+	defer db.Close()
 
 	return password
 }
