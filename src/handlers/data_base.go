@@ -8,7 +8,7 @@ import (
 )
 
 func OpenDataBase() *sql.DB {
-	db, err := sql.Open("sqlite3", "BDD/BDD_Final")
+	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
 
 	if err != nil {
 		fmt.Println("error open")
@@ -19,7 +19,7 @@ func OpenDataBase() *sql.DB {
 func AddUser(user string, pw string, mail string) {
 
 	db := OpenDataBase()
-	statement, err := db.Prepare("INSERT INTO user (id_username, password, email) VALUES (?, ?, ?)")
+	statement, err := db.Prepare("INSERT INTO user (username, password, email) VALUES (?, ?, ?)")
 
 	//Error TO DO
 	if err != nil {
@@ -27,6 +27,8 @@ func AddUser(user string, pw string, mail string) {
 		return
 	}
 	statement.Exec(user, pw, mail)
+
+	defer db.Close()
 }
 
 func DeleteUser(user string) {
@@ -36,6 +38,7 @@ func DeleteUser(user string) {
 	// 	fmt.Println("error open 1")
 	// 	return
 	// }
+	//
 
 	db := OpenDataBase()
 
@@ -80,15 +83,10 @@ func DeleteUser(user string) {
 // 	}
 // }
 
-func GetUserName(user string) string {
-	//db := OpenDataBase()
-	return ""
-}
-
-func GetPassWord(user string) string {
+func GetElement(user, element string) string {
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("SELECT password FROM user WHERE id_username = ?")
+	statement, err := db.Prepare("SELECT " + element + " FROM user WHERE username = ?")
 	result, err2 := statement.Query(user)
 
 	if err != nil || err2 != nil {
@@ -103,6 +101,8 @@ func GetPassWord(user string) string {
 		/* Faire quelque chose avec cette ligne */
 		fmt.Println(password)
 	}
+
+	defer db.Close()
 
 	return password
 }
