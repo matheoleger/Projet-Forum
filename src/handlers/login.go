@@ -43,6 +43,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				fmt.Println("right PW ", passwordDB)
 				http.Redirect(w, r, "/", http.StatusSeeOther)
 			}
+		} else {
+			http.Redirect(w, r, "/login/", http.StatusSeeOther)
 		}
 
 	} else if r.URL.Path == "/login/inscription" {
