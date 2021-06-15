@@ -18,7 +18,7 @@ func CreateCookie(w http.ResponseWriter, r *http.Request, name string, value str
 func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
 	c, err := r.Cookie(name)
 	if err != nil {
-		http.Error(w, http.StatusText(400), http.StatusBadRequest)
+		// http.Error(w, http.StatusText(400), http.StatusBadRequest)
 		println("\033[1;31m", "[cookies] : reading error", err)
 		return "empty"
 	}
@@ -54,13 +54,20 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) {
 			Value:    id.String(),
 			Secure:   true,
 			HttpOnly: true,
-			Path:     "/",
+			// Path:     "/",
 		}
 		http.SetCookie(w, cookie)
 
 		stringID = id.String()
 		println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
+
+		//test
+		AddSession(stringID, "Johanna")
+		return
+
 	}
+	println("\033[1;31m", "[cookies] : session allready exist")
+
 }
 
 func ExpireSession(w http.ResponseWriter, r *http.Request) {

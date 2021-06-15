@@ -117,6 +117,19 @@ func AddSession(uuid string, user_name string) {
 	// 	return
 	// }
 
+	statementTest, err := db.Prepare("SELECT username FROM session WHERE uuid = ?")
+	if err != nil {
+		fmt.Println("\033[1;31m", "[session] : error, impossible to verify if session allready exist", uuid)
+		return
+	}
+	// statementTest.Exec(user_name)
+	result, err2 := statementTest.Query(uuid)
+
+	if err2 == nil {
+		fmt.Println("\033[1;31m", "[session] : error, there is allready a session with uuid :", uuid, result)
+		return
+	}
+
 	statement, err := db.Prepare("INSERT INTO session (uuid, username) VALUES (?, ?)")
 
 	//Error TO DO
@@ -141,7 +154,7 @@ func DeleteSession(uuid string) {
 
 	//Error TO DO
 	if err != nil {
-		fmt.Println("\033[1;31m", "[session] : error, cdelete insert into database")
+		fmt.Println("\033[1;31m", "[session] : error, deleting from database")
 		return
 	}
 	println("\033[0;32m", "[session] : session sucessfully deleted : uuid = ", uuid)
