@@ -102,7 +102,7 @@ func AddSession(uuid string, user_name string) {
 	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
 
 	if err != nil {
-		fmt.Println("error open")
+		fmt.Println("\033[1;31m", "[session] : error open")
 		return
 	}
 
@@ -110,7 +110,7 @@ func AddSession(uuid string, user_name string) {
 
 	//Error TO DO
 	if err != nil {
-		fmt.Println("error prepare")
+		fmt.Println("\033[1;31m", "[session] : error, can't insert into database")
 		return
 	}
 	statement.Exec(uuid, user_name)
@@ -120,7 +120,7 @@ func DeleteSession(uuid string) {
 	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
 
 	if err != nil {
-		fmt.Println("error open 1")
+		fmt.Println("\033[1;31m", "[session] : error open")
 		return
 	}
 
