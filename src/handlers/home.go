@@ -26,7 +26,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	// SessionCookie(w, r)
 	// CreateCookie(w, r, "salu", "how many money")
 
-	launchSession(w, r, "Alex77")
+	LaunchSession(w, r, "Alex77")
 
 	ts.Execute(w, nil)
 }

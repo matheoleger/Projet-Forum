@@ -11,7 +11,7 @@ func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
 
 	if err != nil {
-		fmt.Println("error open")
+		fmt.Println("\033[1;31m", "error open")
 	}
 	return db
 }
@@ -110,12 +110,12 @@ func GetElement(user, element string) string {
 //	---------- uuid ----------
 
 func AddSession(uuid string, user_name string) {
-	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+	db := OpenDataBase()
 
-	if err != nil {
-		fmt.Println("\033[1;31m", "[session] : error open")
-		return
-	}
+	// if err != nil {
+	// 	fmt.Println("\033[1;31m", "[session] : error open")
+	// 	return
+	// }
 
 	statement, err := db.Prepare("INSERT INTO session (uuid, username) VALUES (?, ?)")
 
@@ -124,17 +124,27 @@ func AddSession(uuid string, user_name string) {
 		fmt.Println("\033[1;31m", "[session] : error, can't insert into database")
 		return
 	}
+	println("\033[0;32m", "[session] : session sucessfully created : uuid = ", uuid, " username =", user_name)
+
 	statement.Exec(uuid, user_name)
 }
 
 func DeleteSession(uuid string) {
-	db, err := sql.Open("sqlite3", "BDD/BBD_Final")
+	db := OpenDataBase()
 
-	if err != nil {
-		fmt.Println("\033[1;31m", "[session] : error open")
-		return
-	}
+	// if err != nil {
+	// 	fmt.Println("\033[1;31m", "[session] : error open")
+	// 	return
+	// }
 
 	statement, err := db.Prepare("DELETE FROM session WHERE uuid = ?")
+
+	//Error TO DO
+	if err != nil {
+		fmt.Println("\033[1;31m", "[session] : error, cdelete insert into database")
+		return
+	}
+	println("\033[0;32m", "[session] : session sucessfully deleted : uuid = ", uuid)
+
 	statement.Exec(uuid)
 }

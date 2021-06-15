@@ -74,14 +74,14 @@ func ExpireSession(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, c)
 }
 
-func launchSession(w http.ResponseWriter, r *http.Request, username string) {
+func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
 	SessionCookie(w, r)
 	var uuid = ReadCookie(w, r, "session")
 	println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
 	AddSession(uuid, username)
 }
 
-func endSession(w http.ResponseWriter, r *http.Request) {
+func EndSession(w http.ResponseWriter, r *http.Request) {
 	ExpireSession(w, r)
 	var uuid = ReadCookie(w, r, "session")
 	println("\033[0;32m", "[session] : end session ")
