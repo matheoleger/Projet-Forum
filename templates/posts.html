@@ -1,3 +1,11 @@
 {{define "body"}}
-    <p>posts</p>
+
+    <ul>
+        <li> Username : {{ .Username}}</li>
+        <li> Title : {{ .Title}}</li>
+        <li> Content : {{ .Content}}</li>
+        <li> Date : {{ .Date}}</li>
+        <li> Like : {{ .Number_like}}</li>
+    </ul>
+
 {{end}}
