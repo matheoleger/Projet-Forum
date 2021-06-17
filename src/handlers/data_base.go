@@ -121,3 +121,17 @@ func GetElement(user, element string) string {
 
 	return password
 }
+
+func createCategory(name string) {
+	db := OpenDataBase()
+	statement, err := db.Prepare("INSERT INTO user (name) VALUES (?)")
+
+	if err != nil {
+		fmt.Println("error prepare createCategory")
+		return
+	}
+	statement.Exec(name)
+
+	defer db.Close()
+
+}
