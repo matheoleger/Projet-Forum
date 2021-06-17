@@ -36,7 +36,7 @@ func AddUser(user string, pw string, mail string) {
 func DeleteUser(user string) {
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("DELETE FROM user WHERE id_username = ?")
+	statement, err := db.Prepare("DELETE FROM user WHERE username = ?")
 	if err != nil {
 		fmt.Println("error prepare")
 		return
@@ -97,4 +97,46 @@ func GetPost() interface{} {
 	}
 	// statement.Scan(&title, &content, &username)
 	return post
+}
+
+func createCategory(name string) {
+	db := OpenDataBase()
+	statement, err := db.Prepare("INSERT INTO category (name) VALUES (?)")
+
+	if err != nil {
+		fmt.Println("error prepare createCategory")
+		return
+	}
+	statement.Exec(name)
+
+	defer db.Close()
+
+}
+
+func deleteCategory(name string) {
+
+	db := OpenDataBase()
+	statement, err := db.Prepare("DELETE FROM category WHERE name = ?")
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(name)
+
+	defer db.Close()
+}
+
+func InsertPost(title string, content string, username string) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO post (title, content, username) VAlUES (?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare InsertPost")
+		return
+	}
+
+	statement.Exec(title, content, username)
+
+	defer db.Close()
 }
