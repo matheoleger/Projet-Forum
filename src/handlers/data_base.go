@@ -117,16 +117,25 @@ func AddSession(uuid string, user_name string) {
 	// 	return
 	// }
 
-	statementTest, err := db.Prepare("SELECT username FROM session WHERE uuid = ?")
+	statementTest, err := db.Prepare("SELECT uuid FROM session WHERE username = ?")
 	if err != nil {
 		fmt.Println("\033[1;31m", "[session] : error, impossible to verify if session allready exist", uuid)
 		return
 	}
 	// statementTest.Exec(user_name)
-	result, err2 := statementTest.Query(uuid)
+	result, err2 := statementTest.Query(user_name)
 
-	if err2 == nil {
-		fmt.Println("\033[1;31m", "[session] : error, there is allready a session with uuid :", uuid, result)
+	if err2 != nil {
+		fmt.Println("\033[1;31m", "[session] : error, impossible to do statement :", uuid, "\n", result)
+		return
+	}
+
+	var resultId string
+	for result.Next() {
+		result.Scan(&resultId)
+	}
+	if resultId == uuid {
+		fmt.Println("\033[1;31m", "[session] : error, a session allready exist with uuid =", uuid)
 		return
 	}
 

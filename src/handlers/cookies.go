@@ -44,8 +44,8 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) {
 	//if erorr (no cookie named session)
 	if err != nil {
 		println("\033[0;96m", "[cookies] : can't find session cookies :", err)
-		id, err := uuid.NewRandom() //create new uuid
-		if err != nil {
+		id, err2 := uuid.NewRandom() //create new uuid
+		if err2 != nil {
 			println("\033[1;31m", "[cookies] : can't create uuid :", err)
 		}
 		// create a new cookie
@@ -54,6 +54,7 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) {
 			Value:    id.String(),
 			Secure:   true,
 			HttpOnly: true,
+			// Expires: time.Now().Add(120*time.Second),
 			// Path:     "/",
 		}
 		http.SetCookie(w, cookie)
@@ -62,7 +63,7 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) {
 		println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
 
 		//test
-		AddSession(stringID, "Johanna")
+		AddSession("f88de7fe-140f-40fa-8607-79fceccf6631", "Johanna")
 		return
 
 	}
