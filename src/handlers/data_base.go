@@ -58,21 +58,6 @@ func DeleteUser(user string) {
 	// }
 }
 
-func InsertPost(title string, content string, username string) {
-	db := OpenDataBase()
-
-	statement, err := db.Prepare("INSERT INTO post (title, content, username) VAlUES (?, ?, ?)")
-
-	if err != nil {
-		fmt.Println("error prepare InsertPost")
-		return
-	}
-
-	statement.Exec(title, content, username)
-
-	defer db.Close()
-}
-
 // func DataBase() {
 // 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
 
@@ -145,6 +130,21 @@ func deleteCategory(name string) {
 		return
 	}
 	statement.Exec(name)
+
+	defer db.Close()
+}
+
+func InsertPost(title string, content string, username string) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO post (title, content, username) VAlUES (?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare InsertPost")
+		return
+	}
+
+	statement.Exec(title, content, username)
 
 	defer db.Close()
 }
