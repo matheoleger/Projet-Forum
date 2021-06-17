@@ -3,6 +3,8 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
+	"strconv"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -32,14 +34,6 @@ func AddUser(user string, pw string, mail string) {
 }
 
 func DeleteUser(user string) {
-	// db, err := sql.Open("sqlite3", "BDD/BBD_Final")
-
-	// if err != nil {
-	// 	fmt.Println("error open 1")
-	// 	return
-	// }
-	//
-
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("DELETE FROM user WHERE username = ?")
@@ -49,39 +43,7 @@ func DeleteUser(user string) {
 	}
 
 	statement.Exec(user)
-	// var password string
-	// var email string
-	// for result.Next() {
-	// 	result.Scan(&password, &email)
-	// 	/* Faire quelque chose avec cette ligne */
-	// 	fmt.Println(password + " " + email)
-	// }
 }
-
-// func DataBase() {
-// 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
-
-// 	if err != nil {
-// 		fmt.Println("error open2")
-// 		return
-// 	}
-
-// 	result, err := db.Query("SELECT password, email FROM user WHERE id_username = \"JohnBibi\"")
-
-// 	// Error TO DO
-// 	if err != nil {
-// 		fmt.Println("error query data base")
-// 		return
-// 	}
-
-// 	var password string
-// 	var email string
-// 	for result.Next() {
-// 		result.Scan(&password, &email)
-// 		/* Faire quelque chose avec cette ligne */
-// 		fmt.Println(password + " " + email)
-// 	}
-// }
 
 func GetElement(user, element string) string {
 	db := OpenDataBase()
@@ -90,7 +52,7 @@ func GetElement(user, element string) string {
 	result, err2 := statement.Query(user)
 
 	if err != nil || err2 != nil {
-		fmt.Println("error query")
+		fmt.Println("Error query")
 		return "error query"
 	}
 
@@ -105,6 +67,36 @@ func GetElement(user, element string) string {
 	defer db.Close()
 
 	return password
+}
+
+func GetPost() interface{} {
+	db := OpenDataBase()
+
+	type PostStruct struct {
+		Id_post     int
+		Title       string
+		Content     string
+		Username    string
+		Number_like int
+		Liked       bool
+		Date        time.Time
+	}
+
+	//statement, err := db.Prepare("SELECT title, content, username FROM post WHERE id_post=$1")
+
+	statement := db.QueryRow("SELECT id_post, title, content, username, Number_like, liked ,date_post FROM post WHERE id_post=8;", 4)
+
+	var post PostStruct
+	switch err := statement.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date); err {
+	case sql.ErrNoRows:
+		fmt.Println("No rows were returned!")
+	case nil:
+		fmt.Println("C'est le post numéro " + strconv.Itoa(post.Id_post) + " le titre est : " + post.Title + " le contenu du post est : " + post.Content + " c'est " + post.Username + " qui a écrit le post, et il y a  " + strconv.Itoa(post.Number_like) + " likes, et la date du post est " + post.Date.String())
+	default:
+		panic(err)
+	}
+	// statement.Scan(&title, &content, &username)
+	return post
 }
 
 func createCategory(name string) {
@@ -148,4 +140,3 @@ func InsertPost(title string, content string, username string) {
 
 	defer db.Close()
 }
-

@@ -40,7 +40,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(errHashed)
 				http.Redirect(w, r, "/login/", http.StatusSeeOther)
 			} else {
-				fmt.Println("right PW ", passwordDB)
+				fmt.Println("right PW : ", passwordDB)
 				http.Redirect(w, r, "/", http.StatusSeeOther)
 			}
 		} else {
