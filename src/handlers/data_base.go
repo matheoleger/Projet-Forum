@@ -42,7 +42,7 @@ func DeleteUser(user string) {
 
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("DELETE FROM user WHERE id_username = ?")
+	statement, err := db.Prepare("DELETE FROM user WHERE username = ?")
 	if err != nil {
 		fmt.Println("error prepare")
 		return
@@ -109,7 +109,7 @@ func GetElement(user, element string) string {
 
 func createCategory(name string) {
 	db := OpenDataBase()
-	statement, err := db.Prepare("INSERT INTO user (name) VALUES (?)")
+	statement, err := db.Prepare("INSERT INTO category (name) VALUES (?)")
 
 	if err != nil {
 		fmt.Println("error prepare createCategory")
@@ -120,3 +120,17 @@ func createCategory(name string) {
 	defer db.Close()
 
 }
+
+func deleteCategory(name string) {
+
+	db := OpenDataBase()
+	statement, err := db.Prepare("DELETE FROM category WHERE name = ?")
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(name)
+
+	defer db.Close()
+}
+
