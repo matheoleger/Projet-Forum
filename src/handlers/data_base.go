@@ -84,7 +84,7 @@ func GetPost() interface{} {
 
 	//statement, err := db.Prepare("SELECT title, content, username FROM post WHERE id_post=$1")
 
-	statement := db.QueryRow("SELECT id_post, title, content, username, Number_like, liked ,date_post FROM post WHERE id_post=8;", 4)
+	statement := db.QueryRow("SELECT id_post, title, content, username, Number_like, liked ,date_post FROM post WHERE id_post=10;")
 
 	var post PostStruct
 	switch err := statement.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date); err {
@@ -124,19 +124,21 @@ func deleteCategory(name string) {
 	statement.Exec(name)
 
 	defer db.Close()
+
 }
 
-func InsertPost(title string, content string, username string) {
+func InsertPost(title string, content string, username string, Number_like int, liked bool, date_post time.Time) {
+
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("INSERT INTO post (title, content, username) VAlUES (?, ?, ?)")
+	statement, err := db.Prepare("INSERT INTO post (title, content, username, Number_like, liked, date_post) VALUES (?, ?, ?, ?, ?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare InsertPost")
 		return
 	}
 
-	statement.Exec(title, content, username)
+	statement.Exec(title, content, username, Number_like, liked, date_post)
 
 	defer db.Close()
 }

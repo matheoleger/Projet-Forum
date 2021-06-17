@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 // func Creationpost(w http.ResponseWriter, r *http.Request) {
@@ -38,8 +39,8 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 	username := "Johanna"
 
-	InsertPost(title, content, username)
+	InsertPost(title, content, username, 8, false, time.Now())
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
-	
+
 }
