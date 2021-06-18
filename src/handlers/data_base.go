@@ -74,6 +74,7 @@ func GetPost() interface{} {
 
 	type PostStruct struct {
 		Id_post     int
+		post		string
 		Title       string
 		Content     string
 		Username    string
@@ -137,6 +138,33 @@ func InsertPost(title string, content string, username string) {
 	}
 
 	statement.Exec(title, content, username)
+
+	defer db.Close()
+}
+
+func deletePost(id_post int) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("DELETE FROM post WHERE id_post = ?")
+
+	if err != nil {
+		fmt.Println("error prepare deletePost")
+		return
+	}
+
+	defer db.Close()
+}
+
+func insertComment(content string, username string,post string) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(content, username, post)
 
 	defer db.Close()
 }

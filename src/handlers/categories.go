@@ -19,5 +19,7 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	
+
 	ts.Execute(w, nil)
 }

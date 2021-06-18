@@ -23,23 +23,41 @@ import (
 
 // }
 
-func CreatePost(w http.ResponseWriter, r *http.Request) {
+// func CreatePost(w http.ResponseWriter, r *http.Request) {
 
+// 	err := r.ParseForm()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+
+// 	title := r.PostFormValue("titlepost")
+// 	category := r.PostFormValue("category")
+// 	content := r.PostFormValue("postcontent")
+
+// 	fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
+
+// 	username := "Johanna"
+
+// 	InsertPost(title, content, username)
+
+// 	http.Redirect(w, r, "/", http.StatusSeeOther)
+
+// }
+
+func createComment(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	title := r.PostFormValue("titlepost")
-	category := r.PostFormValue("category")
-	content := r.PostFormValue("postcontent")
+	post := r.PostFormValue("commentpost")
+	content := r.PostFormValue("commentcontent")
 
-	fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
+	fmt.Println("Votre contenu est : " + content + "sur le post : " + post)
 
 	username := "Johanna"
 
-	InsertPost(title, content, username)
+	insertComment(content, username, post)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
-	
 }
