@@ -133,22 +133,66 @@ func AddSession(uuid string, user_name string) {
 	var resultId string
 	for result.Next() {
 		result.Scan(&resultId)
+		result.Close()
+		println("\033[0;96m", "[session] : there is allready a session with this username :")
+
+		statementUpdate, err3 := db.Prepare("UPDATE session SET uuid = ? WHERE username = ?")
+		if err3 != nil {
+			fmt.Println("\033[1;31m", "[session] : error, impossible update session :", uuid)
+			return
+		}
+		statementUpdate.Exec(uuid, user_name)
+
+		println("\033[0;32m", "[session] : session sucessfully updated with uuid = ", uuid)
+
+		return
+
 	}
+
+	statementuuid, err4 := db.Prepare("SELECT username FROM session WHERE uuid = ?")
+	if err4 != nil {
+		fmt.Println("\033[1;31m", "[session] : error, impossible to do statement")
+		return
+	}
+	resultuuid, err5 := statementuuid.Query(uuid)
+	if err5 != nil {
+		fmt.Println("\033[1;31m", "[session] : error, impossible to querry")
+		return
+	}
+
 	if resultId == uuid {
 		fmt.Println("\033[1;31m", "[session] : error, a session allready exist with uuid =", uuid)
+
 		return
+
+		// } else if  == user_name {
+
+		// 	println("\033[0;96m", "[session] : there is allready a session with this username :", err)
+
+		// 	statementMega, err3 := db.Prepare("UPDATE session SET uuid = (uuid) WHERE username = (username) (?, ?)")
+		// 	if err3 != nil {
+		// 		fmt.Println("\033[1;31m", "[session] : error, impossible update session :", uuid)
+		// 		return
+		// 	}
+		// 	statementMega.Exec(uuid, user_name)
+
+		// 	println("\033[0;32m", "[session] : session sucessfully updated with uuid = ", uuid)
+
+		// 	return
+
+	} else {
+
+		statement, err := db.Prepare("INSERT INTO session (uuid, username) VALUES (?, ?)")
+
+		//Error TO DO
+		if err != nil {
+			fmt.Println("\033[1;31m", "[session] : error, can't insert into database")
+			return
+		}
+		println("\033[0;32m", "[session] : session sucessfully created : uuid = ", uuid, " username =", user_name)
+
+		statement.Exec(uuid, user_name)
 	}
-
-	statement, err := db.Prepare("INSERT INTO session (uuid, username) VALUES (?, ?)")
-
-	//Error TO DO
-	if err != nil {
-		fmt.Println("\033[1;31m", "[session] : error, can't insert into database")
-		return
-	}
-	println("\033[0;32m", "[session] : session sucessfully created : uuid = ", uuid, " username =", user_name)
-
-	statement.Exec(uuid, user_name)
 }
 
 func DeleteSession(uuid string) {

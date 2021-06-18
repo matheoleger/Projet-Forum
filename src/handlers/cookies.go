@@ -16,11 +16,16 @@ func CreateCookie(w http.ResponseWriter, r *http.Request, name string, value str
 }
 
 func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
-	c, err := r.Cookie(name)
+	c, err := r.Cookie("session")
 	if err != nil {
+		if err == http.ErrNoCookie {
+			println("\033[1;31m", "[cookies] : there is no such cookies ! :", err)
+			// w.WriteHeader(http.StatusUnauthorized)
+			return ""
+		}
 		// http.Error(w, http.StatusText(400), http.StatusBadRequest)
 		println("\033[1;31m", "[cookies] : reading error", err)
-		return "empty"
+		return ""
 	}
 	println("\033[0;32m", "[cookies] : here are the chocolat chips in your cookies :", c.Value)
 	return c.Value
@@ -38,7 +43,7 @@ func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) {
 	http.SetCookie(w, c)
 }
 
-func SessionCookie(w http.ResponseWriter, r *http.Request) {
+func SessionCookie(w http.ResponseWriter, r *http.Request) http.Cookie {
 	cookie, err := r.Cookie("session") //try read cookie
 	var stringID string
 	//if erorr (no cookie named session)
@@ -63,36 +68,37 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) {
 		println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
 
 		//test
-		AddSession("f88de7fe-140f-40fa-8607-79fceccf6631", "Johanna")
-		return
+		// AddSession("f88de7fe-140f-40fa-8607-79fceccf6631", "Johanna")
+		return *cookie
 
 	}
 	println("\033[1;31m", "[cookies] : session allready exist")
-
+	return *cookie
 }
 
-func ExpireSession(w http.ResponseWriter, r *http.Request) {
+func ExpireSession(w http.ResponseWriter, r *http.Request) http.Cookie {
 	c, err := r.Cookie("session")
 	if err != nil {
 		println("\033[1;31m", "[cookies] : expire session error :", err)
-		return
+		return *c
 	}
 	println("\033[0;32m", "[cookies] : all the session cookies where ate, humm yummy !")
 	c.MaxAge = -1 // delete cookie
 	http.SetCookie(w, c)
+	return *c
 }
 
 func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
-	SessionCookie(w, r)
-	var uuid = ReadCookie(w, r, "session")
-	println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
-	AddSession(uuid, username)
+	uuid := SessionCookie(w, r).Value
+	// uuid := ReadCookie(w, r, "session")
+	println("\033[0;32m", "[session] : launch session, uuid = ", uuid) // //
+	AddSession("c4460a7f-d513-4f0a-b17d-5ebb43b64604", username)       // uuid, username
 }
 
 func EndSession(w http.ResponseWriter, r *http.Request) {
-	ExpireSession(w, r)
-	var uuid = ReadCookie(w, r, "session")
-	println("\033[0;32m", "[session] : end session ")
+	uuid := ExpireSession(w, r).Value
+	// var uuid = ReadCookie(w, r, "session")
+	// println("\033[0;32m", "[session] : end session ")
 	DeleteSession(uuid)
 
 }
