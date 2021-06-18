@@ -151,6 +151,7 @@ func deletePost(id_post int) {
 		fmt.Println("error prepare deletePost")
 		return
 	}
+	statement.Exec(title, content, username)
 
 	defer db.Close()
 }
@@ -159,6 +160,21 @@ func insertComment(content string, username string,post string) {
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(content, username, post)
+
+	defer db.Close()
+}
+
+
+func deleteComment(content string, username string,post string) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("DELETE FROM comment (content, username, post) WHERE = (?, ?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare ")
