@@ -1,8 +1,9 @@
 package handlers
 
 import (
+	"html/template"
 	"net/http"
-	"text/template"
+	//"text/template"
 )
 
 func Posts(w http.ResponseWriter, r *http.Request) {
@@ -19,5 +20,10 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ts.Execute(w, nil)
+	item := GetPost()
+	ts.Execute(w, item)
 }
+
+// func DisplayPosts(w http.ResponseWriter, r *http.Request) {
+// 	t
+// }

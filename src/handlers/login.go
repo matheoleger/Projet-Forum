@@ -22,25 +22,29 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		ts.Execute(w, nil)
-	} else if r.URL.Path == "/login/connexion" {
 
 	} else if r.URL.Path == "/login/connexion" {
 
 		name := r.PostFormValue("loginName")
 		passwordForm := r.PostFormValue("loginPassword")
 
-		passwordDB := GetPassWord(name)
+		nameDB := GetElement(name, "username")
+		passwordDB := GetElement(name, "password")
 
-		errHashed := bcrypt.CompareHashAndPassword([]byte(passwordDB), []byte(passwordForm))
+		if nameDB == name {
+			errHashed := bcrypt.CompareHashAndPassword([]byte(passwordDB), []byte(passwordForm))
 
-		// DataBase()
+			// DataBase()
 
-		if errHashed != nil {
-			fmt.Println(errHashed)
-			http.Redirect(w, r, "/login/", http.StatusSeeOther)
+			if errHashed != nil {
+				fmt.Println(errHashed)
+				http.Redirect(w, r, "/login/", http.StatusSeeOther)
+			} else {
+				fmt.Println("right PW : ", passwordDB)
+				http.Redirect(w, r, "/", http.StatusSeeOther)
+			}
 		} else {
-			fmt.Println("right PW ", passwordDB)
-			http.Redirect(w, r, "/", http.StatusSeeOther)
+			http.Redirect(w, r, "/login/", http.StatusSeeOther)
 		}
 
 	} else if r.URL.Path == "/login/inscription" {
@@ -188,6 +192,7 @@ func PasswordHash(password string) string {
 
 func VerificationPassword(password string) bool {
 
+	result := true
 	searchMaj := `(.*[a-z]){2,}`
 	searchMin := `(.*[A-Z]){2,}`
 	searchDigit := `(.*\d){2,}`
@@ -210,20 +215,18 @@ func VerificationPassword(password string) bool {
 
 	if !regexMaj.Match([]byte(password)) || !regexMin.Match([]byte(password)) {
 		fmt.Println("Le nombre de Majuscule et minuscule doivent être supérieurs à 2")
-		return false
+		result = false
 	}
-
 	if !regexDigit.Match([]byte(password)) || !regexSpeChar.Match([]byte(password)) {
 		fmt.Println("Le nombre de chiffre doit être supérieurs à 2 et il doit y avoir au moins 1 caractères spéciales")
-		return false
+		result = false
 	}
-
 	if !regexLength.Match([]byte(password)) {
 		fmt.Println("La longueur doit être de 8 caractères")
-		return false
+		result = false
 	}
 
-	return true
+	return result
 }
 
 func VerificationEmail(email string) bool {

@@ -14,14 +14,16 @@
     <link rel="stylesheet" type="text/css" href="../static/createpost.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
-    <script src="../static/script/navbar.js"></script>
-    <script src="../static/script/createpost.js"></script>
+    <script defer src="../static/script/navbar.js"></script>
+    <script defer src="../static/script/createpost.js"></script>
+    <script defer src="../static/script/events.js"></script>
 
 
     <title>Y' Forum</title>
 </head>
 <body>
     {{template "navbar" .}}
+    {{ template "createpost" .}}
     <main>
         {{template "body" .}}
     </main>
