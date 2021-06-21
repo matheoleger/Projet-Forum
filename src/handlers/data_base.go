@@ -3,9 +3,20 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
+
+type PostStruct struct {
+	Id_post     int
+	Title       string
+	Content     string
+	Username    string
+	Number_like int
+	Liked       bool
+	Date        time.Time
+}
 
 func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
@@ -32,56 +43,17 @@ func AddUser(user string, pw string, mail string) {
 }
 
 func DeleteUser(user string) {
-	// db, err := sql.Open("sqlite3", "BDD/BBD_Final")
-
-	// if err != nil {
-	// 	fmt.Println("error open 1")
-	// 	return
-	// }
-	//
-
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("DELETE FROM user WHERE id_username = ?")
+	statement, err := db.Prepare("DELETE FROM user WHERE username = ?")
 	if err != nil {
 		fmt.Println("error prepare")
 		return
 	}
 
 	statement.Exec(user)
-	// var password string
-	// var email string
-	// for result.Next() {
-	// 	result.Scan(&password, &email)
-	// 	/* Faire quelque chose avec cette ligne */
-	// 	fmt.Println(password + " " + email)
-	// }
+
 }
-
-// func DataBase() {
-// 	db, err := sql.Open("sqlite3", "BDD/BBD_v5")
-
-// 	if err != nil {
-// 		fmt.Println("error open2")
-// 		return
-// 	}
-
-// 	result, err := db.Query("SELECT password, email FROM user WHERE id_username = \"JohnBibi\"")
-
-// 	// Error TO DO
-// 	if err != nil {
-// 		fmt.Println("error query data base")
-// 		return
-// 	}
-
-// 	var password string
-// 	var email string
-// 	for result.Next() {
-// 		result.Scan(&password, &email)
-// 		/* Faire quelque chose avec cette ligne */
-// 		fmt.Println(password + " " + email)
-// 	}
-// }
 
 func GetElement(user, element string) string {
 	db := OpenDataBase()
@@ -90,7 +62,7 @@ func GetElement(user, element string) string {
 	result, err2 := statement.Query(user)
 
 	if err != nil || err2 != nil {
-		fmt.Println("error query")
+		fmt.Println("Error query")
 		return "error query"
 	}
 
@@ -105,4 +77,77 @@ func GetElement(user, element string) string {
 	defer db.Close()
 
 	return password
+}
+
+func GetPost() []PostStruct {
+	db := OpenDataBase()
+
+	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 9")
+
+	if err != nil {
+		fmt.Println("error query")
+	}
+
+	defer result.Close()
+
+	var post PostStruct
+	var Arraypost []PostStruct
+
+	for result.Next() {
+		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
+
+		fmt.Println(&post.Date)
+		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
+
+		// On ajoute au tableau chaque post
+		Arraypost = append(Arraypost, post)
+	}
+
+	fmt.Println(Arraypost)
+	err = result.Err()
+	return Arraypost
+}
+
+func createCategory(name string) {
+	db := OpenDataBase()
+	statement, err := db.Prepare("INSERT INTO category (name) VALUES (?)")
+
+	if err != nil {
+		fmt.Println("error prepare createCategory")
+		return
+	}
+	statement.Exec(name)
+
+	defer db.Close()
+
+}
+
+func deleteCategory(name string) {
+
+	db := OpenDataBase()
+	statement, err := db.Prepare("DELETE FROM category WHERE name = ?")
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(name)
+
+	defer db.Close()
+
+}
+
+func InsertPost(title string, content string, username string, Number_like int, liked bool, date_post time.Time) {
+
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO post (title, content, username, Number_like, liked, date_post) VALUES (?, ?, ?, ?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare InsertPost")
+		return
+	}
+
+	statement.Exec(title, content, username, Number_like, liked, date_post)
+
+	defer db.Close()
 }

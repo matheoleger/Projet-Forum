@@ -22,11 +22,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	// AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
 	// DeleteUser("JohnBibi")
 	// DataBase()
+	item := GetPost()
 
-	// SessionCookie(w, r)
-	// CreateCookie(w, r, "salu", "how many money")
-
-	// LaunchSession(w, r, "Johanna")
-
-	ts.Execute(w, nil)
+	ts.Execute(w, item)
 }
