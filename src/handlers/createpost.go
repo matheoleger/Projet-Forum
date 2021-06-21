@@ -39,7 +39,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 	username := "Johanna"
 
-	InsertPost(title, content, username, 8, false, time.Now())
+	InsertPost(title, content, username, 0, false, time.Now())
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
