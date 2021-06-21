@@ -82,7 +82,7 @@ func AddSession(uuid string, user_name string) {
 		}
 		statementUpdate.Exec(uuid, user_name)
 
-		println("\033[0;32m", "[session] : session sucessfully updated with uuid = ", uuid)
+		// println("\033[0;32m", "[session] : session sucessfully updated with uuid = ", uuid)
 
 		return
 
@@ -98,7 +98,7 @@ func AddSession(uuid string, user_name string) {
 
 	statement.Exec(uuid, user_name)
 
-	println("\033[0;32m", "[session] : session sucessfully created : uuid = ", uuid, " username =", user_name)
+	// println("\033[0;32m", "[session] : session sucessfully created : uuid = ", uuid, " username =", user_name)
 
 }
 
@@ -112,7 +112,7 @@ func DeleteSession(uuid string) {
 		fmt.Println("\033[1;31m", "[session] : error, deleting from database")
 		return
 	}
-	println("\033[0;32m", "[session] : session sucessfully deleted : uuid = ", uuid)
+	// println("\033[0;32m", "[session] : session sucessfully deleted : uuid = ", uuid)
 
 	statement.Exec(uuid)
 }

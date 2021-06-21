@@ -12,7 +12,7 @@ func CreateCookie(w http.ResponseWriter, r *http.Request, name string, value str
 		Value: value,
 		Path:  "/",
 	})
-	println("\033[0;32m", "[cookies] : we cooked your cookies, yummy !")
+	// println("\033[0;32m", "[cookies] : we cooked your cookies, yummy !")
 }
 
 func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
@@ -27,7 +27,7 @@ func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
 		println("\033[1;31m", "[cookies] : reading error", err)
 		return ""
 	}
-	println("\033[0;32m", "[cookies] : here are the chocolat chips in your cookies :", c.Value)
+	// println("\033[0;32m", "[cookies] : here are the chocolat chips in your cookies :", c.Value)
 	return c.Value
 }
 
@@ -40,7 +40,7 @@ func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) string {
 		return ""
 	}
 
-	println("\033[0;32m", "[cookies] : all the cookies where ate :")
+	// println("\033[0;32m", "[cookies] : all the cookies where ate :")
 	c.MaxAge = -1 // delete cookie
 	http.SetCookie(w, c)
 	return uuidValue
@@ -48,7 +48,7 @@ func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) string {
 
 func SessionCookie(w http.ResponseWriter, r *http.Request) string {
 	cookie, err := r.Cookie("session") //try read cookie
-	var stringID string
+	// var stringID string
 	//if erorr (no cookie named session)
 	if err != nil {
 		println("\033[0;96m", "[cookies] : can't find session cookies :", err)
@@ -67,8 +67,8 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) string {
 		}
 		http.SetCookie(w, cookie)
 
-		stringID = id.String()
-		println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
+		// stringID = id.String()
+		// println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
 
 		//test
 		// AddSession("f88de7fe-140f-40fa-8607-79fceccf6631", "Johanna")
@@ -85,7 +85,7 @@ func ExpireSession(w http.ResponseWriter, r *http.Request) string {
 		println("\033[1;31m", "[cookies] : expire session error :", err)
 		return "error"
 	}
-	println("\033[0;32m", "[cookies] : all the session cookies where ate, humm yummy !")
+	// println("\033[0;32m", "[cookies] : all the session cookies where ate, humm yummy !")
 	c.MaxAge = -1 // delete cookie
 	http.SetCookie(w, c)
 	return *&c.Value
