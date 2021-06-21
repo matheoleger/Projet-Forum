@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 // func Creationpost(w http.ResponseWriter, r *http.Request) {
@@ -50,14 +51,28 @@ func createComment(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
+<<<<<<< HEAD
 	post := r.PostFormValue("commentpost")
 	content := r.PostFormValue("commentcontent")
+=======
+	title := r.PostFormValue("titlepost")
+	category := r.PostFormValue("category")
+	content := r.PostFormValue("postcontent")
+	// postFile := r.PostFormValue("postfile")
+>>>>>>> 324a996f36c9c8096f5eb01ab91de30fc06e2b59
 
 	fmt.Println("Votre contenu est : " + content + "sur le post : " + post)
 
 	username := "Johanna"
 
+<<<<<<< HEAD
 	insertComment(content, username, post)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+=======
+	InsertPost(title, content, username, 0, false, time.Now())
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+
+>>>>>>> 324a996f36c9c8096f5eb01ab91de30fc06e2b59
 }

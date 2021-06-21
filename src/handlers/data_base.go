@@ -3,11 +3,20 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
-	"strconv"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
+
+type PostStruct struct {
+	Id_post     int
+	Title       string
+	Content     string
+	Username    string
+	Number_like int
+	Liked       bool
+	Date        time.Time
+}
 
 func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
@@ -43,6 +52,7 @@ func DeleteUser(user string) {
 	}
 
 	statement.Exec(user)
+
 }
 
 func GetElement(user, element string) string {
@@ -69,9 +79,10 @@ func GetElement(user, element string) string {
 	return password
 }
 
-func GetPost() interface{} {
+func GetPost() []PostStruct {
 	db := OpenDataBase()
 
+<<<<<<< HEAD
 	type PostStruct struct {
 		Id_post     int
 		post		string
@@ -82,22 +93,32 @@ func GetPost() interface{} {
 		Liked       bool
 		Date        time.Time
 	}
+=======
+	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 9")
+>>>>>>> 324a996f36c9c8096f5eb01ab91de30fc06e2b59
 
-	//statement, err := db.Prepare("SELECT title, content, username FROM post WHERE id_post=$1")
+	if err != nil {
+		fmt.Println("error query")
+	}
 
-	statement := db.QueryRow("SELECT id_post, title, content, username, Number_like, liked ,date_post FROM post WHERE id_post=8;", 4)
+	defer result.Close()
 
 	var post PostStruct
-	switch err := statement.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date); err {
-	case sql.ErrNoRows:
-		fmt.Println("No rows were returned!")
-	case nil:
-		fmt.Println("C'est le post numéro " + strconv.Itoa(post.Id_post) + " le titre est : " + post.Title + " le contenu du post est : " + post.Content + " c'est " + post.Username + " qui a écrit le post, et il y a  " + strconv.Itoa(post.Number_like) + " likes, et la date du post est " + post.Date.String())
-	default:
-		panic(err)
+	var Arraypost []PostStruct
+
+	for result.Next() {
+		result.Scan(&post.Id_post, &post.Title, &post.Username, &post.Content, &post.Number_like, &post.Liked, &post.Date)
+
+		fmt.Println(&post.Date)
+		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
+
+		// On ajoute au tableau chaque post
+		Arraypost = append(Arraypost, post)
 	}
-	// statement.Scan(&title, &content, &username)
-	return post
+
+	fmt.Println(Arraypost)
+	err = result.Err()
+	return Arraypost
 }
 
 func createCategory(name string) {
@@ -125,19 +146,21 @@ func deleteCategory(name string) {
 	statement.Exec(name)
 
 	defer db.Close()
+
 }
 
-func InsertPost(title string, content string, username string) {
+func InsertPost(title string, content string, username string, Number_like int, liked bool, date_post time.Time) {
+
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("INSERT INTO post (title, content, username) VAlUES (?, ?, ?)")
+	statement, err := db.Prepare("INSERT INTO post (title, content, username, Number_like, liked, date_post) VALUES (?, ?, ?, ?, ?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare InsertPost")
 		return
 	}
 
-	statement.Exec(title, content, username)
+	statement.Exec(title, content, username, Number_like, liked, date_post)
 
 	defer db.Close()
 }

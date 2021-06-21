@@ -21,9 +21,7 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	item := GetPost()
-	ts.Execute(w, item)
-}
 
-// func DisplayPosts(w http.ResponseWriter, r *http.Request) {
-// 	t
-// }
+	ts.Execute(w, item)
+
+}

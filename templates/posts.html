@@ -1,5 +1,6 @@
 {{define "body"}}
 
+    {{ range .}}
     <ul>
         <li> Username : {{ .Username}}</li>
         <li> Title : {{ .Title}}</li>
@@ -7,5 +8,6 @@
         <li> Date : {{ .Date}}</li>
         <li> Like : {{ .Number_like}}</li>
     </ul>
-
+    {{end}}
+    
 {{end}}
