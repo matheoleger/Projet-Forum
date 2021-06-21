@@ -8,17 +8,29 @@ import (
 )
 
 func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
-	uuid := SessionCookie(w, r).Value
-	// uuid := ReadCookie(w, r, "session")
-	//println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
-	AddSession(uuid, username) // uuid, username
+	uuid := SessionCookie(w, r)
+	if uuid == "error" {
+		println("\033[1;31m", "[session] : expire error :")
+		return
+
+	} else {
+		// uuid := ReadCookie(w, r, "session")
+		//println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
+		AddSession(uuid, username) // uuid, username
+	}
 }
 
 func EndSession(w http.ResponseWriter, r *http.Request) {
-	uuid := ExpireSession(w, r).Value
-	// var uuid = ReadCookie(w, r, "session")
-	// println("\033[0;32m", "[session] : end session ")
-	DeleteSession(uuid)
+	uuid := ExpireSession(w, r)
+	if uuid == "error" {
+		println("\033[1;31m", "[session] : expire error ")
+		return
+
+	} else {
+		// var uuid = ReadCookie(w, r, "session")
+		// println("\033[0;32m", "[session] : end session ")
+		DeleteSession(uuid)
+	}
 }
 
 func AddSession(uuid string, user_name string) {
@@ -73,7 +85,6 @@ func AddSession(uuid string, user_name string) {
 		println("\033[0;32m", "[session] : session sucessfully updated with uuid = ", uuid)
 
 		return
-		// usefull ???????????????????????
 
 	}
 

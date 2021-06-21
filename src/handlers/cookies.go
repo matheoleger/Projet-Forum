@@ -31,19 +31,22 @@ func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
 	return c.Value
 }
 
-func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) {
+func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) string {
 	c, err := r.Cookie(name)
+	uuidValue := c.Value
 	if err != nil {
 		//http.Redirect(w, r, "/nop", http.StatusSeeOther) // /set
 		println("\033[1;31m", "[cookies] : expire error :", err)
-		return
+		return ""
 	}
+
 	println("\033[0;32m", "[cookies] : all the cookies where ate :")
 	c.MaxAge = -1 // delete cookie
 	http.SetCookie(w, c)
+	return uuidValue
 }
 
-func SessionCookie(w http.ResponseWriter, r *http.Request) http.Cookie {
+func SessionCookie(w http.ResponseWriter, r *http.Request) string {
 	cookie, err := r.Cookie("session") //try read cookie
 	var stringID string
 	//if erorr (no cookie named session)
@@ -69,21 +72,21 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) http.Cookie {
 
 		//test
 		// AddSession("f88de7fe-140f-40fa-8607-79fceccf6631", "Johanna")
-		return *cookie
+		return *&cookie.Value
 
 	}
 	println("\033[1;31m", "[cookies] : session allready exist")
-	return *cookie
+	return "error"
 }
 
-func ExpireSession(w http.ResponseWriter, r *http.Request) http.Cookie {
+func ExpireSession(w http.ResponseWriter, r *http.Request) string {
 	c, err := r.Cookie("session")
 	if err != nil {
 		println("\033[1;31m", "[cookies] : expire session error :", err)
-		return *c
+		return "error"
 	}
 	println("\033[0;32m", "[cookies] : all the session cookies where ate, humm yummy !")
 	c.MaxAge = -1 // delete cookie
 	http.SetCookie(w, c)
-	return *c
+	return *&c.Value
 }
