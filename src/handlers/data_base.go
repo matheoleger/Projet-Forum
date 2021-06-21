@@ -82,20 +82,7 @@ func GetElement(user, element string) string {
 func GetPost() []PostStruct {
 	db := OpenDataBase()
 
-<<<<<<< HEAD
-	type PostStruct struct {
-		Id_post     int
-		post		string
-		Title       string
-		Content     string
-		Username    string
-		Number_like int
-		Liked       bool
-		Date        time.Time
-	}
-=======
 	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 9")
->>>>>>> 324a996f36c9c8096f5eb01ab91de30fc06e2b59
 
 	if err != nil {
 		fmt.Println("error query")
@@ -174,12 +161,12 @@ func deletePost(id_post int) {
 		fmt.Println("error prepare deletePost")
 		return
 	}
-	statement.Exec(title, content, username)
+	statement.Exec(id_post)
 
 	defer db.Close()
 }
 
-func insertComment(content string, username string,post string) {
+func insertComment(content string, username string, post string) {
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
@@ -193,8 +180,7 @@ func insertComment(content string, username string,post string) {
 	defer db.Close()
 }
 
-
-func deleteComment(content string, username string,post string) {
+func deleteComment(content string, username string, post string) {
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("DELETE FROM comment (content, username, post) WHERE = (?, ?, ?)")
