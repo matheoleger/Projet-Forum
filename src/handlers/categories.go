@@ -3,6 +3,8 @@ package handlers
 import (
 	"net/http"
 	"text/template"
+
+	bdd "../database"
 )
 
 func Categories(w http.ResponseWriter, r *http.Request) {
@@ -19,5 +21,7 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ts.Execute(w, nil)
+	page := bdd.Page{Categories: bdd.GetCategory()}
+
+	ts.Execute(w, page)
 }

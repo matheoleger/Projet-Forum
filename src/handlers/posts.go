@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
+
+	bdd "../database"
 	//"text/template"
 )
 
@@ -20,8 +23,17 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	item := GetPost()
+	// item := GetPost()
 
-	ts.Execute(w, item)
+	categoryName := r.URL.Query().Get("category")
+
+	fmt.Println(categoryName)
+
+	page := bdd.Page{Posts: bdd.GetPostByCategory(categoryName)}
+
+	// ts.Execute(w, item)
+	ts.Execute(w, page)
+
+}
 
 }
