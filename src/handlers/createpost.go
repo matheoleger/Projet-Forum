@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 // func Creationpost(w http.ResponseWriter, r *http.Request) {
@@ -33,13 +34,14 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	title := r.PostFormValue("titlepost")
 	category := r.PostFormValue("category")
 	content := r.PostFormValue("postcontent")
+	// postFile := r.PostFormValue("postfile")
 
 	fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
 
 	username := "Johanna"
 
-	InsertPost(title, content, username)
+	InsertPost(title, content, username, 0, false, time.Now())
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
-	
+
 }
