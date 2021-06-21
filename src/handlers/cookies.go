@@ -87,18 +87,3 @@ func ExpireSession(w http.ResponseWriter, r *http.Request) http.Cookie {
 	http.SetCookie(w, c)
 	return *c
 }
-
-func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
-	uuid := SessionCookie(w, r).Value
-	// uuid := ReadCookie(w, r, "session")
-	println("\033[0;32m", "[session] : launch session, uuid = ", uuid) // //
-	AddSession("c4460a7f-d513-4f0a-b17d-5ebb43b64604", username)       // uuid, username
-}
-
-func EndSession(w http.ResponseWriter, r *http.Request) {
-	uuid := ExpireSession(w, r).Value
-	// var uuid = ReadCookie(w, r, "session")
-	// println("\033[0;32m", "[session] : end session ")
-	DeleteSession(uuid)
-
-}

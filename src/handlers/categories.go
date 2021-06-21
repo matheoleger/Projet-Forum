@@ -23,7 +23,7 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 	// ReadCookie(w, r, "salu")
 	// ExpireCookie(w, r, "salu")
 	// ExpireSession(w, r)
-	LaunchSession(w, r, "Roberto")
+	LaunchSession(w, r, "Chad")
 	// SessionCookie(w, r)
 
 	// EndSession(w, r)
