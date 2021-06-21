@@ -8,9 +8,16 @@
         <img src="../static/img/left_arrow.png" class="arrows"> 
 
         <div id="post">
-
-            <h1>Titre</h1>
-            <p>text whola bonsoir je sais y'a pas mais y'a du text et il faut que je bourre donc go raconter de la merde mdr yes lets go</p>
+            {{ range .}}
+                <ul>
+                    <li> Username : {{ .Username}}</li>
+                    <li> Title : {{ .Title}}</li>
+                    <li> Content : {{ .Content}}</li>
+                    <li> Date : {{ .Date}}</li>
+                    <li> Like : {{ .Number_like}}</li>
+                </ul>
+            {{end}}
+           
 
         </div>
 
