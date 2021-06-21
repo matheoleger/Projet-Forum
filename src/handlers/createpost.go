@@ -34,6 +34,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	title := r.PostFormValue("titlepost")
 	category := r.PostFormValue("category")
 	content := r.PostFormValue("postcontent")
+	// postFile := r.PostFormValue("postfile")
 
 	fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
 
