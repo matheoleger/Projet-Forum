@@ -94,7 +94,7 @@ func GetPost() []PostStruct {
 	var Arraypost []PostStruct
 
 	for result.Next() {
-		result.Scan(&post.Id_post, &post.Title, &post.Username, &post.Content, &post.Number_like, &post.Liked, &post.Date)
+		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
 
 		fmt.Println(&post.Date)
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)

@@ -20,8 +20,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	item := GetPost()
-
-	ts.Execute(w, item)
+	ts.Execute(w, nil)
 
 }
