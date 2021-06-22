@@ -2,8 +2,10 @@ package handlers
 
 import (
 	"fmt"
+	"image"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -34,7 +36,18 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	title := r.PostFormValue("titlepost")
 	category := r.PostFormValue("category")
 	content := r.PostFormValue("postcontent")
-	// postFile := r.PostFormValue("postfile")
+	postFile := r.PostFormValue("postfile")
+
+	content += postFile
+
+	f, err := os.Open(postFile)
+	if err != nil {
+		fmt.Println("error open file")
+	}
+
+	image, _, err := image.Decode(f)
+
+	fmt.Println(image)
 
 	fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
 
