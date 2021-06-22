@@ -1,5 +1,13 @@
 {{define "body"}}
 
-    <p>categories</p>
+    <h1>Categories</h1>
+
+    {{ if .Categories }}
+        {{ range .Categories }}
+            <div>
+                <a href="/posts?category={{.Name}}">{{.Name}}</a>
+            </div>
+        {{ end }}
+    {{ end }}
 
 {{end}}
