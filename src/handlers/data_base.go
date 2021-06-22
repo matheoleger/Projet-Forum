@@ -96,14 +96,10 @@ func GetPost() []PostStruct {
 	for result.Next() {
 		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
 
-		fmt.Println(&post.Date)
-		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
-
 		// On ajoute au tableau chaque post
 		Arraypost = append(Arraypost, post)
 	}
 
-	fmt.Println(Arraypost)
 	err = result.Err()
 	return Arraypost
 }
