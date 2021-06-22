@@ -19,7 +19,5 @@ func Profil(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// EndSession(w, r)
-
 	ts.Execute(w, nil)
 }

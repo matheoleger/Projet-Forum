@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -62,13 +63,13 @@ func SessionCookie(w http.ResponseWriter, r *http.Request) string {
 			Value:    id.String(),
 			Secure:   true,
 			HttpOnly: true,
-			// Expires: time.Now().Add(120*time.Second),
-			// Path:     "/",
+			Expires:  time.Now().Add(2 * time.Hour),
+			Path:     "/",
 		}
 		http.SetCookie(w, cookie)
 
 		// stringID = id.String()
-		// println("\033[0;32m", "[cookies] : we created your session cookies : ", stringID)
+		// println("\033[0;32m", "[cookies] : we created your session cookies : "+"time = "+cookie.Expires.String()) //, stringID
 
 		//test
 		// AddSession("f88de7fe-140f-40fa-8607-79fceccf6631", "Johanna")
