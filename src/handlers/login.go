@@ -41,6 +41,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/login/", http.StatusSeeOther)
 			} else {
 				fmt.Println("right PW : ", passwordDB)
+				LaunchSession(w, r, name)
 				http.Redirect(w, r, "/", http.StatusSeeOther)
 			}
 		} else {
