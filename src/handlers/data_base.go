@@ -12,6 +12,7 @@ type PostStruct struct {
 	Id_post     int
 	Title       string
 	Content     string
+	post        int
 	Username    string
 	Number_like int
 	Liked       bool
@@ -166,7 +167,7 @@ func deletePost(id_post int) {
 	defer db.Close()
 }
 
-func insertComment(content string, username string, post string) {
+func insertComment(content string, username string, post int) {
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
@@ -180,7 +181,7 @@ func insertComment(content string, username string, post string) {
 	defer db.Close()
 }
 
-func deleteComment(content string, username string, post string) {
+func deleteComment(content string, username string, post int) {
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("DELETE FROM comment (content, username, post) WHERE = (?, ?, ?)")

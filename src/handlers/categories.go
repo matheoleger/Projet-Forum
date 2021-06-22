@@ -21,13 +21,7 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-<<<<<<< HEAD
-	
-
-	ts.Execute(w, nil)
-=======
 	page := bdd.Page{Categories: bdd.GetCategory()}
 
 	ts.Execute(w, page)
->>>>>>> b7bafd2922cccab9f7b503849373295f1b1e37c4
 }

@@ -24,7 +24,7 @@ func main() {
 	// http.HandleFunc("/connexion", handlers.GetLogin)
 	// http.HandleFunc("/creationpost", handlers.Creationpost)
 	http.HandleFunc("/creationpost", handlers.CreatePost)
-	http.HandleFunc("/comment", handlers.CreationComment)
+	http.HandleFunc("/creationcomment", handlers.CreateComment)
 
 	fmt.Println(string(white), "[SERVER_READY] : on http://localhost:8080 ✅ ")
 	fmt.Println(string(yellow), "[SERVER_INFO] : To stop the program : Ctrl + c")

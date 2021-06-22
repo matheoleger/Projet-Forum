@@ -14,19 +14,13 @@
                 
                     <label for="category-select" id="categorieslabel"><b>Category</b></label>
                     <select name="category" id="category-select">
-                        <!-- <option value="Sport">Sport</option>
+                        <option value="Sport">Sport</option>
                         <option value="Politique">Politique</option>
                         <option value="Actu">Actu</option>
                         <option value="Technology">Technologie</option>
                         <option value="Nourritures">Nourritures</option>
                         <option value="Animals">Animal</option>
-                        <option value="Other">Autre</option> -->
-                    {{ if .Categories }}
-                        {{ range .Categories }}
-                            <option value="{{.Name}}">{{.Name}}</option>
-                        {{ end }}
-                        
-                    {{ end }}
+                        <option value="Other">Autre</option>
                     </select>
                 </div>
 
