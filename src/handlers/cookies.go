@@ -47,11 +47,21 @@ func ExpireCookie(w http.ResponseWriter, r *http.Request, name string) string {
 	return uuidValue
 }
 
+func VerifyCookie(w http.ResponseWriter, r *http.Request) bool {
+	_, err := r.Cookie("session")
+	if err != nil {
+		return false
+	} else {
+		return true
+	}
+}
+
 func SessionCookie(w http.ResponseWriter, r *http.Request) string {
 	cookie, err := r.Cookie("session") //try read cookie
 	// var stringID string
 	//if erorr (no cookie named session)
-	if err != nil {
+
+	if !VerifyCookie(w, r) {
 		println("\033[0;96m", "[cookies] : can't find session cookies :", err)
 		id, err2 := uuid.NewRandom() //create new uuid
 		if err2 != nil {
