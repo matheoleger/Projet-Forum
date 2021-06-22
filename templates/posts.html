@@ -1,5 +1,19 @@
 {{define "body"}}
 
-    <p> post</p>
-    
+    {{if .Categories}}
+        {{range .Categories}}
+            <h1 class="category-of-posts">{{.Name}}</h1>
+        {{end}}
+    {{end}}
+
+    {{if .Posts}}
+        {{ range .Posts }}
+            <div id="{{ .Id_post }}">
+                <h1>{{ .Username }}</h1>
+                <h1>{{ .Title }}</h1>
+                <h2>{{ .Content }}</h1>
+            </div>
+        {{ end }}
+    {{ end }}
+
 {{end}}

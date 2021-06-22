@@ -22,7 +22,7 @@ func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
 
 	if err != nil {
-		fmt.Println("error open")
+		fmt.Println("\033[1;31m", "error open")
 	}
 	return db
 }
