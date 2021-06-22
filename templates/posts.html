@@ -1,19 +1,9 @@
 {{define "body"}}
 
-    {{ range .}}
-    <ul>
-        <li> Username : {{ .Username}}</li>
-        <li> Title : {{ .Title}}</li>
-        <li> Content : {{ .Content}}</li>
-        <li> Date : {{ .Date}}</li>
-        <li> Like : {{ .Number_like}}</li>
-    </ul>
-    {{ end }}
-
-    {{if Posts}}
-        {{ range Posts }}
-            <div id="{{.Id}}">
-                <h1>{{. Username }}</h1>
+    {{if .Posts}}
+        {{ range .Posts }}
+            <div id="{{ .Id_post }}">
+                <h1>{{ .Username }}</h1>
                 <h1>{{ .Title }}</h1>
                 <h2>{{ .Content }}</h1>
             </div>
