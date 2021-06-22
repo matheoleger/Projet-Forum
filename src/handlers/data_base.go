@@ -10,6 +10,7 @@ import (
 
 type PostStruct struct {
 	Id_post     int
+	Id_comment  int
 	Title       string
 	Content     string
 	post        int
@@ -181,16 +182,16 @@ func insertComment(content string, username string, post int) {
 	defer db.Close()
 }
 
-func deleteComment(content string, username string, post int) {
+func deleteComment(id_comment int) {
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("DELETE FROM comment (content, username, post) WHERE = (?, ?, ?)")
+	statement, err := db.Prepare("DELETE FROM comment WHERE id_comment = ?")
 
 	if err != nil {
 		fmt.Println("error prepare ")
 		return
 	}
-	statement.Exec(content, username, post)
+	statement.Exec(id_comment)
 
 	defer db.Close()
 }

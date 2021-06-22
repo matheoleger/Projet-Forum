@@ -72,7 +72,7 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(n)
 	fmt.Println("Votre contenu est : " + content + "sur le post : " + post)
 
-	username := "Johanna"
+	username := "Alex77"
 
 	insertComment(content, username, n)
 

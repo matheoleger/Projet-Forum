@@ -1,19 +1,27 @@
 {{define "body"}}
 
-    {{if .Categories}}
-        {{range .Categories}}
-            <h1 class="category-of-posts">{{.Name}}</h1>
+    <div class="posts-by-category">
+        {{if .Categories}}
+            {{range .Categories}}
+                <div class="category-of-posts">
+                    <h1 class="">{{.Name}}</h1>
+                </div>        
+            {{end}}
         {{end}}
-    {{end}}
 
-    {{if .Posts}}
-        {{ range .Posts }}
-            <div id="{{ .Id_post }}">
-                <h1>{{ .Username }}</h1>
-                <h1>{{ .Title }}</h1>
-                <h2>{{ .Content }}</h1>
-            </div>
-        {{ end }}
-    {{ end }}
+        {{if .Posts}}
+            {{ range .Posts }}
+                <div id="{{ .Id_post }}" class="posts">
+                    <div class="post-user-element">
+                        <img src="../static/img/user-btn.png"></img>
+                        <h1>{{ .Username }}</h1>
+                    </div>
+                    <h1 id="title">{{ .Title }}</h1>
+                    <p>{{ .Content }}</p>
+                </div>
+            {{ end }}
+        {{ end }}       
+    </div>
+
 
 {{end}}
