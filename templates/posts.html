@@ -1,5 +1,11 @@
 {{define "body"}}
 
+    {{if .Categories}}
+        {{range .Categories}}
+            <h1 class="category-of-posts">{{.Name}}</h1>
+        {{end}}
+    {{end}}
+
     {{if .Posts}}
         {{ range .Posts }}
             <div id="{{ .Id_post }}">

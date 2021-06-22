@@ -20,7 +20,11 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("ici cest le params : " + categoryName)
 
-	page := bdd.Page{Categories: bdd.GetCategory(), Posts: bdd.GetPostByCategory(categoryName)}
+	category := bdd.Category{Name: categoryName}
+	var categories []bdd.Category
+	categories = append(categories, category)
+
+	page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
 
 	files := findPathFiles("./templates/posts.html")
 

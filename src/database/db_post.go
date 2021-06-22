@@ -34,41 +34,6 @@ func GetPostByCategory(category string) []Post {
 
 		postStruct = append(postStruct, GetPost(db, postByCategory))
 
-		// resultCat.Scan(&postByCategory)
-
-		// fmt.Println(postByCategory)
-
-		// statement, err := db.Prepare("SELECT id_post, title, content, username, date_post FROM post WHERE id_post = ?")
-
-		// if err != nil {
-		// 	fmt.Println("error prepare GetPostByCategory in resultCat : ", err)
-		// 	return postStruct
-		// }
-
-		// result, err2 := statement.Query(postByCategory)
-
-		// if err2 != nil {
-		// 	fmt.Println("error query GetPostByCategory in resultCat : ", err2)
-		// 	return postStruct
-		// }
-
-		// var id int
-		// var title string
-		// var content string
-		// var username string
-
-		// for result.Next() {
-		// 	result.Scan(&id, &title, &content, &username)
-
-		// 	fmt.Println(id)
-		// 	fmt.Println(title)
-		// 	fmt.Println(content)
-
-		// 	postStruct = append(postStruct, Post{Id_post: id, Title: title, Content: content, Username: username})
-
-		// 	fmt.Println(postStruct)
-		// }
-
 	}
 
 	defer db.Close()
