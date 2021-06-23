@@ -29,3 +29,8 @@ type Comment struct {
 	post       string
 	Liked      bool
 }
+
+type User struct {
+	Username string
+	Email    string
+}

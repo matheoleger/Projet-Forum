@@ -1,5 +1,10 @@
 {{define "body"}}
 
-    <p>profil</p>
+    <h1>Profil</h1>
+
+    {{ range .User}}
+        <p> {{ .Username}}</p>
+        <p> {{ .Email}}</p>
+    {{ end }}
 
 {{end}}

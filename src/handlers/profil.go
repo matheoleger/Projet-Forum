@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"text/template"
+
+	bdd "../database"
 )
 
 func Profil(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +22,13 @@ func Profil(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// EndSession(w, r)
+	if !VerifyCookie(w, r) {
+		http.Redirect(w, r, "/login/", http.StatusSeeOther)
 
-	ts.Execute(w, nil)
+	} else {
+		content := bdd.GetProfil(w, r)
+		fmt.Println(content)
+		ts.Execute(w, content)
+	}
+
 }
