@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func GetProfil(w http.ResponseWriter, r *http.Request) []User {
+func GetProfil(w http.ResponseWriter, r *http.Request) User {
 	db := OpenDataBase()
 
 	c, err := r.Cookie("session")
@@ -37,11 +37,11 @@ func GetProfil(w http.ResponseWriter, r *http.Request) []User {
 	return resultInformation
 }
 
-func GetMoreInformation(w http.ResponseWriter, r *http.Request, username string) []User {
+func GetMoreInformation(w http.ResponseWriter, r *http.Request, username string) User {
 	db := OpenDataBase()
 
 	var myUser User
-	var users []User
+	// var users []User
 	statement, err := db.Prepare("SELECT username, email FROM user WHERE username = ?")
 
 	if err != nil {
@@ -58,9 +58,9 @@ func GetMoreInformation(w http.ResponseWriter, r *http.Request, username string)
 
 	for result.Next() {
 		result.Scan(&myUser.Username, &myUser.Email)
-		users = append(users, myUser)
-		fmt.Println(users)
+		// users = append(users, myUser)
+		fmt.Println(myUser)
 	}
 
-	return users
+	return myUser
 }

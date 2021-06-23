@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 	"text/template"
 
@@ -22,13 +21,26 @@ func Profil(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	Disconnect(w, r)
 	if !VerifyCookie(w, r) {
 		http.Redirect(w, r, "/login/", http.StatusSeeOther)
 
 	} else {
 		content := bdd.GetProfil(w, r)
-		fmt.Println(content)
-		ts.Execute(w, content)
+
+		page := bdd.Page{UserInfo: content}
+
+		ts.Execute(w, page)
+	}
+
+}
+
+func Disconnect(w http.ResponseWriter, r *http.Request) {
+	submit := r.FormValue("submit")
+
+	if len(submit) != 0 {
+		EndSession(w, r)
+		http.Redirect(w, r, "/login/", http.StatusSeeOther)
 	}
 
 }

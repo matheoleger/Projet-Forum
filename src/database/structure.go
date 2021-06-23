@@ -3,6 +3,7 @@ package database
 import "time"
 
 type Page struct {
+	UserInfo   User
 	Categories []Category
 	Posts      []Post
 	Comments   []Comment
