@@ -28,7 +28,10 @@ func Profil(w http.ResponseWriter, r *http.Request) {
 	} else {
 		content := bdd.GetProfil(w, r)
 		fmt.Println(content)
-		ts.Execute(w, content)
+
+		page := bdd.Page{UserInfo: content}
+
+		ts.Execute(w, page)
 	}
 
 }
