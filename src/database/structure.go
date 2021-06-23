@@ -1,7 +1,5 @@
 package database
 
-import "time"
-
 type Page struct {
 	Categories []Category
 	Posts      []Post
@@ -19,7 +17,7 @@ type Post struct {
 	Username    string
 	Number_like int
 	Liked       bool
-	Date        time.Time
+	Date        string
 }
 
 type Comment struct {
