@@ -98,14 +98,14 @@ func GetPost() []PostStruct {
 	for result.Next() {
 		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
 
-		fmt.Println(&post.Date)
+		// fmt.Println(&post.Date)
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
 
 		// On ajoute au tableau chaque post
 		Arraypost = append(Arraypost, post)
 	}
 
-	fmt.Println(Arraypost)
+	// fmt.Println(Arraypost)
 	err = result.Err()
 	return Arraypost
 }
@@ -168,16 +168,16 @@ func deletePost(id_post int) {
 	defer db.Close()
 }
 
-func insertComment(content string, username string, post int) {
+func insertComment(content string, username string) {
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
+	statement, err := db.Prepare("INSERT INTO comment (content, username) VAlUES (?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare ")
 		return
 	}
-	statement.Exec(content, username, post)
+	statement.Exec(content, username)
 
 	defer db.Close()
 }

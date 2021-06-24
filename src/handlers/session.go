@@ -10,12 +10,12 @@ import (
 func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
 	uuid := SessionCookie(w, r)
 	if uuid == "error" {
-		println("\033[1;31m", "[session] : expire error :")
+		println("\033[1;31m", "[session] : launching session error : session, probably allready exist")
 		return
 
 	} else {
 		// uuid := ReadCookie(w, r, "session")
-		//println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
+		// println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
 		AddSession(uuid, username) // uuid, username
 	}
 }
@@ -23,7 +23,7 @@ func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
 func EndSession(w http.ResponseWriter, r *http.Request) {
 	uuid := ExpireSession(w, r)
 	if uuid == "error" {
-		println("\033[1;31m", "[session] : expire error ")
+		println("\033[1;31m", "[session] : expire session error ")
 		return
 
 	} else {

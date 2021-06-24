@@ -3,6 +3,7 @@ package database
 import "time"
 
 type Page struct {
+	UserInfo   User
 	Categories []Category
 	Posts      []Post
 	Comments   []Comment
@@ -28,4 +29,9 @@ type Comment struct {
 	Username   string
 	post       string
 	Liked      bool
+}
+
+type User struct {
+	Username string
+	Email    string
 }

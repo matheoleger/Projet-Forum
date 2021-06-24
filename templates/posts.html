@@ -12,6 +12,9 @@
         {{if .Posts}}
             {{ range .Posts }}
                 <div id="{{ .Id_post }}" class="posts">
+                    <div class="button-of-comment">
+                        <button onclick="showCreateComment()">YPOSTER2</button>
+                    </div>
                     <div class="post-user-element">
                         <img src="../static/img/user-btn.png"></img>
                         <h1>{{ .Username }}</h1>
