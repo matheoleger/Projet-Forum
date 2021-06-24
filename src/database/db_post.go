@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"time"
 )
 
 func GetPostByCategory(category string) []Post {
@@ -46,7 +47,7 @@ func GetPost(db *sql.DB, id_post int) Post {
 	// var postStruct []Post
 	var post Post
 
-	statement, err := db.Prepare("SELECT title, content, username FROM post WHERE id_post = ?")
+	statement, err := db.Prepare("SELECT title, content, username, date_post FROM post WHERE id_post = ?")
 
 	if err != nil {
 		fmt.Println("error prepare GetPostByCategory in resultCat : ", err)
@@ -64,13 +65,21 @@ func GetPost(db *sql.DB, id_post int) Post {
 	// var content string
 	// var username string
 
+	var date time.Time
+
 	for result.Next() {
-		result.Scan(&post.Title, &post.Content, &post.Username)
+		result.Scan(&post.Title, &post.Content, &post.Username, &date)
 
 		// postStruct = append(postStruct, Post{Id_post: id_post, Title: title, Content: content, Username: username})
 
 		fmt.Println(post)
 	}
+
+	dateFormated := date.Format("2006-01-02 15:04:05")
+
+	post.Date = dateFormated
+
+	fmt.Println(post.Date)
 
 	return post
 }
