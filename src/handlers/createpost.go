@@ -28,33 +28,37 @@ import (
 
 func CreatePost(w http.ResponseWriter, r *http.Request) {
 
-	err := r.ParseForm()
-	if err != nil {
-		log.Fatal(err)
+	if !VerifyCookie(w, r) {
+		http.Redirect(w, r, "/login/", http.StatusSeeOther)
+	} else {
+		err := r.ParseForm()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		title := r.PostFormValue("titlepost")
+		category := r.PostFormValue("category")
+		content := r.PostFormValue("postcontent")
+		postFile := r.PostFormValue("postfile")
+
+		content += postFile
+
+		f, err := os.Open(postFile)
+		if err != nil {
+			fmt.Println("error open file")
+		}
+
+		image, _, err := image.Decode(f)
+
+		fmt.Println(image)
+
+		fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
+
+		username := "Johanna"
+
+		InsertPost(title, content, username, 0, false, time.Now())
+
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
-
-	title := r.PostFormValue("titlepost")
-	category := r.PostFormValue("category")
-	content := r.PostFormValue("postcontent")
-	postFile := r.PostFormValue("postfile")
-
-	content += postFile
-
-	f, err := os.Open(postFile)
-	if err != nil {
-		fmt.Println("error open file")
-	}
-
-	image, _, err := image.Decode(f)
-
-	fmt.Println(image)
-
-	fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content)
-
-	username := "Johanna"
-
-	InsertPost(title, content, username, 0, false, time.Now())
-
-	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
