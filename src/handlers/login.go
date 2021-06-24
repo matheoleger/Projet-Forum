@@ -38,7 +38,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 			if errHashed != nil {
 				fmt.Println(errHashed)
-				http.Redirect(w, r, "/login/", http.StatusSeeOther)
+				http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_PW", http.StatusSeeOther)
 			} else {
 				fmt.Println("right PW : ", passwordDB)
 				// ExpireSession(w, r)
@@ -46,7 +46,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/", http.StatusSeeOther)
 			}
 		} else {
-			http.Redirect(w, r, "/login/", http.StatusSeeOther)
+			http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_name", http.StatusSeeOther)
 		}
 
 	} else if r.URL.Path == "/login/inscription" {
@@ -69,8 +69,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 		} else {
 			fmt.Println("Mot de passe n'est pas bon")
-			http.Redirect(w, r, "/login/inscription", http.StatusSeeOther)
+			http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_PW", http.StatusSeeOther)
 		}
+
+		http.Redirect(w, r, "/login/?loginForm=connexion", http.StatusSeeOther)
 
 	} else {
 		CodeErreur(w, r, 404)

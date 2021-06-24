@@ -5,8 +5,8 @@
 
   <img src="../static/img/user-logo-coloring2.png">
   <div class="btn-choice">
-    <button onclick="showLoginOrRegister(true)" id="choice_login_btn">Connexion</button>
-    <button onclick="showLoginOrRegister(false)" id="choice_register_btn">Inscription</button>  
+    <button onclick="connexionForm()" id="choice_login_btn">Connexion</button>
+    <button onclick="inscriptionForm()" id="choice_register_btn">Inscription</button>  
   </div>
   
   <form action="./connexion" method="POST" class="loginForm">
@@ -46,6 +46,6 @@
 </div>
 
 
-<script src="../static/script/login.js"></script>
+<script type="application/javascript" src="../static/script/login.js"></script>
 
 {{ end }}
