@@ -69,8 +69,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 		} else {
 			fmt.Println("Mot de passe n'est pas bon")
-			http.Redirect(w, r, "/login/inscription", http.StatusSeeOther)
+			http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_PW", http.StatusSeeOther)
 		}
+
+		http.Redirect(w, r, "/login/?loginForm=connexion", http.StatusSeeOther)
 
 	} else {
 		CodeErreur(w, r, 404)
