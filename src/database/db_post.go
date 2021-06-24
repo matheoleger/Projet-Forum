@@ -70,6 +70,7 @@ func GetPost(db *sql.DB, id_post int) Post {
 	for result.Next() {
 		result.Scan(&post.Title, &post.Content, &post.Username, &date)
 
+		post.Id_post = id_post
 		// postStruct = append(postStruct, Post{Id_post: id_post, Title: title, Content: content, Username: username})
 
 		fmt.Println(post)
