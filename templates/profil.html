@@ -1,5 +1,11 @@
 {{define "body"}}
 
-    <p>profil</p>
+    <h1>Profil</h1>
+    <p>{{ .UserInfo.Username }}</p>
+    <p> {{ .UserInfo.Email }}</p>
 
+    <form method="POST">
+        <button type="submit" value="disconnect" name="submit">Déconnexion</button>
+    </form>
+    
 {{end}}
