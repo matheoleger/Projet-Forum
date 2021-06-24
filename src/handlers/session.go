@@ -44,7 +44,7 @@ func AddSession(uuid string, user_name string) {
 
 	resultuuid, err5 := statementuuid.Query(uuid)
 	if err5 != nil {
-		fmt.Println("\033[1;31m", "[session] : error, impossible to querry")
+		fmt.Println("\033[1;31m", "[session] : error, impossible to query")
 		return
 	}
 
