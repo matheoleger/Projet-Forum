@@ -17,7 +17,7 @@ func CreateCookie(w http.ResponseWriter, r *http.Request, name string, value str
 }
 
 func ReadCookie(w http.ResponseWriter, r *http.Request, name string) string {
-	c, err := r.Cookie("session")
+	c, err := r.Cookie(name)
 	if err != nil {
 		if err == http.ErrNoCookie {
 			println("\033[1;31m", "[cookies] : there is no such cookies ! :", err)
