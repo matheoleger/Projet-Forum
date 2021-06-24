@@ -5,18 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	bdd "../database"
+
 	_ "github.com/mattn/go-sqlite3"
 )
-
-type PostStruct struct {
-	Id_post     int
-	Title       string
-	Content     string
-	Username    string
-	Number_like int
-	Liked       bool
-	Date        time.Time
-}
 
 func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
@@ -79,7 +71,7 @@ func GetElement(user, element string) string {
 	return password
 }
 
-func GetPost() []PostStruct {
+func GetPost() []bdd.Post {
 	db := OpenDataBase()
 
 	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 10")
@@ -90,8 +82,8 @@ func GetPost() []PostStruct {
 
 	defer result.Close()
 
-	var post PostStruct
-	var Arraypost []PostStruct
+	var post bdd.Post
+	var Arraypost []bdd.Post
 
 	for result.Next() {
 		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)

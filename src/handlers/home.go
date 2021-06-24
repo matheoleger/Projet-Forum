@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"text/template"
+
+	bdd "../database"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -18,11 +21,13 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		CodeErreur(w, r, 500)
 		return
 	}
-
+	item := GetPost()
+	page := bdd.Page{Posts: item, Categories: bdd.GetCategory()}
 	// AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
 	// DeleteUser("JohnBibi")
 	// DataBase()
-	item := GetPost()
 
-	ts.Execute(w, item)
+	fmt.Println(item)
+
+	ts.Execute(w, page)
 }
