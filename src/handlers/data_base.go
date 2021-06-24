@@ -82,7 +82,7 @@ func GetElement(user, element string) string {
 func GetPost() []PostStruct {
 	db := OpenDataBase()
 
-	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 9")
+	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 10")
 
 	if err != nil {
 		fmt.Println("error query")
