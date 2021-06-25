@@ -2,16 +2,18 @@ package database
 
 import (
 	"fmt"
+	"strconv"
 )
 
-func GetComments(id_post int) []Comment {
+func GetComments(id_post int, per_page int, page int) []Comment {
 	db := OpenDataBase()
 
 	// var postStruct []Post
 	var comments []Comment
 	var comment Comment
 
-	statement, err := db.Prepare("SELECT id_comment, content, username, post FROM comment WHERE post = ?")
+	// statement, err := db.Prepare("SELECT id_comment, content, username, post FROM comment WHERE post = ?")
+	statement, err := db.Prepare("SELECT id_comment, content, username, post FROM comment ORDER BY id_comment ASCENDING LIMIT " + strconv.Itoa(per_page) + " OFFSET " + strconv.Itoa(per_page*page))
 
 	if err != nil {
 		fmt.Println("error prepare GetComment in resultCat : ", err)
