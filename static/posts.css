@@ -18,9 +18,9 @@
 
 .posts {
     transition: ease 0.5s;
-    background-color: #ded2c0;
+    background-color: #A89C62;
     color: #fff5e6;
-    padding: 10px;
+    padding: 15px;
     padding-bottom: 15px;
     border-radius: 10px;
     width : 700px;
@@ -29,7 +29,7 @@
 
 .posts:hover {
     cursor: pointer;
-    background-color: #cabfaf;
+    background-color: #7c7448;
 }
 
 .post-user-element {
@@ -51,5 +51,37 @@
 }
 
 .posts img {
+    height: 50px;
+}
+
+.comments {
+    transition: ease 0.5s;
+    background-color: #ded2c0;
+    color: #fff5e6;
+    padding: 8px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+    width : 500px;
+    margin-top: 10px;
+}
+
+.comments:hover {
+    cursor: pointer;
+    background-color: #cabfaf;
+}
+
+.comment-user-element {
+    display: flex;
+}
+
+.comment-user-element h1 {
+    margin: auto 10px;
+}
+
+.comments p {
+    font-size: 20px;
+}
+
+.comments img {
     height: 50px;
 }

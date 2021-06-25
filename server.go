@@ -18,6 +18,7 @@ func main() {
 	http.HandleFunc("/", handlers.Home)
 	http.HandleFunc("/categories", handlers.Categories)
 	http.HandleFunc("/posts", handlers.Posts)
+	http.HandleFunc("/posts/content", handlers.PostsContent)
 	http.HandleFunc("/profil", handlers.Profil)
 	http.HandleFunc("/login/", handlers.Login)
 
