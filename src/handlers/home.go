@@ -28,5 +28,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	FiltresLike()
 
+	// fmt.Println(filtreLike)
+
+	FiltresCategory()
+
 	ts.Execute(w, page)
 }
