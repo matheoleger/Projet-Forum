@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 	"text/template"
 
@@ -27,7 +26,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	// DeleteUser("JohnBibi")
 	// DataBase()
 
-	fmt.Println(item)
+	FiltresLike()
 
 	ts.Execute(w, page)
 }

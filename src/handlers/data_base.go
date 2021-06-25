@@ -92,6 +92,7 @@ func GetPost() []bdd.Post {
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
 
 		// On ajoute au tableau chaque post
+
 		Arraypost = append(Arraypost, post)
 	}
 
