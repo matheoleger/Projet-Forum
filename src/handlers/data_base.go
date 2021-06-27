@@ -9,8 +9,12 @@ import (
 )
 
 type PostStruct struct {
-	Id_post     int
-	Id_comment  int
+	Id_post       int
+	Id_comment    int
+	B_id_post     int
+	B_id_category string
+	// A_id_post     int
+	// A_id_comment  int
 	Title       string
 	Content     string
 	post        int
@@ -151,7 +155,10 @@ func InsertPost(title string, content string, username string, Number_like int, 
 
 	statement.Exec(title, content, username, Number_like, liked, date_post)
 
+	statement, err = db.Prepare("select last_insert_rowid()")
+
 	defer db.Close()
+
 }
 
 func deletePost(id_post int) {
@@ -168,16 +175,16 @@ func deletePost(id_post int) {
 	defer db.Close()
 }
 
-func insertComment(content string, username string) {
+func insertComment(content string, username string, post int) {
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("INSERT INTO comment (content, username) VAlUES (?, ?)")
+	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare ")
 		return
 	}
-	statement.Exec(content, username)
+	statement.Exec(content, username, post)
 
 	defer db.Close()
 }
@@ -195,3 +202,31 @@ func deleteComment(id_comment int) {
 
 	defer db.Close()
 }
+
+func insertBridge(B_id_post int, B_id_category string) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO bridge (B_id_post, B_id_category) VAlUES (?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(B_id_post, B_id_category)
+
+	defer db.Close()
+}
+
+// func insertBridge(A_id_post int, A_id_comment string) {
+// 	db := OpenDataBase()
+
+// 	statement, err := db.Prepare("INSERT INTO bridge2 (A_id_post, A_id_comment) VAlUES (?, ?)")
+
+// 	if err != nil {
+// 		fmt.Println("error prepare ")
+// 		return
+// 	}
+// 	statement.Exec(A_id_post, A_id_comment)
+
+// 	defer db.Close()
+// }

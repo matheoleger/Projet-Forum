@@ -11,14 +11,7 @@
 
         {{if .Posts}}
             {{ range .Posts }}
-<<<<<<< HEAD
-                <div id="{{ .Id_post }}" class="posts">
-                    <div class="button-of-comment">
-                        <button onclick="showCreateComment()">YPOSTER2</button>
-                    </div>
-=======
                 <div id="{{ .Id_post }}" class="posts"  onclick="window.location.href='/posts/content?post={{ .Id_post }}'">
->>>>>>> 18fcef72b7d4a6c5d0508ea510efc33b2c6b0fea
                     <div class="post-user-element">
                         <img src="../static/img/user-btn.png"></img>
                         <h1>{{ .Username }}</h1>

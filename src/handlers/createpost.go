@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	//"strconv"
+	"strconv"
 	"time"
 )
 
@@ -70,12 +70,15 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	content := r.PostFormValue("postcontent")
+	post := r.PostFormValue("postId")
 
-	fmt.Println("Votre contenu est : " + content + "sur le post : ")
+	n, _ := strconv.Atoi(post)
+
+	fmt.Println("Votre contenu est : " + content + "sur le post : " + post)
 
 	username := "Alex77"
 
-	insertComment(content, username)
+	insertComment(content, username, n)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
