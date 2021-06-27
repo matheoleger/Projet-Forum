@@ -25,7 +25,7 @@ type Comment struct {
 	Id_comment int
 	Content    string
 	Username   string
-	post       string
+	Post       string
 	Liked      bool
 }
 
