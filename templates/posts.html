@@ -20,6 +20,9 @@
                     <h1 id="title">{{ .Title }}</h1>
                     <p>{{ .Content }}</p>
                 </div>
+                <button onclick="LikedPost('{{ .Id_post }}', true)">LIKE</button>
+                <button onclick="LikedPost('{{ .Id_post }}', false)">DISLIKE</button>
+                <div>{{.}}</div>
             {{ end }}
         {{ end }}       
     </div>
