@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func GetPostByCategory(category string) []Post {
+func GetPostByCategory(category string, username string) []Post {
 	var postStruct []Post
 
 	db := OpenDataBase()
@@ -33,7 +33,7 @@ func GetPostByCategory(category string) []Post {
 
 		resultCat.Scan(&postByCategory)
 
-		postStruct = append(postStruct, GetPost(db, postByCategory))
+		postStruct = append(postStruct, GetPost(db, postByCategory, username))
 
 	}
 
@@ -42,7 +42,7 @@ func GetPostByCategory(category string) []Post {
 	return postStruct
 }
 
-func GetPost(db *sql.DB, id_post int) Post {
+func GetPost(db *sql.DB, id_post int, username string) Post {
 
 	// var postStruct []Post
 	var post Post
@@ -79,6 +79,8 @@ func GetPost(db *sql.DB, id_post int) Post {
 	dateFormated := date.Format("2006-01-02 15:04:05")
 
 	post.Date = dateFormated
+
+	post.LikeInfo = IsLiked("post", username, id_post)
 
 	fmt.Println(post.Date)
 

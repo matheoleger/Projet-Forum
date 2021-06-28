@@ -79,9 +79,9 @@ func IsLiked(element string, username string, id int) Like {
 	}
 
 	if like.IdLike == 0 {
-		like.LikeSate = false
+		like.LikeState = false
 	} else {
-		like.LikeSate = true
+		like.LikeState = true
 	}
 
 	// if idLikes == 0 {

@@ -77,11 +77,11 @@ func ChangeLike(elementType string, elementId string, changeIsLiked bool, userna
 
 	like = bdd.IsLiked(elementType, username, elementIdInt)
 
-	if !like.LikeSate {
+	if !like.LikeState {
 		bdd.AddLike(elementType, username, elementIdInt, changeIsLiked)
-	} else if like.LikeSate && like.IsLiked == changeIsLiked {
+	} else if like.LikeState && like.IsLiked == changeIsLiked {
 		bdd.DeleteLike(like.IdLike)
-	} else if like.LikeSate && like.IsLiked != changeIsLiked {
+	} else if like.LikeState && like.IsLiked != changeIsLiked {
 		bdd.ChangeValueLiked(like.IdLike, changeIsLiked)
 	}
 }

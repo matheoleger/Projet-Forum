@@ -35,7 +35,7 @@ type User struct {
 }
 
 type Like struct {
-	IdLike   int
-	LikeSate bool
-	IsLiked  bool
+	IdLike    int
+	LikeState bool
+	IsLiked   bool
 }
