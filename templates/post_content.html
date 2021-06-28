@@ -3,10 +3,10 @@
     {{if .Posts}}
        {{ range .Posts }}
             <select name="Elements par pages" id="perpage">
-                <option value="10" >10</option>
-                <option value="20" >20</option>
-                <option value="30" >30</option>
-                <option value="50" >50</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
             </select>
         {{ end }}
     {{ end }}     
@@ -41,14 +41,8 @@
    {{ end }}  
 </div>
 <div class="page-buttons">
-    <button class="previous-page" type="submit"> Previous Page </button>
-    <button class="next-page"  type="submit"> Next Page </button>
+    <button class="previous-page" type="submit" onclick="previousPage('page')"> Previous Page </button>
+    <button class="next-page"  type="submit" onclick="nextPage('page')"> Next Page </button>
 </div>
 
 {{ end }}
-
-<script>
-    $("#sort").change(function(){
-    alert('Selected value: ' + $(this).val());
-    });
-</script>
