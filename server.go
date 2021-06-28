@@ -28,6 +28,6 @@ func main() {
 	http.HandleFunc("/creationpost", handlers.CreatePost)
 
 	fmt.Println(string(white), "[SERVER_READY] : on http://localhost:8080 ✅ ")
-	fmt.Println(string(yellow), "[SERVER_INFO] : To stop the program : Ctrl + c")
+	fmt.Println(string(yellow), "[SERVER_INFO] : To stop the program : Ctrl + c", string(white))
 	http.ListenAndServe(":8080", nil)
 }
