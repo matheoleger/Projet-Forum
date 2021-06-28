@@ -18,37 +18,16 @@
     
     {{if .Comments}}
         {{ range .Comments }}
-                <div id="{{ .Id_comment }}" class="comments">
+            <form action="/creationcomment?idpost={{ .Id_post }}" method="POST" class="creationForm2">
                     <div class="comment-user-element">
                         <img src="../static/img/user-btn.png"></img>
                         <h1>{{ .Username }}</h1>
                         <!-- <h4></h4> -->
                     </div>
                     <p>{{ .Content }}</p>
-                </div>
+            </form>
         {{ end }}
     {{ end }}  
-    </div>
-    <div class="creationcomment-bg" style="display: none">
-        <div class="creation-comment-element">
-            <div class="profil-create-comment">
-                <img src="../static/img/user-logo-coloring2.png">
-                <h1 id="profil-name-create-comment">Username</h1>
-            </div>
-            <div id="formulaire">
-                <form action="/creationcomment?post={{ .Id_post }}" method="POST" class="creationForm2">
-                    <div>
-                        <!-- <label for="postId"><b>id</b></label>
-                        <input type="text" name="postId" placeholder="Enter id of post" required> -->
-                        
-                        
-                        <label for="postcontent"><b>content</b></label>
-                        <input type="text" name="postcontent" placeholder="Enter the content" required>
-                    </div>
-                    <button type="submit" id="submit_btn">PublYsh</button>
-                </form>
-            </div>
-        </div>
     </div>
 
 {{ end }}
