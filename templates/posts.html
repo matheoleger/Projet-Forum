@@ -23,10 +23,10 @@
                             <p>{{ .Content }}</p>
                         </div>
                         <div class="btn-for-like">
-                            <button onclick="LikedPost('{{ .Id_post }}', true)">
+                            <button onclick="LikedPost('{{ .Id_post }}', 'true')">
                                 <img src="../static/img/arrow-like.png" class="like-btn-img liked-img">
                             </button>
-                            <button onclick="LikedPost('{{ .Id_post }}', false)">
+                            <button onclick="LikedPost('{{ .Id_post }}', 'false')">
                                 <img src="../static/img/arrow-dislike.png" class="dislike-btn-img liked-img">    
                             </button>
                         </div>
