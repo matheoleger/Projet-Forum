@@ -18,6 +18,8 @@
 
 .posts {
     transition: ease 0.5s;
+    display: flex;
+    justify-content: space-between;
     background-color: #A89C62;
     color: #fff5e6;
     padding: 15px;
@@ -101,4 +103,23 @@ button {
 
 button:hover {
     background-color: #40422b;
+}
+.post-list button {
+    border: none;
+    background: none;
+}
+
+.btn-for-like {
+    display: flex;
+    flex-direction: column;
+}
+
+.liked-img {
+    cursor: pointer;
+    transition: ease 0.5s;
+    width: 50px;
+}
+
+.liked-img:hover {
+    filter:hue-rotate(30deg) contrast(110%);
 }
