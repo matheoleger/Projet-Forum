@@ -74,7 +74,7 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 	var posts []bdd.Post        //var categories []bdd.Category
 	posts = append(posts, post) //categories = append(categories, category)
 
-	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(12, perpageInt, wichpageInt*perpageInt)} //page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
+	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)} //page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
 	fmt.Print(page)
 
 	files := findPathFiles("./templates/post_content.html")
