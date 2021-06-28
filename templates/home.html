@@ -7,17 +7,17 @@
     <div id="best-posts">
         <img src="../static/img/left_arrow.png" class="arrows"> 
 
+    
         <div id="post">
-            {{ range .}}
+            {{ range .Posts}}
                 <ul>
-                    <li> Username : {{ .Username}}</li>
-                    <li> Title : {{ .Title}}</li>
-                    <li> Content : {{ .Content}}</li>
-                    <li> Date : {{ .Date}}</li>
-                    <li> Like : {{ .Number_like}}</li>
+                    <li> Username : {{ .Username }}</li>
+                    <li> Title : {{ .Title }}</li>
+                    <li> Content : {{ .Content }}</li>
+                    <li> Date : {{ .Date }}</li>
+                    <li> Like : {{ .Number_like }}</li>
                 </ul>
             {{end}}
-           
 
         </div>
 

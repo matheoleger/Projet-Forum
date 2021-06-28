@@ -32,7 +32,7 @@ func GetCategory() []Category {
 		CategoriesList = append(CategoriesList, Category{Name: nameCategory})
 	}
 
-	fmt.Println(CategoriesList)
+	// fmt.Println(CategoriesList)
 
 	defer db.Close()
 

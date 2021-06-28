@@ -80,7 +80,5 @@ func GetPost(db *sql.DB, id_post int) Post {
 
 	post.Date = dateFormated
 
-	fmt.Println(post.Date)
-
 	return post
 }
