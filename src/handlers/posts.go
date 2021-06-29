@@ -17,6 +17,12 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	wichpage := r.URL.Query().Get("page")
+	wichpageInt, _ := strconv.Atoi(wichpage)
+
+	perpage := r.URL.Query().Get("perpage")
+	perpageInt, _ := strconv.Atoi(perpage)
+
 	categoryName := r.URL.Query().Get("category")
 
 	fmt.Println("ici cest le params : " + categoryName)
@@ -25,7 +31,11 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var categories []bdd.Category
 	categories = append(categories, category)
 
-	page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
+	username := bdd.GetProfil(w, r).Username
+
+	page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt, username)}
+
+	fmt.Println(page.Posts)
 
 	files := findPathFiles("./templates/posts.html")
 
@@ -53,16 +63,23 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 	postname := r.URL.Query().Get("post") //categoryName := r.URL.Query().Get("category")
 	postnameint, _ := strconv.Atoi(postname)
 
+	username := bdd.GetProfil(w, r).Username
+	wichpage := r.URL.Query().Get("page")
+	wichpageInt, _ := strconv.Atoi(wichpage)
+
+	perpage := r.URL.Query().Get("perpage")
+	perpageInt, _ := strconv.Atoi(perpage)
+
 	fmt.Println("ici cest le params : " + postname) //fmt.Println("ici cest le params : " + categoryName)
 
 	db := OpenDataBase()
-	post := bdd.GetPost(db, postnameint)
+	post := bdd.GetPost(db, postnameint, username)
 	db.Close()
 	// post := bdd.Post{Id_post: postnameint} //category := bdd.Category{Name: categoryName}
 	var posts []bdd.Post        //var categories []bdd.Category
 	posts = append(posts, post) //categories = append(categories, category)
 
-	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(postnameint)} //page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
+	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)} //page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
 	fmt.Print(page)
 
 	files := findPathFiles("./templates/post_content.html")

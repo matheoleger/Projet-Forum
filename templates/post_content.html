@@ -2,33 +2,31 @@
 
     <div class="posts-by-category">
 
-    {{if .Posts}}
-        {{ range .Posts }}
-            <div id="{{ .Id_post }}" class="posts">
-                <div class="post-user-element">
-                    <img src="../static/img/user-btn.png"></img>
-                    <h1>{{ .Username }}</h1>
-                    <h4>{{ .Date }}</h4>
-                </div>
-                <h1 id="title">{{ .Title }}</h1>
-                <p>{{ .Content }}</p>
-            </div>
-            <button onclick="showCreateComment()">YPOSTER2</button>
-        {{ end }}
-    {{ end }}     
-    
-    {{if .Comments}}
-        {{ range .Comments }}
-                <div id="{{ .Id_comment }}" class="comments"  onclick="window.location.href='/posts/content?comment={{ .Id_comment }}'">
-                    <div class="comment-user-element">
+        {{if .Posts}}
+            {{ range .Posts }}
+                <div id="{{ .Id_post }}" class="posts">
+                    <div class="post-user-element">
                         <img src="../static/img/user-btn.png"></img>
                         <h1>{{ .Username }}</h1>
-                        <!-- <h4></h4> -->
+                        <h4>{{ .Date }}</h4>
                     </div>
+                    <h1 id="title">{{ .Title }}</h1>
                     <p>{{ .Content }}</p>
                 </div>
-        {{ end }}
-    {{ end }}  
-    </div>
-
+                <button onclick="showCreateComment()">YPOSTER2</button>
+            {{ end }}
+        {{ end }}     
+        
+        {{if .Comments}}
+            {{ range .Comments }}
+                    <div id="{{ .Id_comment }}" class="comments"  onclick="window.location.href='/posts/content?comment={{ .Id_comment }}'">
+                        <div class="comment-user-element">
+                            <img src="../static/img/user-btn.png"></img>
+                            <h1>{{ .Username }}</h1>
+                            <!-- <h4></h4> -->
+                        </div>
+                        <p>{{ .Content }}</p>
+                    </div>
+            {{ end }}
+        {{ end }}  
 {{ end }}

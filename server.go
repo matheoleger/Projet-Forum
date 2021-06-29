@@ -21,6 +21,7 @@ func main() {
 	http.HandleFunc("/posts/content", handlers.PostsContent)
 	http.HandleFunc("/profil", handlers.Profil)
 	http.HandleFunc("/login/", handlers.Login)
+	http.HandleFunc("/like", handlers.Like)
 
 	// http.HandleFunc("/connexion", handlers.GetLogin)
 	// http.HandleFunc("/creationpost", handlers.Creationpost)
@@ -28,6 +29,6 @@ func main() {
 	http.HandleFunc("/creationcomment", handlers.CreateComment)
 
 	fmt.Println(string(white), "[SERVER_READY] : on http://localhost:8080 ✅ ")
-	fmt.Println(string(yellow), "[SERVER_INFO] : To stop the program : Ctrl + c")
+	fmt.Println(string(yellow), "[SERVER_INFO] : To stop the program : Ctrl + c", string(white))
 	http.ListenAndServe(":8080", nil)
 }

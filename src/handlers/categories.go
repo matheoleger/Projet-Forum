@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 	"text/template"
 
 	bdd "../database"
@@ -21,7 +22,13 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	page := bdd.Page{Categories: bdd.GetCategory()}
+	wichpage := r.URL.Query().Get("page")
+	wichpageInt, _ := strconv.Atoi(wichpage)
+
+	perpage := r.URL.Query().Get("perpage")
+	perpageInt, _ := strconv.Atoi(perpage)
+
+	page := bdd.Page{Categories: bdd.GetCategory(perpageInt, wichpageInt)}
 
 	ts.Execute(w, page)
 }

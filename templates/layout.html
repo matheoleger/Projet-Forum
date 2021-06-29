@@ -19,6 +19,7 @@
     <script defer src="../static/script/navbar.js"></script>
     <script defer src="../static/script/createpost.js"></script>
     <script defer src="../static/script/events.js"></script>
+    <script defer src="../static/script/like.js"></script>
 
 
     <title>Y' Forum</title>
@@ -26,7 +27,7 @@
 <body>
     {{template "navbar" .}}
     {{ template "createpost" .}}
-    {{template "createcomment" .}}
+    {{ template "createcomment" .}}
     <main>
         {{template "body" .}}
     </main>
