@@ -15,7 +15,7 @@
 </div>
 <div class="posts-by-category">
 
-   {{if .Posts}}
+   <!-- {{if .Posts}}
        {{ range .Posts }}
            <div id="{{ .Id_post }}" class="posts">
                <div class="post-user-element">
@@ -27,7 +27,25 @@
                <p>{{ .Content }}</p>
            </div>
        {{ end }}
-   {{ end }}     
+   {{ end }}      -->
+   {{if .Posts}}
+            <div class="post-list">
+                {{ range .Posts }}
+                    <div id="{{ .Id_post }}" class="posts" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
+                        <div>
+                            <div class="post-user-element">
+                                <img src="../static/img/user-btn.png"></img>
+                                <h1>{{ .Username }}</h1>
+                                <h4>{{ .Date }}</h4>
+                            </div>
+                            <h1 id="title">{{ .Title }}</h1>
+                            <p>{{ .Content }}</p>
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+            
+        {{ end }}    
    
    {{if .Comments}}
        {{ range .Comments }}
