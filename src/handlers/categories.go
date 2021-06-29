@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -31,4 +32,18 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 	page := bdd.Page{Categories: bdd.GetCategory(perpageInt, wichpageInt)}
 
 	ts.Execute(w, page)
+}
+
+func insertBridge(B_id_post int, B_id_category string) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO bridge (B_id_post, B_id_category) VAlUES (?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(B_id_post, B_id_category)
+
+	defer db.Close()
 }

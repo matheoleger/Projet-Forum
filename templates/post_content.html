@@ -1,17 +1,32 @@
 {{ define "body"}}
-
     <div class="posts-by-category">
 
-        {{if .Posts}}
-            {{ range .Posts }}
-                <div id="{{ .Id_post }}" class="posts">
-                    <div class="post-user-element">
+    {{if .Posts}}
+        {{ range .Posts }}
+            <div id="{{ .Id_post }}" class="posts">
+                <div class="post-user-element">
+                    <img src="../static/img/user-btn.png"></img>
+                    <h1>{{ .Username }}</h1>
+                    <h4>{{ .Date }}</h4>
+                </div>
+                <h1 id="title">{{ .Title }}</h1>
+                <p>{{ .Content }}</p>
+            </div>
+            <button onclick="showCreateComment()">YPOSTER2</button>
+        {{ end }}
+    {{ end }}     
+    
+    {{if .Comments}}
+        {{ range .Comments }}
+            <form action="/creationcomment?idpost={{ .Id_post }}" method="POST" class="creationForm2">
+                    <div class="comment-user-element">
                         <img src="../static/img/user-btn.png"></img>
                         <h1>{{ .Username }}</h1>
                         <h4>{{ .Date }}</h4>
                     </div>
                     <h1 id="title">{{ .Title }}</h1>
                     <p>{{ .Content }}</p>
+<<<<<<< HEAD
                 </div>
                 <button onclick="showCreateComment()">YPOSTER2</button>
             {{ end }}
@@ -29,4 +44,11 @@
                     </div>
             {{ end }}
         {{ end }}  
+=======
+            </form>
+        {{ end }}
+    {{ end }}  
+    </div>
+
+>>>>>>> 6bca75046dacca52457ca9842aa9383b496454e6
 {{ end }}

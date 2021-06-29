@@ -5,24 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	bdd "../database"
+
 	_ "github.com/mattn/go-sqlite3"
 )
-
-type PostStruct struct {
-	Id_post       int
-	Id_comment    int
-	B_id_post     int
-	B_id_category string
-	// A_id_post     int
-	// A_id_comment  int
-	Title       string
-	Content     string
-	post        int
-	Username    string
-	Number_like int
-	Liked       bool
-	Date        time.Time
-}
 
 func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
@@ -85,10 +71,10 @@ func GetElement(user, element string) string {
 	return password
 }
 
-func GetPost() []PostStruct {
+func GetPost() []bdd.Post {
 	db := OpenDataBase()
 
-	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 9")
+	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 10")
 
 	if err != nil {
 		fmt.Println("error query")
@@ -96,8 +82,8 @@ func GetPost() []PostStruct {
 
 	defer result.Close()
 
-	var post PostStruct
-	var Arraypost []PostStruct
+	var post bdd.Post
+	var Arraypost []bdd.Post
 
 	for result.Next() {
 		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
@@ -106,6 +92,7 @@ func GetPost() []PostStruct {
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
 
 		// On ajoute au tableau chaque post
+
 		Arraypost = append(Arraypost, post)
 	}
 
@@ -155,8 +142,6 @@ func InsertPost(title string, content string, username string, Number_like int, 
 
 	statement.Exec(title, content, username, Number_like, liked, date_post)
 
-	statement, err = db.Prepare("select last_insert_rowid()")
-
 	defer db.Close()
 
 }
@@ -203,30 +188,16 @@ func deleteComment(id_comment int) {
 	defer db.Close()
 }
 
-func insertBridge(B_id_post int, B_id_category string) {
-	db := OpenDataBase()
-
-	statement, err := db.Prepare("INSERT INTO bridge (B_id_post, B_id_category) VAlUES (?, ?)")
-
-	if err != nil {
-		fmt.Println("error prepare ")
-		return
-	}
-	statement.Exec(B_id_post, B_id_category)
-
-	defer db.Close()
-}
-
-// func insertBridge(A_id_post int, A_id_comment string) {
+// func insertBridge(B_id_post int, B_id_category string) {
 // 	db := OpenDataBase()
 
-// 	statement, err := db.Prepare("INSERT INTO bridge2 (A_id_post, A_id_comment) VAlUES (?, ?)")
+// 	statement, err := db.Prepare("INSERT INTO bridge (B_id_post, B_id_category) VAlUES (?, ?)")
 
 // 	if err != nil {
 // 		fmt.Println("error prepare ")
 // 		return
 // 	}
-// 	statement.Exec(A_id_post, A_id_comment)
+// 	statement.Exec(B_id_post, B_id_category)
 
 // 	defer db.Close()
 // }

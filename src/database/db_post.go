@@ -80,9 +80,5 @@ func GetPost(db *sql.DB, id_post int) Post {
 
 	post.Date = dateFormated
 
-	// post.LikeInfo = IsLiked("post", username, id_post)
-
-	fmt.Println(post.Date)
-
 	return post
 }
