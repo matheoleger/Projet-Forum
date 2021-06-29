@@ -1,23 +1,3 @@
-// let isAlreadyLiked = false;
-// let isAlreadyDisLiked = false;
-
-function LikedPost(id, isLiked) {
-    fetch(`/like?post=${id}&isLiked=${isLiked}`)
-
-    let queryString = `div#${CSS.escape(id)}.posts`
-
-    ChangeAttributeLike(queryString, isLiked)
-
-}
-
-function LikedComment(id, isLiked) {
-    fetch(`/like?comment=${id}&isLiked=${isLiked}`)
-    
-    let queryString = `div#${CSS.escape(id)}.posts`
-
-    ChangeAttributeLike(queryString, isLiked)
-}
-
 let posts = document.querySelectorAll(".posts")
 
 for(let post of posts) {
@@ -27,25 +7,38 @@ for(let post of posts) {
     VerifyStateOfLike(queryString)
 }
 
-function ChangeAttributeLike(queryString, isLiked) {
 
-    let postEl = document.querySelector(queryString)
+function LikedPost(id, isLiked) {
+    fetch(`/like?post=${id}&isLiked=${isLiked}`)
+    .then(response => response.json())
+    .then((resp) => {
+        changeAttributeLike(resp, id, "posts")
+    })
 
-    if (postEl.dataset.likestate == "false") {
+}
 
-        postEl.dataset.likestate = "true"
-        postEl.dataset.isliked = isLiked 
+function LikedComment(id, isLiked) {
+    fetch(`/like?comment=${id}&isLiked=${isLiked}`)
+    .then(response => response.json())
+    .then((resp) => {
+        changeAttributeLike(resp, id, "comments")
+    })
 
-    } else if (postEl.dataset.likestate == "true" && isLiked == postEl.dataset.isliked) {
+}
 
-        console.log("je suis bien allé ici")
+function changeAttributeLike(resp, id, elementType) {
+    let queryString = `div#${CSS.escape(id)}.${elementType}`
+    console.log(queryString)
+    let element = document.querySelector(queryString)
 
-        postEl.dataset.likestate = "false"
+    // let btnForLike = element.querySelector('.class-for-like')
+    let nbrLikeElement = element.querySelector('.btn-for-like > h2')
+
+    console.log(resp)
     
-    } else if (postEl.dataset.likestate == "true" && postEl.dataset.isliked != isLiked) {
-
-        postEl.dataset.isliked = isLiked
-    }
+    element.dataset.likestate = resp.LikeState
+    element.dataset.isliked = resp.IsLiked
+    nbrLikeElement.textContent = resp.Number_like
 
     VerifyStateOfLike(queryString)
 }
@@ -54,19 +47,19 @@ function VerifyStateOfLike(queryString) {
 
     let imgDisLike = document.querySelector(`${queryString} .dislike-btn-img`)
     let imgLike = document.querySelector(`${queryString} .like-btn-img`)
-    let postEl = document.querySelector(queryString)
+    let element = document.querySelector(queryString)
 
-    if (postEl.dataset.likestate == "true" && postEl.dataset.isliked == "true") {
+    if (element.dataset.likestate == "true" && element.dataset.isliked == "true") {
               
         imgLike.setAttribute("src", "../static/img/arrow-like-coloring.png")
         imgDisLike.setAttribute("src", "../static/img/arrow-dislike.png")
 
-    } else if (postEl.dataset.likestate == "true" && postEl.dataset.isliked == "false") {
+    } else if (element.dataset.likestate == "true" && element.dataset.isliked == "false") {
         
         imgLike.setAttribute("src", "../static/img/arrow-like.png")
         imgDisLike.setAttribute("src", "../static/img/arrow-dislike-coloring.png")
 
-    } else if (postEl.dataset.likestate == "false") {
+    } else if (element.dataset.likestate == "false") {
         imgLike.setAttribute("src", "../static/img/arrow-like.png")
         imgDisLike.setAttribute("src", "../static/img/arrow-dislike.png")
     }

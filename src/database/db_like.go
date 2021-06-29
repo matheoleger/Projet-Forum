@@ -140,3 +140,20 @@ func ChangeValueLiked(idLikes int, changeIsLiked bool) {
 
 	statement.Exec(changeIsLiked, idLikes)
 }
+
+func ChangeNumberLike(incSign string, elementType string, id int) int {
+	db := OpenDataBase()
+	defer db.Close()
+
+	statement, err := db.Prepare("UPDATE " + elementType + " SET Number_like = Number_like " + incSign + " WHERE id_" + elementType + "= ? RETURNING Number_like ")
+
+	if err != nil {
+		fmt.Println("error prepare changeNumberLike : ", err)
+	}
+
+	var nbrLike int
+
+	statement.QueryRow(id).Scan(&nbrLike)
+
+	return nbrLike
+}
