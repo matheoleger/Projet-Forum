@@ -4,6 +4,16 @@
 
     <h1>Y'Forum Home</h1>
 
+    <form action="/" method="POST">
+        <select name="filtre" id="filtre-choice">
+            <option value="likecroissant">Trié les posts avec des likes de façon croissante</option>
+            <option value="likedecroissant">Trié les posts avec des likes de façon décroissante</option>
+            <option value="datefiltre">Trié les posts avec les dates</option> 
+        </select>
+        <input type="submit" value="valideFiltre">
+    </form>
+
+
     <div id="best-posts">
         <img src="../static/img/left_arrow.png" class="arrows"> 
 

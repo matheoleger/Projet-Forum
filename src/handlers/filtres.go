@@ -9,14 +9,22 @@ import (
 	bdd "../database"
 )
 
-func FiltresLike() []bdd.Post {
+func FiltresLikeCroissant() []bdd.Post {
 	getPost := GetPost()
 
 	sort.Slice(getPost, func(i, j int) bool {
 		return getPost[i].Number_like > getPost[j].Number_like
 	})
 
-	// fmt.Println(getPost)
+	return getPost
+}
+
+func FiltresLikeDecroissant() []bdd.Post {
+	getPost := GetPost()
+
+	sort.Slice(getPost, func(i, j int) bool {
+		return getPost[i].Number_like < getPost[j].Number_like
+	})
 
 	return getPost
 }
