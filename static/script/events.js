@@ -30,6 +30,12 @@ function setupFlipflop() {
 setupFlipflop();
 
 
+function vider()
+{
+	document.getElementById("filtre").value = "";
+	return false;
+};
+
 
 
 // function dispatchEvent (eventClick) {

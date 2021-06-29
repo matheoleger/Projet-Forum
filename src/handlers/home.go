@@ -41,7 +41,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		ts.Execute(w, page)
 	} else {
 		filtres := FiltreHome(w, r, filtre)
+
 		ts.Execute(w, filtres)
+
 	}
 }
 
@@ -59,15 +61,18 @@ func FiltreHome(w http.ResponseWriter, r *http.Request, filtre string) bdd.Page 
 		filtres := FiltresLikeDecroissant()
 
 		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+
 	}
 
 	if filtre == "datefiltre" {
 		filtres := SortDate()
 
 		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+
 	}
 
 	fmt.Println(page.Posts)
+
 	return page
 
 	// fmt.Println(page.Categories)
