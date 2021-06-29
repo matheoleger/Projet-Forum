@@ -5,18 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	bdd "../database"
+
 	_ "github.com/mattn/go-sqlite3"
 )
-
-type PostStruct struct {
-	Id_post     int
-	Title       string
-	Content     string
-	Username    string
-	Number_like int
-	Liked       bool
-	Date        time.Time
-}
 
 func OpenDataBase() *sql.DB {
 	db, err := sql.Open("sqlite3", "BDD/BDD_Finalv2.db")
@@ -79,10 +71,10 @@ func GetElement(user, element string) string {
 	return password
 }
 
-func GetPost() []PostStruct {
+func GetPost() []bdd.Post {
 	db := OpenDataBase()
 
-	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 9")
+	result, err := db.Query("SELECT * FROM post WHERE id_post NOT BETWEEN 1 AND 10")
 
 	if err != nil {
 		fmt.Println("error query")
@@ -90,20 +82,19 @@ func GetPost() []PostStruct {
 
 	defer result.Close()
 
-	var post PostStruct
-	var Arraypost []PostStruct
+	var post bdd.Post
+	var Arraypost []bdd.Post
 
 	for result.Next() {
-		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
+		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Date, &post.Number_like)
 
 		// fmt.Println(&post.Date)
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
 
 		// On ajoute au tableau chaque post
+
 		Arraypost = append(Arraypost, post)
 	}
-
-	// fmt.Println(Arraypost)
 	err = result.Err()
 	return Arraypost
 }
@@ -136,18 +127,39 @@ func deleteCategory(name string) {
 
 }
 
-func InsertPost(title string, content string, username string, Number_like int, liked bool, date_post time.Time) {
+func InsertPost(title string, content string, username string, date_post time.Time, Number_like int) {
 
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("INSERT INTO post (title, content, username, Number_like, liked, date_post) VALUES (?, ?, ?, ?, ?, ?)")
+	statement, err := db.Prepare("INSERT INTO post (title, content, username, date_post, Number_like) VALUES (?, ?, ?, ?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare InsertPost")
 		return
 	}
 
-	statement.Exec(title, content, username, Number_like, liked, date_post)
+	statement.Exec(title, content, username, date_post, Number_like)
 
 	defer db.Close()
+}
+
+func GetLastedID() int {
+	db := OpenDataBase()
+
+	// Selection du dernier id
+	statement, err := db.Query("SELECT id_post FROM post ORDER BY id_post DESC LIMIT 1")
+
+	if err != nil {
+		fmt.Println("Error Query")
+	}
+
+	defer statement.Close()
+
+	var id_post int
+
+	for statement.Next() {
+		statement.Scan(&id_post)
+	}
+	return id_post
+
 }

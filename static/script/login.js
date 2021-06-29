@@ -56,5 +56,7 @@ if (errType == "wrong_PW") {
     alert("Erreur : Vous avez renseigné un mauvais mot de passe...")
 } else if (errType == "wrong_name") {
     alert("Erreur : Vous avez renseigné un mauvais nom d'utilisateur...")
+} else if (errType == "wrong_EMAIL") {
+    alert("Erreur : Vous avez renseigné un email qui existe déjà ... ")
 }
 // }
