@@ -15,6 +15,8 @@ func FiltresLike() []bdd.Post {
 		return getPost[i].Number_like > getPost[j].Number_like
 	})
 
+	fmt.Println(getPost)
+
 	return getPost
 }
 
@@ -36,13 +38,13 @@ func (categorie CategorySort) Swap(i, j int) {
 func FiltresCategory() {
 	test := bdd.GetCategory(20, 0)
 
-	fmt.Println(test)
+	// fmt.Println(test)
 
 	sort.Sort(CategorySort(test))
 
 	for index := 0; index < len(test); index++ {
 		bdd.GetPostByCategory(test[index].Name, 20, 0)
-		fmt.Println(bdd.GetPostByCategory(test[index].Name, 20, 0))
+		// fmt.Println(bdd.GetPostByCategory(test[index].Name, 20, 0))
 	}
 
 }

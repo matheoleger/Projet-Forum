@@ -47,7 +47,7 @@ func GetPost(db *sql.DB, id_post int) Post {
 	// var postStruct []Post
 	var post Post
 
-	statement, err := db.Prepare("SELECT title, content, username, date_post FROM post WHERE id_post = ?")
+	statement, err := db.Prepare("SELECT title, content, username, date_post, Number_like FROM post WHERE id_post = ?")
 
 	if err != nil {
 		fmt.Println("error prepare GetPostByCategory in resultCat : ", err)
@@ -68,21 +68,20 @@ func GetPost(db *sql.DB, id_post int) Post {
 	var date time.Time
 
 	for result.Next() {
-		result.Scan(&post.Title, &post.Content, &post.Username, &date)
+		result.Scan(&post.Title, &post.Content, &post.Username, &date, &post.Number_like)
 
 		post.Id_post = id_post
 		// postStruct = append(postStruct, Post{Id_post: id_post, Title: title, Content: content, Username: username})
 
-		fmt.Println(post)
 	}
 
 	dateFormated := date.Format("2006-01-02 15:04:05")
 
 	post.Date = dateFormated
 
-	post.LikeInfo = IsLiked("post", id_post)
+	// post.LikeInfo = IsLiked("post", username, id_post)
 
-	fmt.Println(post.Date)
+	// fmt.Println(post.Date)
 
 	return post
 }

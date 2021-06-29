@@ -31,10 +31,23 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 	var categories []bdd.Category
 	categories = append(categories, category)
 
-	username := bdd.GetProfil(w, r).Username
+	posts := bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt)
 
-	page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt, username)}
+	// page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt)}
 
+	if VerifyCookie(w, r) {
+		username := bdd.GetProfil(w, r).Username
+
+		for i, postEl := range posts {
+			postEl.LikeInfo = bdd.IsLiked("post", username, postEl.Id_post)
+
+			posts[i] = postEl
+		}
+	}
+
+	page := bdd.Page{Categories: categories, Posts: posts}
+
+	fmt.Println("ceci est le page.Posts de post.go")
 	fmt.Println(page.Posts)
 
 	files := findPathFiles("./templates/posts.html")
@@ -63,7 +76,7 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 	postname := r.URL.Query().Get("post") //categoryName := r.URL.Query().Get("category")
 	postnameint, _ := strconv.Atoi(postname)
 
-	username := bdd.GetProfil(w, r).Username
+	// username := bdd.GetProfil(w, r).Username
 	wichpage := r.URL.Query().Get("page")
 	wichpageInt, _ := strconv.Atoi(wichpage)
 
@@ -73,7 +86,7 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("ici cest le params : " + postname) //fmt.Println("ici cest le params : " + categoryName)
 
 	db := OpenDataBase()
-	post := bdd.GetPost(db, postnameint, username)
+	post := bdd.GetPost(db, postnameint)
 	db.Close()
 	// post := bdd.Post{Id_post: postnameint} //category := bdd.Category{Name: categoryName}
 	var posts []bdd.Post        //var categories []bdd.Category

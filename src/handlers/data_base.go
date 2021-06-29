@@ -86,7 +86,7 @@ func GetPost() []bdd.Post {
 	var Arraypost []bdd.Post
 
 	for result.Next() {
-		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Date)
+		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Date, &post.Number_like)
 
 		// fmt.Println(&post.Date)
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
@@ -95,8 +95,6 @@ func GetPost() []bdd.Post {
 
 		Arraypost = append(Arraypost, post)
 	}
-
-	// fmt.Println(Arraypost)
 	err = result.Err()
 	return Arraypost
 }
@@ -129,18 +127,18 @@ func deleteCategory(name string) {
 
 }
 
-func InsertPost(title string, content string, username string, Number_like int, liked bool, date_post time.Time) {
+func InsertPost(title string, content string, username string, date_post time.Time, Number_like int) {
 
 	db := OpenDataBase()
 
-	statement, err := db.Prepare("INSERT INTO post (title, content, username, Number_like, liked, date_post) VALUES (?, ?, ?, ?, ?, ?)")
+	statement, err := db.Prepare("INSERT INTO post (title, content, username, date_post, Number_like) VALUES (?, ?, ?, ?, ?)")
 
 	if err != nil {
 		fmt.Println("error prepare InsertPost")
 		return
 	}
 
-	statement.Exec(title, content, username, Number_like, liked, date_post)
+	statement.Exec(title, content, username, date_post, Number_like)
 
 	defer db.Close()
 }

@@ -21,7 +21,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	item := GetPost()
-	page := bdd.Page{Posts: item, Categories: bdd.GetCategory()}
+	page := bdd.Page{Posts: item, Categories: bdd.GetCategory(20, 0)}
 	// AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
 	// DeleteUser("JohnBibi")
 	// DataBase()
