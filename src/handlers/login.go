@@ -7,13 +7,14 @@ import (
 	"regexp"
 	"text/template"
 
+	bdd "../database"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path == "/login/" {
-
 		files := findPathFiles("./templates/login.html")
 
 		ts, err := template.ParseFiles(files...)
@@ -32,6 +33,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		passwordDB := GetElement(name, "password")
 
 		if nameDB == name {
+
 			errHashed := bcrypt.CompareHashAndPassword([]byte(passwordDB), []byte(passwordForm))
 
 			// DataBase()
@@ -57,14 +59,20 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		email := r.PostFormValue("registerMail")
 
 		if VerificationPassword(password) && VerificationEmail(email) {
-			if password == secondPassword {
-				hashedPW := PasswordHash(password)
+			test := bdd.GetInformationAllUser(w, r, "email")
+			if bdd.VerificationEmail(email, test) {
+				if password == secondPassword {
+					hashedPW := PasswordHash(password)
 
-				AddUser(name, hashedPW, email)
-				http.Redirect(w, r, "/login/", http.StatusSeeOther)
+					AddUser(name, hashedPW, email)
+					http.Redirect(w, r, "/login/", http.StatusSeeOther)
+				} else {
+					fmt.Println("Votre mot de passe de confirmation n'est pas le même que votre mot de passe")
+					http.Redirect(w, r, "/login/inscription", http.StatusSeeOther)
+				}
 			} else {
-				fmt.Println("Votre mot de passe de confirmation n'est pas le même que votre mot de passe")
-				http.Redirect(w, r, "/login/inscription", http.StatusSeeOther)
+				fmt.Println("Un utilisateur déjà inscrit possède votre addresse mail")
+				http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_EMAIL", http.StatusSeeOther)
 			}
 
 		} else {

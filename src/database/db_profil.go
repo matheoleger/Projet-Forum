@@ -64,3 +64,35 @@ func GetMoreInformation(w http.ResponseWriter, r *http.Request, username string)
 
 	return myUser
 }
+
+func GetInformationAllUser(w http.ResponseWriter, r *http.Request, element string) []string {
+	db := OpenDataBase()
+
+	var users []string
+	statement, err := db.Query("SELECT " + element + " FROM user")
+
+	if err != nil {
+		fmt.Println("Error prepares")
+	}
+
+	defer statement.Close()
+
+	var test string
+	for statement.Next() {
+		statement.Scan(&test)
+		users = append(users, test)
+	}
+
+	return users
+}
+
+func VerificationEmail(email string, emailbdd []string) bool {
+	result := true
+	for index := 0; index < len(emailbdd); index++ {
+		if email == emailbdd[index] {
+			result = false
+			break
+		}
+	}
+	return result
+}
