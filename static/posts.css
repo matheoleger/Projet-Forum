@@ -88,6 +88,36 @@
     height: 50px;
 }
 
+.page-select {
+    margin-left: 1%;
+
+}
+
+.page-buttons {
+    display: flex;
+    justify-content: center;
+
+}
+
+.paginationbutton {
+    transition: ease 0.5s;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 30px;
+    background-color: #595D3C;
+    color: #FFF5E6;
+    font-family: inherit;
+    padding: 10px;
+    width: 100px;
+    /* margin: 10px auto; */
+    margin: 10px;
+}
+
+.paginationbutton:hover {
+    background-color: #40422b;
+}
+
+
 .post-list button {
     border: none;
     background: none;
