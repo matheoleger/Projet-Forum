@@ -1,5 +1,6 @@
 let posts = document.querySelectorAll(".posts")
 
+// cette boucle permet de remettre les flèches "like/dislike" à la bonne valeur pour chaque post
 for(let post of posts) {
 
     let queryString = `div#${CSS.escape(post.id)}.posts`
@@ -7,7 +8,7 @@ for(let post of posts) {
     VerifyStateOfLike(queryString)
 }
 
-
+// cette fonction est appelé lors du clique sur un like/dislike d'un post
 function LikedPost(id, isLiked) {
     fetch(`/like?post=${id}&isLiked=${isLiked}`)
     .then(response => response.json())
@@ -17,6 +18,7 @@ function LikedPost(id, isLiked) {
 
 }
 
+// cette fonction est appelé lors du clique sur un like/dislike d'un commentaire
 function LikedComment(id, isLiked) {
     fetch(`/like?comment=${id}&isLiked=${isLiked}`)
     .then(response => response.json())
@@ -26,6 +28,8 @@ function LikedComment(id, isLiked) {
 
 }
 
+// cette fonction permet de changer les attributs liés au like : 
+// valeurs des "data-likestates" et "data-isliked", ainsi que le nombre de like
 function changeAttributeLike(resp, id, elementType) {
     let queryString = `div#${CSS.escape(id)}.${elementType}`
     console.log(queryString)
@@ -43,6 +47,7 @@ function changeAttributeLike(resp, id, elementType) {
     VerifyStateOfLike(queryString)
 }
 
+// cette fonction permet de modifier la flèche en fonction de l'état du like
 function VerifyStateOfLike(queryString) {
 
     let imgDisLike = document.querySelector(`${queryString} .dislike-btn-img`)
