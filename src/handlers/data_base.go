@@ -143,8 +143,23 @@ func InsertPost(title string, content string, username string, date_post time.Ti
 	defer db.Close()
 }
 
-// func GetLastedID() {
-// 	db := OpenDataBase()
+func GetLastedID() int {
+	db := OpenDataBase()
 
-// 	statement, err := db.Prepare("SELECT LAST_INSERT_ID()")
-// }
+	// Selection du dernier id
+	statement, err := db.Query("SELECT id_post FROM post ORDER BY id_post DESC LIMIT 1")
+
+	if err != nil {
+		fmt.Println("Error Query")
+	}
+
+	defer statement.Close()
+
+	var id_post int
+
+	for statement.Next() {
+		statement.Scan(&id_post)
+	}
+	return id_post
+
+}

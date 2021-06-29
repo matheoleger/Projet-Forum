@@ -61,6 +61,10 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 		InsertPost(title, content, user.Username, time.Now(), 0)
 
+		id := GetLastedID()
+
+		InsertBridge(id, category)
+
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 
