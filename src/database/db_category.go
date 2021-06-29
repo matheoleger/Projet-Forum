@@ -44,7 +44,7 @@ func GetCategory(per_page int, page int) []Category {
 		CategoriesList = append(CategoriesList, Category{Name: nameCategory})
 	}
 
-	fmt.Println(CategoriesList)
+	// fmt.Println(CategoriesList)
 
 	defer db.Close()
 
