@@ -5,7 +5,7 @@
     {{ if .Categories }}
         {{ range .Categories }}
             <div>
-                <a href="/posts?category={{.Name}}">{{.Name}}</a>
+                <a href="/posts?category={{.Name}}&perpage=20&page=0">{{.Name}}</a>
             </div>
         {{ end }}
     {{ end }}

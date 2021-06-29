@@ -86,7 +86,7 @@ func GetPost() []bdd.Post {
 	var Arraypost []bdd.Post
 
 	for result.Next() {
-		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Liked, &post.Date)
+		result.Scan(&post.Id_post, &post.Title, &post.Content, &post.Username, &post.Number_like, &post.Date)
 
 		// fmt.Println(&post.Date)
 		// fmt.Println(post.Id_post, post.Title, post.Username, post.Content, post.Date, post.Number_like, post.Liked)
@@ -144,3 +144,9 @@ func InsertPost(title string, content string, username string, Number_like int, 
 
 	defer db.Close()
 }
+
+// func GetLastedID() {
+// 	db := OpenDataBase()
+
+// 	statement, err := db.Prepare("SELECT LAST_INSERT_ID()")
+// }

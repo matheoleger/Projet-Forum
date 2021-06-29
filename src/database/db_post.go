@@ -6,19 +6,19 @@ import (
 	"time"
 )
 
-func GetPostByCategory(category string) []Post {
+func GetPostByCategory(category string, per_page int, page int) []Post {
 	var postStruct []Post
 
 	db := OpenDataBase()
 
-	statementCat, errCat := db.Prepare("SELECT B_id_post FROM bridge WHERE B_name_category = ?")
+	statementCat, errCat := db.Prepare("SELECT B_id_post FROM bridge WHERE B_name_category = ? ORDER BY id LIMIT ? OFFSET ?")
 
 	if errCat != nil {
 		fmt.Println("error prepare GetPostByCategory : ", errCat)
 		return postStruct
 	}
 
-	resultCat, errQueryCat := statementCat.Query(category)
+	resultCat, errQueryCat := statementCat.Query(category, per_page, page*per_page)
 
 	if errQueryCat != nil {
 		fmt.Println("error prepare GetPostByCategory : ", errQueryCat)
@@ -70,6 +70,7 @@ func GetPost(db *sql.DB, id_post int) Post {
 	for result.Next() {
 		result.Scan(&post.Title, &post.Content, &post.Username, &date)
 
+		post.Id_post = id_post
 		// postStruct = append(postStruct, Post{Id_post: id_post, Title: title, Content: content, Username: username})
 
 		fmt.Println(post)
@@ -78,6 +79,10 @@ func GetPost(db *sql.DB, id_post int) Post {
 	dateFormated := date.Format("2006-01-02 15:04:05")
 
 	post.Date = dateFormated
+
+	post.LikeInfo = IsLiked("post", id_post)
+
+	fmt.Println(post.Date)
 
 	return post
 }

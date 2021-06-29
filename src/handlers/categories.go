@@ -22,12 +22,12 @@ func Categories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	page := bdd.Page{Categories: bdd.GetCategory()}
+	page := bdd.Page{Categories: bdd.GetCategory(20, 0)}
 
 	ts.Execute(w, page)
 }
 
-func insertBridge(B_id_post int, B_id_category string) {
+func InsertBridge(B_id_post int, B_id_category string) {
 	db := OpenDataBase()
 
 	statement, err := db.Prepare("INSERT INTO bridge (B_id_post, B_id_category) VAlUES (?, ?)")

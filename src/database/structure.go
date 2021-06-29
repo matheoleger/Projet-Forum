@@ -17,7 +17,7 @@ type Post struct {
 	Content     string
 	Username    string
 	Number_like int
-	Liked       bool
+	LikeInfo    Like
 	Date        string
 }
 
@@ -25,11 +25,17 @@ type Comment struct {
 	Id_comment int
 	Content    string
 	Username   string
-	post       string
-	Liked      bool
+	Post       string
+	LikeInfo   Like
 }
 
 type User struct {
 	Username string
 	Email    string
+}
+
+type Like struct {
+	IdLike    int
+	LikeState bool
+	IsLiked   bool
 }
