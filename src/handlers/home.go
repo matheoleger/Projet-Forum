@@ -28,9 +28,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	FiltresLike()
 
+	// SortDate()
+
 	// fmt.Println(filtreLike)
 
-	FiltresCategory()
+	// FiltresCategory()
 
 	ts.Execute(w, page)
 }
