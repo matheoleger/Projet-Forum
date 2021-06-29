@@ -47,9 +47,10 @@ function perPage(quantity) {
 
 let theSelect = document.querySelector('#perpage')
 
-theSelect.addEventListener( 'click', () => {
+theSelect.addEventListener( 'change', () => { // onchange="perPage()
+    // values = valueFromUrl()
     choice = theSelect.selectedIndex;
     value = theSelect.options[choice].value
     perPage(value)
 
-})
+}, true)
