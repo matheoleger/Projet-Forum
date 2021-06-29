@@ -12,43 +12,34 @@
                 <h1 id="title">{{ .Title }}</h1>
                 <p>{{ .Content }}</p>
             </div>
-            <button onclick="showCreateComment()">YPOSTER2</button>
+            <!-- <button onclick="showCreateComment()">YPOSTER2</button> -->
         {{ end }}
-    {{ end }}     
-    
+    {{ end }}
     {{if .Comments}}
         {{ range .Comments }}
-            <form action="/creationcomment?idpost={{ .Id_post }}" method="POST" class="creationForm2">
+                <div id="{{ .Id_comment }}" class="comments">
                     <div class="comment-user-element">
                         <img src="../static/img/user-btn.png"></img>
                         <h1>{{ .Username }}</h1>
-                        <h4>{{ .Date }}</h4>
+                        <!-- <h4></h4> -->
                     </div>
-                    <h1 id="title">{{ .Title }}</h1>
                     <p>{{ .Content }}</p>
-<<<<<<< HEAD
                 </div>
-                <button onclick="showCreateComment()">YPOSTER2</button>
-            {{ end }}
-        {{ end }}     
-        
-        {{if .Comments}}
-            {{ range .Comments }}
-                    <div id="{{ .Id_comment }}" class="comments"  onclick="window.location.href='/posts/content?comment={{ .Id_comment }}'">
-                        <div class="comment-user-element">
-                            <img src="../static/img/user-btn.png"></img>
-                            <h1>{{ .Username }}</h1>
-                            <!-- <h4></h4> -->
-                        </div>
-                        <p>{{ .Content }}</p>
-                    </div>
-            {{ end }}
-        {{ end }}  
-=======
+        {{ end }}
+    {{ end }}
+    {{if .Posts}}
+        {{ range .Posts }}      
+            <form action="/creationcomment?id_post={{ .Id_post }}" method="POST" class="creationForm2">
+                <div>
+                    <!-- <label for="postId"><b>id</b></label>
+                    <input type="text" name="postId" placeholder="Enter id of post" required> -->              
+                    <label for="postcontent"><b>Content</b></label>
+                    <textarea name="postcontent" placeholder="Enter content of your post" required></textarea> 
+                </div>
+                <button type="submit" id="submit_btn">PublYsh</button>
             </form>
         {{ end }}
-    {{ end }}  
+    {{ end }}         
     </div>
 
->>>>>>> 6bca75046dacca52457ca9842aa9383b496454e6
 {{ end }}

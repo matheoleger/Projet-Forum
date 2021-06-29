@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+
 	// "os"
 	"time"
 
@@ -76,19 +77,21 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	content := r.PostFormValue("postcontent")
-	postint := r.URL.Query().Get("post")
+	postint := r.URL.Query().Get("id_post")
 
 	n, _ := strconv.Atoi(postint)
 
 	fmt.Println("Votre contenu est : " + content + "sur le post : " + postint)
 
-	user := bdd.GetProfil(w, r)
+	if VerifyCookie(w, r) {
+		user := bdd.GetProfil(w, r)
 
-	// db := OpenDataBase()
-	// post := bdd.GetPost(db, n)
-	// db.Close()
+		// db := OpenDataBase()
+		// post := bdd.GetPost(db, n)
+		// db.Close()
 
-	insertComment(content, user.Username, n)
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+		insertComment(content, user.Username, n)
+		http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	}
 
 }
