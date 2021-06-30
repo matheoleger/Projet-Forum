@@ -26,8 +26,6 @@
                     <div id="{{ .Id_post }}" class="posts-profil" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
                         <div onclick="window.location.href='/posts/content?post={{ .Id_post }}&perpage=5&page=0'">
                             <div class="post-user-element">
-                                <!-- <img src="../static/img/user-btn.png"></img>
-                                <h1>{{ .Username }}</h1> -->
                                 <h4>{{ .Date }}</h4>
                             </div>
                             <h1 id="title">{{ .Title }}</h1>
