@@ -3,7 +3,6 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	// handlers "../handlers"
 )
 
 func OpenDataBase() *sql.DB {
@@ -26,11 +25,6 @@ func GetCategory(per_page int, page int) []Category {
 		return CategoriesList
 	}
 
-	// dapage := 0
-	// if page != 0 {
-	// 	dapage = page*per_page - 1
-	// }
-
 	result, err2 := prepare.Query(per_page, page)
 
 	if err2 != nil {
@@ -43,8 +37,6 @@ func GetCategory(per_page int, page int) []Category {
 		result.Scan(&nameCategory)
 		CategoriesList = append(CategoriesList, Category{Name: nameCategory})
 	}
-
-	// fmt.Println(CategoriesList)
 
 	defer db.Close()
 

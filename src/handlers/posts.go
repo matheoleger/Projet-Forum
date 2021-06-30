@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	bdd "../database"
-	//"text/template"
 )
 
 func Posts(w http.ResponseWriter, r *http.Request) {
@@ -33,8 +32,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 
 	posts := bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt)
 
-	// page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt)}
-
 	if VerifyCookie(w, r) {
 		username := bdd.GetProfil(w, r).Username
 
@@ -47,9 +44,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 
 	page := bdd.Page{Categories: categories, Posts: posts}
 
-	fmt.Println("ceci est le page.Posts de post.go")
-	fmt.Println(page.Posts)
-
 	files := findPathFiles("./templates/posts.html")
 
 	ts, err := template.ParseFiles(files...)
@@ -59,9 +53,6 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// item := GetPost()
-
-	// ts.Execute(w, item)
 	ts.Execute(w, page)
 
 }
@@ -73,27 +64,22 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	postname := r.URL.Query().Get("post") //categoryName := r.URL.Query().Get("category")
+	postname := r.URL.Query().Get("post")
 	postnameint, _ := strconv.Atoi(postname)
 
-	// username := bdd.GetProfil(w, r).Username
 	wichpage := r.URL.Query().Get("page")
 	wichpageInt, _ := strconv.Atoi(wichpage)
 
 	perpage := r.URL.Query().Get("perpage")
 	perpageInt, _ := strconv.Atoi(perpage)
 
-	fmt.Println("ici cest le params : " + postname) //fmt.Println("ici cest le params : " + categoryName)
-
 	db := OpenDataBase()
 	post := bdd.GetPost(db, postnameint)
 	db.Close()
-	// post := bdd.Post{Id_post: postnameint} //category := bdd.Category{Name: categoryName}
-	var posts []bdd.Post        //var categories []bdd.Category
-	posts = append(posts, post) //categories = append(categories, category)
+	var posts []bdd.Post
+	posts = append(posts, post)
 
-	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)} //page := bdd.Page{Categories: categories, Posts: bdd.GetPostByCategory(categoryName)}
-	fmt.Print(page)
+	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)}
 
 	files := findPathFiles("./templates/post_content.html")
 	ts, err := template.ParseFiles(files...)
@@ -103,6 +89,6 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ts.Execute(w, page) //page
+	ts.Execute(w, page)
 
 }

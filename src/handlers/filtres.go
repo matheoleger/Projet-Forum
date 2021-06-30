@@ -44,22 +44,6 @@ func (categorie CategorySort) Swap(i, j int) {
 	categorie[i], categorie[j] = categorie[j], categorie[i]
 }
 
-// func FiltresCategory() {
-// 	test := bdd.GetCategory(20, 0)
-
-// 	// fmt.Println(test)
-
-// 	sort.Sort(CategorySort(test))
-
-// 	for index := 0; index < len(test); index++ {
-// 		bdd.GetPostByCategory(test[index].Name, 20, 0)
-
-// 		fmt.Println("Category " + test[index].Name + " : ")
-// 		fmt.Println(bdd.GetPostByCategory(test[index].Name, 20, 0))
-// 	}
-
-// }
-
 func SortDate() []bdd.Post {
 
 	getpost := GetPost()

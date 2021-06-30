@@ -7,12 +7,9 @@ import (
 func GetComments(id_post int, per_page int, page int) []Comment {
 	db := OpenDataBase()
 
-	// var postStruct []Post
 	var comments []Comment
 	var comment Comment
 
-	// statement, err := db.Prepare("SELECT id_comment, content, username, post FROM comment WHERE post = ?")
-	// statement, err := db.Prepare("SELECT id_comment, content, username, post FROM comment ORDER BY id_comment ASCENDING LIMIT " + strconv.Itoa(per_page) + " OFFSET " + strconv.Itoa(per_page*page))
 	statement, err := db.Prepare("SELECT id_comment, content, username, post FROM comment WHERE post = ? ORDER BY id_comment LIMIT ? OFFSET ?")
 
 	if err != nil {
@@ -27,16 +24,11 @@ func GetComments(id_post int, per_page int, page int) []Comment {
 		return comments
 	}
 
-	// var title string
-	// var content string
-	// var username string
-
 	for result.Next() {
 		result.Scan(&comment.Id_comment, &comment.Content, &comment.Username, &comment.Post)
 
 		comments = append(comments, comment)
 
-		fmt.Println(comment)
 	}
 
 	return comments
