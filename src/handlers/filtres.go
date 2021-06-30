@@ -3,7 +3,6 @@ package handlers
 import (
 	"sort"
 	"time"
-	"unicode/utf8"
 
 	bdd "../database"
 )
@@ -32,26 +31,6 @@ func FiltresLikeDecroissant() []bdd.Post {
 	})
 
 	return getPost
-}
-
-// Trier les catégorie
-type CategorySort []bdd.Category
-
-// Fonction qui renvoie la longueur de la catégories
-func (categorie CategorySort) Len() int {
-	return len(categorie)
-}
-
-// Fonction qui trie les catégories en fonction de leur lettres
-func (categorie CategorySort) Less(i, j int) bool {
-	iRune, _ := utf8.DecodeRuneInString(categorie[i].Name)
-	jRune, _ := utf8.DecodeRuneInString(categorie[j].Name)
-	return int32(iRune) < int32(jRune)
-}
-
-// Fonction qui change d'ordre les catégories dans le tableau
-func (categorie CategorySort) Swap(i, j int) {
-	categorie[i], categorie[j] = categorie[j], categorie[i]
 }
 
 func SortDate() []bdd.Post {
