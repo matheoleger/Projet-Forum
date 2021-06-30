@@ -28,6 +28,16 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	// Item récupère toutes les informations des posts
 	item := GetPost()
 
+	if VerifyCookie(w, r) {
+		username := bdd.GetProfil(w, r).Username
+
+		for i, postEl := range item {
+			postEl.LikeInfo = bdd.IsLiked("post", username, postEl.Id_post)
+
+			item[i] = postEl
+		}
+	}
+
 	// Récupération du choix du filtre
 	filtre := r.PostFormValue("filtre")
 
@@ -48,25 +58,33 @@ func Home(w http.ResponseWriter, r *http.Request) {
 func FiltreHome(w http.ResponseWriter, r *http.Request, filtre string) bdd.Page {
 	var page bdd.Page
 
+	var filtres []bdd.Post
+
 	// Appel de fonction permettant le filtre en fonction du choix de l'utilisateur
 	if filtre == "likecroissant" {
-		filtres := FiltresLikeDecroissant()
-
-		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+		filtres = FiltresLikeDecroissant()
 
 	} else if filtre == "likedecroissant" {
-		filtres := FiltresLikeCroissant()
-
-		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+		filtres = FiltresLikeCroissant()
 
 	} else if filtre == "datefiltre" {
-		filtres := SortDate()
-
-		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+		filtres = SortDate()
 
 	} else {
 		CodeErreur(w, r, 400)
 	}
+
+	if VerifyCookie(w, r) {
+		username := bdd.GetProfil(w, r).Username
+
+		for i, postEl := range filtres {
+			postEl.LikeInfo = bdd.IsLiked("post", username, postEl.Id_post)
+
+			filtres[i] = postEl
+		}
+	}
+
+	page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
 
 	return page
 
