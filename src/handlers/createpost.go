@@ -1,10 +1,12 @@
 package handlers
 
 import (
-	"fmt"
+
 	// "image"
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	// "os"
 	"time"
@@ -57,7 +59,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 		// fmt.Println(image)
 
-		fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content + ". C'est " + user.Username + " qui a créé ce post, il y a 0 likes et ce post n'a pas été liké, de plus il a été créé le : " + time.Now().String())
+		// fmt.Println("Votre titre est : " + title + " et votre catégorie est : " + category + " puis votre contenu est : " + content + ". C'est " + user.Username + " qui a créé ce post, il y a 0 likes et ce post n'a pas été liké, de plus il a été créé le : " + time.Now().String())
 
 		InsertPost(title, content, user.Username, time.Now(), 0)
 
@@ -66,6 +68,31 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 		InsertBridge(id, category)
 
 		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+
+}
+
+func CreateComment(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal(err)
+	}
+	content := r.PostFormValue("postcontent")
+	postint := r.URL.Query().Get("id_post")
+
+	n, _ := strconv.Atoi(postint)
+
+	fmt.Println("Votre contenu est : " + content + "sur le post : " + postint)
+
+	if VerifyCookie(w, r) {
+		user := bdd.GetProfil(w, r)
+
+		// db := OpenDataBase()
+		// post := bdd.GetPost(db, n)
+		// db.Close()
+
+		insertComment(content, user.Username, n)
+		http.Redirect(w, r, r.Header.Get("Referer"), 302)
 	}
 
 }

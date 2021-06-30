@@ -141,6 +141,7 @@ func InsertPost(title string, content string, username string, date_post time.Ti
 	statement.Exec(title, content, username, date_post, Number_like)
 
 	defer db.Close()
+
 }
 
 func GetLastedID() int {
@@ -163,3 +164,59 @@ func GetLastedID() int {
 	return id_post
 
 }
+
+func deletePost(id_post int) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("DELETE FROM post WHERE id_post = ?")
+
+	if err != nil {
+		fmt.Println("error prepare deletePost")
+		return
+	}
+	statement.Exec(id_post)
+
+	defer db.Close()
+}
+
+func insertComment(content string, username string, post int) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("INSERT INTO comment (content, username, post) VAlUES (?, ?, ?)")
+
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(content, username, post)
+
+	defer db.Close()
+}
+
+func deleteComment(id_comment int) {
+	db := OpenDataBase()
+
+	statement, err := db.Prepare("DELETE FROM comment WHERE id_comment = ?")
+
+	if err != nil {
+		fmt.Println("error prepare ")
+		return
+	}
+	statement.Exec(id_comment)
+
+	defer db.Close()
+}
+
+// func insertBridge(B_id_post int, B_id_category string) {
+// 	db := OpenDataBase()
+
+// 	statement, err := db.Prepare("INSERT INTO bridge (B_id_post, B_id_category) VAlUES (?, ?)")
+
+// 	if err != nil {
+// 		fmt.Println("error prepare ")
+// 		return
+// 	}
+// 	statement.Exec(B_id_post, B_id_category)
+
+// 	defer db.Close()
+// }

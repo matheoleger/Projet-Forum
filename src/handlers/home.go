@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"text/template"
 
@@ -21,16 +22,59 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	item := GetPost()
-	page := bdd.Page{Posts: item, Categories: bdd.GetCategory(20, 0)}
+
+	filtre := r.PostFormValue("filtre")
+
+	fmt.Println(filtre)
 	// AddUser("JohnBibi", "Coucou21", "john.bibi@yforum.com")
 	// DeleteUser("JohnBibi")
 	// DataBase()
 
-	FiltresLike()
+	// SortDate()
 
 	// fmt.Println(filtreLike)
 
-	FiltresCategory()
+	// FiltresCategory()
 
-	ts.Execute(w, page)
+	if len(filtre) <= 0 {
+		page := bdd.Page{Posts: item, Categories: bdd.GetCategory(20, 0)}
+		ts.Execute(w, page)
+	} else {
+		filtres := FiltreHome(w, r, filtre)
+
+		ts.Execute(w, filtres)
+
+	}
+}
+
+func FiltreHome(w http.ResponseWriter, r *http.Request, filtre string) bdd.Page {
+	var page bdd.Page
+
+	if filtre == "likecroissant" {
+		filtres := FiltresLikeDecroissant()
+
+		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+
+	}
+
+	if filtre == "likedecroissant" {
+		filtres := FiltresLikeCroissant()
+
+		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+
+	}
+
+	if filtre == "datefiltre" {
+		filtres := SortDate()
+
+		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
+
+	}
+
+	fmt.Println(page.Posts)
+
+	return page
+
+	// fmt.Println(page.Categories)
+
 }
