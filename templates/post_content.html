@@ -1,4 +1,18 @@
-{{ define "body"}}
+{{ define "body"}}   
+    <div class="page-select">
+        {{if .Posts}}
+        {{ range .Posts }}
+                <select name="Elements par pages" id="perpage">
+                    <option disabled selected value> -- Elements per pages -- </option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                </select>
+            {{ end }}
+        {{ end }}     
+    </div>
     <div class="posts-by-category">
 
     {{if .Posts}}
@@ -41,5 +55,8 @@
         {{ end }}
     {{ end }}         
     </div>
-
+    <div class="page-buttons">
+        <button class="paginationbutton" type="submit" onclick="previousPage('page')"> Previous Page </button>
+        <button class="paginationbutton"  type="submit" onclick="nextPage('page')"> Next Page </button>
+    </div>
 {{ end }}
