@@ -31,7 +31,8 @@ func Profil(w http.ResponseWriter, r *http.Request) {
 	} else {
 		//Affichage de données de l'utilisateur si présence de cookie
 		content := bdd.GetProfil(w, r)
-		page := bdd.Page{UserInfo: content}
+		page := bdd.Page{UserInfo: content, Posts: SortUserPost(content.Username)}
+
 		ts.Execute(w, page)
 	}
 

@@ -29,9 +29,6 @@ function setupFlipflop() {
 
 setupFlipflop();
 
-
-
-
 // function dispatchEvent (eventClick) {
 
 //     if (flipflop = 0)
