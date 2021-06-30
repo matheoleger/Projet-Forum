@@ -10,6 +10,8 @@ import (
 )
 
 func Like(w http.ResponseWriter, r *http.Request) {
+
+	// Récupération de certain élément de l'URL
 	postValue := r.URL.Query().Get("post")
 	commentValue := r.URL.Query().Get("comment")
 	isLikedValue := r.URL.Query().Get("isLiked")
@@ -21,17 +23,16 @@ func Like(w http.ResponseWriter, r *http.Request) {
 
 	if !VerifyCookie(w, r) {
 
-		fmt.Println("ERREUR PAS CONNECTE EN FAIT")
+		fmt.Println("error user don't connect")
 		http.Redirect(w, r, "/login/", http.StatusSeeOther)
 
 	} else {
-
-		fmt.Println("post " + postValue + " comment " + commentValue + " isliked " + isLikedValue)
-
+		// Récupération du nom de l'utilisateur
 		username := bdd.GetProfil(w, r).Username
 
 		var returningValue []byte
 
+		// Changer de valeur de like pour les posts ou commentaires
 		if postValue != "" {
 
 			returningValue = ChangeLike("post", postValue, changeIsLiked, username)
@@ -53,7 +54,6 @@ func ChangeLike(elementType string, elementId string, changeIsLiked bool, userna
 
 	var finalResult []byte
 
-	fmt.Println("there are postValue")
 	elementIdInt, err := strconv.Atoi(elementId)
 
 	if err != nil {
@@ -65,6 +65,7 @@ func ChangeLike(elementType string, elementId string, changeIsLiked bool, userna
 	var nbrLike int
 
 	if !like.LikeState {
+		// Ajout d'un like
 		bdd.AddLike(elementType, username, elementIdInt, changeIsLiked)
 
 		if changeIsLiked {
@@ -74,6 +75,7 @@ func ChangeLike(elementType string, elementId string, changeIsLiked bool, userna
 		}
 
 	} else if like.LikeState && like.IsLiked == changeIsLiked {
+		// Suppression d'un like
 		bdd.DeleteLike(like.IdLike)
 
 		if changeIsLiked {
@@ -83,6 +85,7 @@ func ChangeLike(elementType string, elementId string, changeIsLiked bool, userna
 		}
 
 	} else if like.LikeState && like.IsLiked != changeIsLiked {
+		// Changement de valeur d'un like
 		bdd.ChangeValueLiked(like.IdLike, changeIsLiked)
 
 		if changeIsLiked {

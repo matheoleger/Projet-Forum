@@ -21,6 +21,7 @@ func Profil(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Permet la déconnexion
 	Disconnect(w, r)
 
 	//Vérification de présence de cookie de connexion
