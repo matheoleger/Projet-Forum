@@ -21,6 +21,7 @@ func Like(w http.ResponseWriter, r *http.Request) {
 
 	if !VerifyCookie(w, r) {
 
+		fmt.Println("ERREUR PAS CONNECTE EN FAIT")
 		http.Redirect(w, r, "/login/", http.StatusSeeOther)
 
 	} else {

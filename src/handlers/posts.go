@@ -79,7 +79,19 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 	var posts []bdd.Post
 	posts = append(posts, post)
 
-	page := bdd.Page{Posts: posts, Comments: bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)}
+	comments := bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)
+
+	if VerifyCookie(w, r) {
+		username := bdd.GetProfil(w, r).Username
+
+		for i, commentEl := range comments {
+			commentEl.LikeInfo = bdd.IsLiked("comment", username, commentEl.Id_comment)
+
+			comments[i] = commentEl
+		}
+	}
+
+	page := bdd.Page{Posts: posts, Comments: comments}
 
 	files := findPathFiles("./templates/post_content.html")
 	ts, err := template.ParseFiles(files...)
