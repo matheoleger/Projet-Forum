@@ -14,9 +14,7 @@ func LaunchSession(w http.ResponseWriter, r *http.Request, username string) {
 		return
 
 	} else {
-		// uuid := ReadCookie(w, r, "session")
-		// println("\033[0;32m", "[session] : launch session, uuid = ", uuid)
-		AddSession(uuid, username) // uuid, username
+		AddSession(uuid, username)
 	}
 }
 
@@ -27,8 +25,6 @@ func EndSession(w http.ResponseWriter, r *http.Request) {
 		return
 
 	} else {
-		// var uuid = ReadCookie(w, r, "session")
-		// println("\033[0;32m", "[session] : end session ")
 		DeleteSession(uuid)
 	}
 }
@@ -82,23 +78,18 @@ func AddSession(uuid string, user_name string) {
 		}
 		statementUpdate.Exec(uuid, user_name)
 
-		// println("\033[0;32m", "[session] : session sucessfully updated with uuid = ", uuid)
-
 		return
 
 	}
 
 	statement, err := db.Prepare("INSERT INTO session (uuid, username) VALUES (?, ?)")
 
-	//Error TO DO
 	if err != nil {
 		fmt.Println("\033[1;31m", "[session] : error, can't insert into database")
 		return
 	}
 
 	statement.Exec(uuid, user_name)
-
-	// println("\033[0;32m", "[session] : session sucessfully created : uuid = ", uuid, " username =", user_name)
 
 }
 
@@ -107,12 +98,9 @@ func DeleteSession(uuid string) {
 
 	statement, err := db.Prepare("DELETE FROM session WHERE uuid = ?")
 
-	//Error TO DO
 	if err != nil {
 		fmt.Println("\033[1;31m", "[session] : error, deleting from database")
 		return
 	}
-	// println("\033[0;32m", "[session] : session sucessfully deleted : uuid = ", uuid)
-
 	statement.Exec(uuid)
 }
