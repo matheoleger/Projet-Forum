@@ -39,3 +39,9 @@ type Like struct {
 	LikeState bool
 	IsLiked   bool
 }
+
+type ReturningLike struct {
+	LikeState   bool
+	IsLiked     bool
+	Number_like int
+}

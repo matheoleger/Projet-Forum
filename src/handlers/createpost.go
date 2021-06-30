@@ -3,8 +3,10 @@ package handlers
 import (
 
 	// "image"
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	// "os"
 	"time"
@@ -66,6 +68,31 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 		InsertBridge(id, category)
 
 		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+
+}
+
+func CreateComment(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal(err)
+	}
+	content := r.PostFormValue("postcontent")
+	postint := r.URL.Query().Get("id_post")
+
+	n, _ := strconv.Atoi(postint)
+
+	fmt.Println("Votre contenu est : " + content + "sur le post : " + postint)
+
+	if VerifyCookie(w, r) {
+		user := bdd.GetProfil(w, r)
+
+		// db := OpenDataBase()
+		// post := bdd.GetPost(db, n)
+		// db.Close()
+
+		insertComment(content, user.Username, n)
+		http.Redirect(w, r, r.Header.Get("Referer"), 302)
 	}
 
 }
