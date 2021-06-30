@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Fonction qui récupère la colonne que l'on souhaite
 func IsLiked(element string, username string, id int) Like {
 	db := OpenDataBase()
 	defer db.Close()
@@ -40,6 +41,7 @@ func IsLiked(element string, username string, id int) Like {
 
 }
 
+// Fonction qui ajoute une ligne dans la table de like
 func AddLike(element string, username string, id int, isLiked bool) {
 
 	db := OpenDataBase()
@@ -55,6 +57,7 @@ func AddLike(element string, username string, id int, isLiked bool) {
 
 }
 
+// Fonction qui va retirer une ligne dans la table de like
 func DeleteLike(idLikes int) {
 
 	db := OpenDataBase()
@@ -69,6 +72,7 @@ func DeleteLike(idLikes int) {
 	statement.Exec(idLikes)
 }
 
+// Fonction qui va changer la valeur isLiked pour le faire passer à sa valeur opposé
 func ChangeValueLiked(idLikes int, changeIsLiked bool) {
 
 	db := OpenDataBase()
@@ -83,6 +87,7 @@ func ChangeValueLiked(idLikes int, changeIsLiked bool) {
 	statement.Exec(changeIsLiked, idLikes)
 }
 
+// Fonction qui va changer le nombre de like dans la BDD
 func ChangeNumberLike(incSign string, elementType string, id int) int {
 	db := OpenDataBase()
 	defer db.Close()

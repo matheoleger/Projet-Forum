@@ -13,11 +13,15 @@ import (
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-
+	// Gestion erreur 404
 	if r.URL.Path == "/login/" {
+
+		// Appel de la fonction qui créera la page login
 		files := findPathFiles("./templates/login.html")
 
 		ts, err := template.ParseFiles(files...)
+
+		// Gestion d'erreur 500
 		if err != nil {
 			CodeErreur(w, r, 500)
 		}
@@ -26,24 +30,24 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	} else if r.URL.Path == "/login/connexion" {
 
+		// Récupération des information entrées par l'utilisateur
 		name := r.PostFormValue("loginName")
 		passwordForm := r.PostFormValue("loginPassword")
 
+		// Récupération des informations de la base de données
 		nameDB := GetElement(name, "username")
 		passwordDB := GetElement(name, "password")
 
+		// Vérification du nom entré par l'utilisateur avec les noms de la base de données
 		if nameDB == name {
 
+			// Comparaison des mots de passes hashés de la base de données avec l'utilisateur
 			errHashed := bcrypt.CompareHashAndPassword([]byte(passwordDB), []byte(passwordForm))
 
-			// DataBase()
-
 			if errHashed != nil {
-				fmt.Println(errHashed)
 				http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_PW", http.StatusSeeOther)
 			} else {
-				fmt.Println("right PW : ", passwordDB)
-				// ExpireSession(w, r)
+				// Création de session si toutes les conditions sont validés
 				LaunchSession(w, r, name)
 				http.Redirect(w, r, "/", http.StatusSeeOther)
 			}
@@ -52,18 +56,19 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 	} else if r.URL.Path == "/login/inscription" {
-
+		// Récupération de chaques informations entrées par l'utilisateur
 		name := r.PostFormValue("registerName")
 		password := r.PostFormValue("registerPassword")
 		secondPassword := r.PostFormValue("registerConfirmPassword")
 		email := r.PostFormValue("registerMail")
 
+		// Verification de chaque critères pour la création d'un compte
 		if VerificationPassword(password) && VerificationEmail(email) {
 			test := bdd.GetInformationAllUser(w, r, "email")
 			if bdd.VerificationEmail(email, test) {
 				if password == secondPassword {
 					hashedPW := PasswordHash(password)
-
+					// Ajout d'un utilisateur si et seulement si tout les critères sont valides
 					AddUser(name, hashedPW, email)
 					http.Redirect(w, r, "/login/", http.StatusSeeOther)
 				} else {
@@ -79,10 +84,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Mot de passe n'est pas bon")
 			http.Redirect(w, r, "/login/?loginForm=inscription&err=wrong_PW", http.StatusSeeOther)
 		}
-
+		// Si une information est invalide alors l'utilisateur restera sur la même page
 		http.Redirect(w, r, "/login/?loginForm=connexion", http.StatusSeeOther)
 
 	} else {
+		// Gestion d'erreur 404
 		CodeErreur(w, r, 404)
 	}
 
@@ -103,6 +109,7 @@ func PasswordHash(password string) string {
 
 func VerificationPassword(password string) bool {
 
+	// Utilisation de regex afin de vérifier chaque élément du mot de passe
 	result := true
 	searchMaj := `(.*[a-z]){2,}`
 	searchMin := `(.*[A-Z]){2,}`
@@ -116,6 +123,7 @@ func VerificationPassword(password string) bool {
 	regexSpeChar := regexp.MustCompile(searchSpeChar)
 	regexLength := regexp.MustCompile(searchLen)
 
+	// Message d'erreur si mot de passe non valide
 	if !regexMaj.Match([]byte(password)) || !regexMin.Match([]byte(password)) {
 		fmt.Println("Le nombre de Majuscule et minuscule doivent être supérieurs à 2")
 		result = false
@@ -133,6 +141,8 @@ func VerificationPassword(password string) bool {
 }
 
 func VerificationEmail(email string) bool {
+
+	// Vérification de chaque charactère du mail
 	var re = regexp.MustCompile(`(?mi)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}`)
 
 	if re.Match([]byte(email)) {

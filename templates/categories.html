@@ -17,7 +17,7 @@
         {{ if .Categories }}
             {{ range .Categories }}
                 <div class="category" onclick="window.location.href='/posts?category={{.Name}}&perpage=5&page=0'">
-                    <p>{{.Name}}</p>
+                    <h1 class="category-p">{{.Name}}</h1>
                 </div>
             {{ end }}
         {{ end }}

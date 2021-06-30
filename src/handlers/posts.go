@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -10,12 +9,13 @@ import (
 )
 
 func Posts(w http.ResponseWriter, r *http.Request) {
+	// Gestion d'erreur 404
 	if r.URL.Path != "/posts" {
-		fmt.Println("ici cest la merde ")
 		CodeErreur(w, r, 404)
 		return
 	}
 
+	// Récupération de certains éléments de l'URL
 	wichpage := r.URL.Query().Get("page")
 	wichpageInt, _ := strconv.Atoi(wichpage)
 
@@ -24,14 +24,13 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 
 	categoryName := r.URL.Query().Get("category")
 
-	fmt.Println("ici cest le params : " + categoryName)
-
 	category := bdd.Category{Name: categoryName}
 	var categories []bdd.Category
 	categories = append(categories, category)
 
 	posts := bdd.GetPostByCategory(categoryName, perpageInt, wichpageInt)
 
+	// Vérification de la connexion de l'utilisateur
 	if VerifyCookie(w, r) {
 		username := bdd.GetProfil(w, r).Username
 
@@ -44,11 +43,13 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 
 	page := bdd.Page{Categories: categories, Posts: posts}
 
+	// Appel de fonction qui créera la page post
 	files := findPathFiles("./templates/posts.html")
 
 	ts, err := template.ParseFiles(files...)
+
+	// Gestion erreur 500
 	if err != nil {
-		fmt.Println("ici cest la merde ")
 		CodeErreur(w, r, 500)
 		return
 	}
@@ -58,12 +59,13 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostsContent(w http.ResponseWriter, r *http.Request) {
+	// Gestion erreur 404
 	if r.URL.Path != "/posts/content" {
-		fmt.Println("ici cest la merde content")
 		CodeErreur(w, r, 404)
 		return
 	}
 
+	// Récupération de certains éléments de l'URL
 	postname := r.URL.Query().Get("post")
 	postnameint, _ := strconv.Atoi(postname)
 
@@ -81,6 +83,7 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 
 	comments := bdd.GetComments(postnameint, perpageInt, wichpageInt*perpageInt)
 
+	// Vérification de la connexion de l'utilisateur
 	if VerifyCookie(w, r) {
 		username := bdd.GetProfil(w, r).Username
 
@@ -94,9 +97,12 @@ func PostsContent(w http.ResponseWriter, r *http.Request) {
 	page := bdd.Page{Posts: posts, Comments: comments}
 
 	files := findPathFiles("./templates/post_content.html")
+
+	// Appel de la fonction qui créera la page post_content
 	ts, err := template.ParseFiles(files...)
+
+	// Gestion erreur 500
 	if err != nil {
-		fmt.Println("ici cest la merde dans le parsefile")
 		CodeErreur(w, r, 500)
 		return
 	}
