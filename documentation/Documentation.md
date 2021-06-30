@@ -1,4 +1,4 @@
-# Documentation
+# _Documentation_
 
 > ## Plannings
 
@@ -15,7 +15,7 @@ Avec cela, nous avons utilisé le système de ``BACKLOG``. Ce système consiste 
 > Ce sont les fonctionnalités on cours de création pour le sprint d'une certain semaine
 
 ``IN PROGRESS`` :
-> Ce sont les choses qui nous reste a terminer pour la fin de projet
+> Ce sont les choses en cours 
 
 ``SPRINT(par semaine)`` : 
 > A chaque fin de semaine, on met dans les sprints les fonctionnalités terminer
@@ -45,7 +45,7 @@ On a du se repartir les tâches a quatre : Louis, Mathéo, Kévin et Nicolas
 
 1.  Mathéo a effectué la création des posts ainsi que la fonctionnalité des likes/dislikes 
 
-2. Kévin a fait les filtres 
+2. Kévin a fait les filtres et le login(hash ..)
 
 3. Nicolas a fait les commentaires ainsi que la base de donnée (BDD)
 
@@ -106,9 +106,16 @@ Un **id** appelé ``id_post`` toujours en **autoincrement** ainsi qu'un ``title,
 Ici, on a un ``id_comment`` et quatre colonnes : ``content, username, post, Number_like``. Il possède une **foreign key** de la conne ``post`` vers l'**id** de table ``post``, cela sert a lier les commentaires au différents posts sur le forum
 
 
-> table ``likes`` :
+> table ``likes`` :  
+Cette table contient un ``id_likes``, trois colonnes : ``username, post, comment`` et pour finir un **booléan** nommé ``isLiked``  
+Le booléan sert a savoir si on a cliqué sur ``like(true) ou dislike(false)``.  
+Si on n'a pas intéragie avec le post/commentaires, il n'y pas de liaison avec ``username``  
+Au niveau, des **foreign key**, on a ``post`` relié a ``id_post``, ``comment`` associé a ``id_comment`` et ``username`` affecté a ``username`` de table ``user``
 
-> table ``session`` :
+> table ``session`` :  
+Elle est composé d'un ``uuid``(**primary key**) et d'un ``username``.  
+L'``uuid`` est un numéro session aléatoire et très long, ce qui rend impossible de l'avoir en double.  
+Ici, il est lié a un utilisateur de la BDD, par la **foreign key** ``username``
 
 > table ``bridge`` :  
 Le ``bridge`` est une parti importante car il permet de faire la liaison entre les posts et les categories.  
@@ -116,10 +123,10 @@ Il a un **id** en **autoincrement** et deux autres colonnes en integer : ``B_id_
 C'est deux integer récupère les **id** des tables ``post`` et ``category`` pour pouvoir les relier dans un même tableau.
 Les deux **foreign key** de cette table sont ``B_id_post`` vers l'**id** de la table post et ``B_id_category`` vers l'**id** de latable ``category``. Explication de leur fonctionnement juste au-dessus
 
->**PS : Partez du principe que toute les foreign key sont en cascade.Cascade signifie que si un enregistrement de la table parent est supprimé, les enregistrements correspondants de la table enfant seront automatiquement supprimés.**  
-**Par exemple, si on supprime un user cela supprimera tout ses posts et commentaires**  
+**PS :** Partez du principe que toute les foreign key sont en cascade.Cascade signifie que si un enregistrement de la table parent est supprimé, les enregistrements correspondants de la table enfant seront automatiquement supprimés. 
+Par exemple, si on supprime un user cela supprimera tout ses posts et commentaires 
 
->**Partez du principe que tout les id sont en autoincrement**
+Partez du principe que tout les id sont en autoincrement
 
 
 > ## Spécifications techniques
@@ -134,7 +141,7 @@ Pour ce projet les technologies sont :
 
 On a donc adopté le langage ``go`` pour le back et pour le front, les langages utilisés sont ``html, css et javascript``
 
-Mais, nous avons aussi exploité la technologie de DBshéma avec le langage ``sqlite``
+Mais, nous avons aussi exploité la technologie de **DBshéma** avec le langage ``sqlite``
 
 Architecture du projet
 
@@ -145,6 +152,9 @@ Architecture du projet
 * comment
 * like
 * filtre
+
+![alt text](./img/spéfonctionnel.png)
+
 
 > ## Architecture du projet readme?
 
