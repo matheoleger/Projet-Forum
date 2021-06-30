@@ -17,29 +17,31 @@
 
     <div id="best-posts">
         {{if .Posts}}
-            {{ range .Posts }}
-                <div id="{{ .Id_post }}" class="posts" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
-                    <div onclick="window.location.href='/posts/content?post={{ .Id_post }}&perpage=5&page=0'">
-                        <div class="post-user-element">
-                            <img src="../static/img/user-btn.png"></img>
-                            <h1>{{ .Username }}</h1>
-                            <h4>{{ .Date }}</h4>
+            <div class="post-list">
+                {{ range .Posts }}
+                    <div id="{{ .Id_post }}" class="posts" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
+                        <div onclick="window.location.href='/posts/content?post={{ .Id_post }}&perpage=5&page=0'">
+                            <div class="post-user-element">
+                                <img src="../static/img/user-btn.png"></img>
+                                <h1>{{ .Username }}</h1>
+                                <h4>{{ .Date }}</h4>
+                            </div>
+                            <h1 id="title">{{ .Title }}</h1>
+                            <p>{{ .Content }}</p>
                         </div>
-                        <h1 id="title">{{ .Title }}</h1>
-                        <p>{{ .Content }}</p>
+                        <div class="btn-for-like">
+                            <button onclick="LikedPost('{{ .Id_post }}', 'true')">
+                                <img src="../static/img/arrow-like.png" class="like-btn-img liked-img">
+                            </button>
+                            <h2>{{ .Number_like }}</h2>
+                            <button onclick="LikedPost('{{ .Id_post }}', 'false')">
+                                <img src="../static/img/arrow-dislike.png" class="dislike-btn-img liked-img">    
+                            </button>
+                        </div>
                     </div>
-                    <div class="btn-for-like">
-                        <button onclick="LikedPost('{{ .Id_post }}', 'true')">
-                            <img src="../static/img/arrow-like.png" class="like-btn-img liked-img">
-                        </button>
-                        <h2>{{ .Number_like }}</h2>
-                        <button onclick="LikedPost('{{ .Id_post }}', 'false')">
-                            <img src="../static/img/arrow-dislike.png" class="dislike-btn-img liked-img">    
-                        </button>
-                    </div>
-                </div>
-            {{ end }}
-        {{ end }}       
+                {{ end }}
+            </div>
+        {{ end }}  
     </div>
     
 </div>
