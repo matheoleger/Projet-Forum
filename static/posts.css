@@ -17,10 +17,6 @@ button {
     margin: auto 10px;
 }
 
-.category-of-posts h1 {
-    
-}
-
 .posts {
     transition: ease 0.5s;
     display: flex;
@@ -31,13 +27,14 @@ button {
     padding-bottom: 15px;
     border-radius: 10px;
     width : 700px;
-    margin-top: 10px;
+    margin: 1%;
 }
 
 .posts:hover {
     cursor: pointer;
     background-color: #7c7448;
 }
+
 
 .post-user-element {
     display: flex;
