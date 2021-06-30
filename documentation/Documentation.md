@@ -155,7 +155,3 @@ Architecture du projet
 
 ![alt text](./img/spéfonctionnel.png)
 
-
-> ## Architecture du projet readme?
-
-voir idée de départ et ou on est arrivé
