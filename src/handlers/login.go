@@ -107,7 +107,7 @@ func VerificationPassword(password string) bool {
 	searchMaj := `(.*[a-z]){2,}`
 	searchMin := `(.*[A-Z]){2,}`
 	searchDigit := `(.*\d){2,}`
-	searchSpeChar := `(.*[@$!%*?&])`
+	searchSpeChar := `(.*\W|_)`
 	searchLen := `[A-Za-z\d@$!%*?&]{8,}`
 
 	regexMaj := regexp.MustCompile(searchMaj)

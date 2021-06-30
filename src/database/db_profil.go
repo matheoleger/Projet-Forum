@@ -41,7 +41,6 @@ func GetMoreInformation(w http.ResponseWriter, r *http.Request, username string)
 	db := OpenDataBase()
 
 	var myUser User
-	// var users []User
 	statement, err := db.Prepare("SELECT username, email FROM user WHERE username = ?")
 
 	if err != nil {
@@ -58,7 +57,6 @@ func GetMoreInformation(w http.ResponseWriter, r *http.Request, username string)
 
 	for result.Next() {
 		result.Scan(&myUser.Username, &myUser.Email)
-		// users = append(users, myUser)
 		fmt.Println(myUser)
 	}
 

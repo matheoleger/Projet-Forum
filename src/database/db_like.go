@@ -4,52 +4,6 @@ import (
 	"fmt"
 )
 
-// func IsLiked(element string, username string, id int, isLiked bool) Like {
-// 	db := OpenDataBase()
-// 	defer db.Close()
-
-// 	var like Like
-
-// 	statement, err := db.Prepare("SELECT id_likes, isLiked FROM likes WHERE " + element + "= ? AND username = ?")
-
-// 	if err != nil {
-// 		fmt.Println("error prepare IsLiked : ", err)
-// 		return like
-// 	}
-
-// 	result, errQuery := statement.Query(id, username)
-
-// 	if errQuery != nil {
-// 		fmt.Println("error query IsLiked : ", errQuery)
-// 		return like
-// 	}
-
-// 	var idLikes int
-// 	// var isLikedDataBase bool
-
-// 	for result.Next() {
-// 		// result.Scan(&idLikes, &isLikedDataBase)
-// 		result.Scan(&idLikes, &like.isLiked)
-// 	}
-
-// 	if idLikes == 0 {
-// 		like.LikeSate = false
-// 	}
-
-// 	// if idLikes == 0 {
-// 	// 	AddLike(db, element, username, id, isLiked)
-// 	// } else if isLikedDataBase == isLiked && idLikes != 0 {
-// 	// 	DeleteLike(db, idLikes)
-// 	// } else if isLikedDataBase != isLiked && idLikes != 0 {
-// 	// 	ChangeValueLiked(db, idLikes, isLiked)
-// 	// }
-
-// 	fmt.Println(result)
-
-// 	return like
-
-// }
-
 func IsLiked(element string, username string, id int) Like {
 	db := OpenDataBase()
 	defer db.Close()
@@ -70,11 +24,7 @@ func IsLiked(element string, username string, id int) Like {
 		return like
 	}
 
-	// var idLikes int
-	// var isLikedDataBase bool
-
 	for result.Next() {
-		// result.Scan(&idLikes, &isLikedDataBase)
 		result.Scan(&like.IdLike, &like.IsLiked)
 	}
 
@@ -83,14 +33,6 @@ func IsLiked(element string, username string, id int) Like {
 	} else {
 		like.LikeState = true
 	}
-
-	// if idLikes == 0 {
-	// 	AddLike(db, element, username, id, isLiked)
-	// } else if isLikedDataBase == isLiked && idLikes != 0 {
-	// 	DeleteLike(db, idLikes)
-	// } else if isLikedDataBase != isLiked && idLikes != 0 {
-	// 	ChangeValueLiked(db, idLikes, isLiked)
-	// }
 
 	fmt.Println(result)
 
