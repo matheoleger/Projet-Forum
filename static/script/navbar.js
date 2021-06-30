@@ -23,16 +23,3 @@ function showCreatePost() {
         isShowCreatePost = false;
     }
 }
-
-// let isShowCreateComment = true;
-
-// function showCreateComment() {
-    
-//     if(!isShowCreateComment) {
-//         document.querySelector('.creationcomment-bg').style.display = "none";
-//         isShowCreateComment = true;
-//     } else {
-//         document.querySelector('.creationcomment-bg').style.display = "flex";
-//         isShowCreateComment = false;
-//     }
-// }

@@ -53,8 +53,6 @@ function nextPage() {
     } else {
         window.location.replace("/")
     }
-
-    // le good regex = /[?&]+page=?([^&]*)?/gi
 }
 
 function previousPage() {
@@ -102,8 +100,7 @@ function perPage(quantity) {
 
 let theSelect = document.querySelector('#perpage')
 
-theSelect.addEventListener( 'change', () => { // onchange="perPage()
-    // values = valueFromUrl()
+theSelect.addEventListener( 'change', () => {
     choice = theSelect.selectedIndex;
     value = theSelect.options[choice].value
     perPage(value)
