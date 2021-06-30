@@ -68,3 +68,22 @@
     padding: 1%;
 
 }
+
+#input-filter {
+    transition: ease 0.5s;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 30px;
+    background-color: #595D3C;
+    color: #FFF5E6;
+    font-family: inherit;
+    padding: 10px;
+    width: 100px;
+    /* margin: 10px auto; */
+    margin: 10px;
+}
+
+#input-filter:hover {
+    cursor: pointer;
+    background-color: #7c7448;
+}

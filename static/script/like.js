@@ -1,10 +1,17 @@
 let posts = document.querySelectorAll(".posts")
+let comments = document.querySelectorAll(".comments")
 
 // cette boucle permet de remettre les flèches "like/dislike" à la bonne valeur pour chaque post
 for(let post of posts) {
 
     let queryString = `div#${CSS.escape(post.id)}.posts`
 
+    VerifyStateOfLike(queryString)
+}
+
+for(let comment of comments) {
+    let queryString = `div#${CSS.escape(comment.id)}.comments`
+    console.log(queryString)
     VerifyStateOfLike(queryString)
 }
 
