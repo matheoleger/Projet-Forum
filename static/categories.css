@@ -1,0 +1,18 @@
+.category {
+    width: 50%;
+    background-color: #A89C62;
+    border-radius: 10px;
+    margin: 5%;
+    padding: 2%;
+}
+
+.category:hover {
+    background-color: #7c7346;
+    cursor: pointer;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
