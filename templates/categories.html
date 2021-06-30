@@ -2,12 +2,14 @@
 
     <h1>Categories</h1>
 
-    {{ if .Categories }}
-        {{ range .Categories }}
-            <div>
-                <a href="/posts?category={{.Name}}&perpage=5&page=0">{{.Name}}</a>
-            </div>
+    <div class="categories">
+        {{ if .Categories }}
+            {{ range .Categories }}
+                <div class="category" onclick="window.location.href='/posts?category={{.Name}}&perpage=5&page=0'">
+                    <p>{{.Name}}</p>
+                </div>
+            {{ end }}
         {{ end }}
-    {{ end }}
+    </div>
 
 {{end}}

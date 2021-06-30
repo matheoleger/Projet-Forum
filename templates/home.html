@@ -5,32 +5,32 @@
     <h1>Y'Forum Home</h1>
 
     <div id="best-posts">
-        <img src="../static/img/left_arrow.png" class="arrows"> 
-
+        {{if .Posts}}
+            {{ range .Posts }}
+                <div id="{{ .Id_post }}" class="posts" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
+                    <div onclick="window.location.href='/posts/content?post={{ .Id_post }}&perpage=5&page=0'">
+                        <div class="post-user-element">
+                            <img src="../static/img/user-btn.png"></img>
+                            <h1>{{ .Username }}</h1>
+                            <h4>{{ .Date }}</h4>
+                        </div>
+                        <h1 id="title">{{ .Title }}</h1>
+                        <p>{{ .Content }}</p>
+                    </div>
+                    <div class="btn-for-like">
+                        <button onclick="LikedPost('{{ .Id_post }}', 'true')">
+                            <img src="../static/img/arrow-like.png" class="like-btn-img liked-img">
+                        </button>
+                        <h2>{{ .Number_like }}</h2>
+                        <button onclick="LikedPost('{{ .Id_post }}', 'false')">
+                            <img src="../static/img/arrow-dislike.png" class="dislike-btn-img liked-img">    
+                        </button>
+                    </div>
+                </div>
+            {{ end }}
+        {{ end }}       
+    </div>
     
-        <div id="post">
-            {{ range .Posts}}
-                <ul>
-                    <li> Username : {{ .Username }}</li>
-                    <li> Title : {{ .Title }}</li>
-                    <li> Content : {{ .Content }}</li>
-                    <li> Date : {{ .Date }}</li>
-                    <li> Like : {{ .Number_like }}</li>
-                </ul>
-            {{end}}
-
-        </div>
-
-        <img src="../static/img/right_arrow.png" class="arrows"> 
-
-    </div>
-
-    <div id="dots">
-        <img src="../static/img/full_dot.png" class="dots"> 
-        <img src="../static/img/empty_dot.png" class="dots"> 
-        <img src="../static/img/empty_dot.png" class="dots"> 
-    </div>
-
 </div>
 
 <div id="best-categories-div">
@@ -42,12 +42,6 @@
         <div class="categorie">3. METHODES DE SUICIDE</div>
 
 
-    </div>
-
-    <div id="dots">
-        <img src="../static/img/full_dot.png" class="dots"> 
-        <img src="../static/img/full_dot.png" class="dots"> 
-        <img src="../static/img/full_dot.png" class="dots"> 
     </div>
 
 </div>
