@@ -1,4 +1,4 @@
-.creationcomment-bg {
+.creationpost-bg {
     /* background-color: #A89C62; */
     color: #595D3C;
 
@@ -14,7 +14,7 @@
     position: fixed;
 }
 
-.creation-comment-element {
+.creation-post-element {
     overflow: hidden;
     height: 500px;
     width: 800px;
@@ -28,12 +28,19 @@
     position: fixed;
 }
 
-#profil-name-create-comment {
+.creation-post-element h1 {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#profil-name-create-post {
     color: #595D3C;
     text-align: center;
     font-size: 50px;
 }
-.creationForm2 {
+.creationForm {
     display: block;
     text-align: center;
 }
@@ -58,8 +65,8 @@
     margin-bottom: 20px;
 }
 
-.profil-create-comment img {
-    width: 70px;
+.profil-create-post img {
+    width: 100px;
 }
 
 

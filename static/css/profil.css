@@ -21,8 +21,8 @@
 }
 
 #profil-pic {
-    width: 20%;
-    height: 20%;
+    width: 15%;
+    /* height: 20%; */
     margin: 10px;
 }
 
@@ -36,7 +36,7 @@
 #deco-button {
     border: 0px;
     border-radius: 10px;
-    padding: 3px;
+    padding: 5px;
     margin: 10px;
 
 }
@@ -46,9 +46,6 @@
     flex-direction: column;    
     justify-content: center;
     text-align: center;
-
-
-
 }
 
 .posts-profil {
@@ -69,4 +66,8 @@
 .posts-profil:hover {
     cursor: pointer;
     background-color: #7c7448;
+}
+
+#profil-data h2{
+    font-size: 30px;
 }
