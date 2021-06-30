@@ -51,14 +51,14 @@ func FiltreHome(w http.ResponseWriter, r *http.Request, filtre string) bdd.Page 
 	var page bdd.Page
 
 	if filtre == "likecroissant" {
-		filtres := FiltresLikeCroissant()
+		filtres := FiltresLikeDecroissant()
 
 		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
 
 	}
 
 	if filtre == "likedecroissant" {
-		filtres := FiltresLikeDecroissant()
+		filtres := FiltresLikeCroissant()
 
 		page = bdd.Page{Posts: filtres, Categories: bdd.GetCategory(20, 0)}
 
