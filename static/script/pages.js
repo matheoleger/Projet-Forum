@@ -1,27 +1,58 @@
 function valueFromUrl() {
 	url = window.location.href
-    post = url.match(/[?&]+post=?([^&]*)?/gi).toString()
-    postv = post.match(/\d/gi).toString()
-    postvalue = postv.replace(/,/g, '')
+    begin_url = url.match(/^.*(?=(\?))/gm).toString()
+
     perpage = url.match(/[?&]+perpage=?([^&]*)?/gi).toString()
     perpagev = perpage.match(/\d/gi).toString()
     perpagevalue = perpagev.replace(/,/g, '')
+
     page = url.match(/[?&]+page=?([^&]*)?/gi).toString()
     pagev = page.match(/\d/gi).toString()
     pagevalue = pagev.replace(/,/g, '')
 
-    console.log("postvalue=" + postvalue + "perpagevalue=" + perpagevalue + "pagevalue=" + pagevalue )
-    return [postvalue, perpagevalue, pagevalue]
+    post = url.match(/[?&]+post=?([^&]*)?/gi)
+    if (post != null ) {
+        spost = post.toString()
+        postv = spost.match(/\d/gi).toString()
+        postvalue = postv.replace(/,/g, '')
+
+        console.log("postvalue=" + postvalue + "perpagevalue=" + perpagevalue + "pagevalue=" + pagevalue )
+        return [perpagevalue, pagevalue, begin_url, postvalue]
+    }
+
+    category = url.match(/[?&]+category=?([^&]*)?/gi)
+    if (category != null ) {
+        scategory = category.toString()
+        categoryv = scategory.replace(/\?/g, '')
+        categoryvalue = categoryv.replace(/category=/g, '')
+
+        console.log("categoryvalue=" + categoryvalue + "perpagevalue=" + perpagevalue + "pagevalue=" + pagevalue )
+        return [perpagevalue, pagevalue, begin_url, categoryvalue]
+    }
+
+    console.log("perpagevalue=" + perpagevalue + "pagevalue=" + pagevalue )
+    return [perpagevalue, pagevalue, begin_url]
 }
 
 function nextPage() {
     values = valueFromUrl()
 
-    page = parseInt(values[2]) + 1
+    page = parseInt(values[1]) + 1
 
     console.log("next page" + values)
-    window.location.replace("/posts/content?post=" + values[0] + "&perpage=" + values[1] + "&page=" + page)
 
+    if (values[2] == "http://localhost:8080/posts/content") {
+        window.location.replace("/posts/content?post=" + values[3] + "&perpage=" + values[0] + "&page=" + page)
+
+    } else if (values[2] == "http://localhost:8080/posts") {
+        window.location.replace("/posts?category=" + values[3] + "&perpage=" + values[0] + "&page=" + page)
+
+    } else if (values[2] == "http://localhost:8080/categories") {
+        window.location.replace("/categories?perpage=" + values[0] + "&page=" + page)
+
+    } else {
+        window.location.replace("/")
+    }
 
     // le good regex = /[?&]+page=?([^&]*)?/gi
 }
@@ -29,12 +60,25 @@ function nextPage() {
 function previousPage() {
     values = valueFromUrl()
 
-    page = values[2]
+    page = values[1]
     if (page > 0) {
         page--
     }
 
-    window.location.replace("/posts/content?post=" + values[0] + "&perpage=" + values[1] + "&page=" + page)
+    console.log("next page" + values)
+
+    if (values[2] == "http://localhost:8080/posts/content") {
+        window.location.replace("/posts/content?post=" + values[3] + "&perpage=" + values[0] + "&page=" + page)
+
+    } else if (values[2] == "http://localhost:8080/posts") {
+        window.location.replace("/posts?category=" + values[3] + "&perpage=" + values[0] + "&page=" + page)
+
+    } else if (values[2] == "http://localhost:8080/categories") {
+        window.location.replace("/categories?perpage=" + values[0] + "&page=" + page)
+
+    } else {
+        window.location.replace("/")
+    }
 }
 
 function perPage(quantity) {
@@ -42,7 +86,18 @@ function perPage(quantity) {
 
     perpage = quantity
 
-    window.location.replace("/posts/content?post=" + values[0] + "&perpage=" + quantity + "&page=" + values[2])
+    if (values[2] == "http://localhost:8080/posts/content") {
+        window.location.replace("/posts/content?post=" + values[3] + "&perpage=" + perpage + "&page=" + values[1])
+
+    } else if (values[2] == "http://localhost:8080/posts") {
+        window.location.replace("/posts?category=" + values[3] + "&perpage=" + perpage + "&page=" + values[1])
+
+    } else if (values[2] == "http://localhost:8080/categories") {
+        window.location.replace("/categories?perpage=" + perpage + "&page=" + values[1])
+
+    } else {
+        window.location.replace("/")
+    }
 }
 
 let theSelect = document.querySelector('#perpage')

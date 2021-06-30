@@ -42,18 +42,32 @@
         {{ end }}
     {{ end }}
     {{if .Posts}}
-        {{ range .Posts }}      
-            <form action="/creationcomment?id_post={{ .Id_post }}" method="POST" class="creationForm2">
-                <div>
-                    <!-- <label for="postId"><b>id</b></label>
-                    <input type="text" name="postId" placeholder="Enter id of post" required> -->              
-                    <label for="postcontent"><b>Content</b></label>
-                    <textarea name="postcontent" placeholder="Enter content of your post" required></textarea> 
-                </div>
-                <button type="submit" id="submit_btn">PublYsh</button>
-            </form>
-        {{ end }}
-    {{ end }}         
+            <div class="post-list">
+                {{ range .Posts }}
+                    <div id="{{ .Id_post }}" class="posts" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
+                        <div>
+                            <div class="post-user-element">
+                                <img src="../static/img/user-btn.png"></img>
+                                <h1>{{ .Username }}</h1>
+                                <h4>{{ .Date }}</h4>
+                            </div>
+                            <h1 id="title">{{ .Title }}</h1>
+                            <p>{{ .Content }}</p>
+                        </div>
+                        <div class="btn-for-like">
+                            <button onclick="LikedPost('{{ .Id_post }}', 'true')">
+                                <img src="../static/img/arrow-like.png" class="like-btn-img liked-img">
+                            </button>
+                            <h2>{{ .Number_like }}</h2>
+                            <button onclick="LikedPost('{{ .Id_post }}', 'false')">
+                                <img src="../static/img/arrow-dislike.png" class="dislike-btn-img liked-img">    
+                            </button>
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+            
+        {{ end }}            
     </div>
     <div class="page-buttons">
         <button class="paginationbutton" type="submit" onclick="previousPage('page')"> Previous Page </button>
