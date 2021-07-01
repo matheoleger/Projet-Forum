@@ -1,0 +1,150 @@
+button {
+    cursor: pointer;
+}
+
+
+.posts-by-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category-of-posts {
+    background-color: #A89C62;
+    border-radius: 10px;
+    padding: 10px;
+    width : 700px;
+    margin: auto 10px;
+}
+
+.category-of-posts h1 {
+    color: #fff5e6;
+}
+
+.posts {
+    transition: ease 0.5s;
+    display: flex;
+    justify-content: space-between;
+    background-color: #A89C62;
+    color: #fff5e6;
+    padding: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+    width : 700px;
+    margin: 1%;
+}
+
+.posts:hover {
+    cursor: pointer;
+    background-color: #7c7448;
+}
+
+
+.post-user-element {
+    display: flex;
+}
+
+.post-user-element h1 {
+    margin: auto 10px;
+}
+
+#title {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 26px;
+}
+
+.posts p {
+    font-size: 20px;
+}
+
+.posts img {
+    height: 50px;
+}
+
+.comments {
+    transition: ease 0.5s;
+    background-color: #ded2c0;
+    color: #fff5e6;
+    padding: 8px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+    width : 500px;
+    margin-top: 10px;
+}
+
+.comments:hover {
+    cursor: pointer;
+    background-color: #cabfaf;
+}
+
+.comment-user-element {
+    display: flex;
+}
+
+.comment-user-element h1 {
+    margin: auto 10px;
+}
+
+.comments p {
+    font-size: 20px;
+}
+
+.comments img {
+    height: 50px;
+}
+
+.page-select {
+    margin-left: 1%;
+
+}
+
+.page-buttons {
+    display: flex;
+    justify-content: center;
+
+}
+
+.paginationbutton {
+    transition: ease 0.5s;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 30px;
+    background-color: #595D3C;
+    color: #FFF5E6;
+    font-family: inherit;
+    padding: 10px;
+    width: 100px;
+    /* margin: 10px auto; */
+    margin: 10px;
+}
+
+.paginationbutton:hover {
+    background-color: #40422b;
+}
+
+
+.btn-for-like button {
+    border: none;
+    background: none;
+}
+
+.btn-for-like {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.liked-img {
+    cursor: pointer;
+    transition: ease 0.5s;
+    width: 50px;
+}
+
+.liked-img:hover {
+    filter:hue-rotate(30deg) contrast(110%);
+}
+
+.post-content {
+    width: 700px;
+}

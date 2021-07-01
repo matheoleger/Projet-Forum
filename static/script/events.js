@@ -28,32 +28,3 @@ function setupFlipflop() {
 }
 
 setupFlipflop();
-
-
-
-
-// function dispatchEvent (eventClick) {
-
-//     if (flipflop = 0)
-
-//         (document.getElementById('headerToNavbar_button')) {
-
-//         enlargeDiv();
-//         flipflop = flipflop + 1;
-
-//         console.log(flipflop);
-//     }
-
-//     if (flipflop = 1)
-
-//     (MouseEvent.click((document.getElementById('headerToNavbar_button')))) {
-
-//         reduceDiv();
-//         flipflop = flipflop - 1;
-
-//         console.log(flipflop);
-//     }
-
-// if (MouseEvent.click((document.getElementById('headerToNavbar_button')))) {
-//     reduceDiv()
-// }

@@ -23,4 +23,3 @@ function showCreatePost() {
         isShowCreatePost = false;
     }
 }
-
