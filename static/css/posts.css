@@ -144,3 +144,7 @@ button {
 .liked-img:hover {
     filter:hue-rotate(30deg) contrast(110%);
 }
+
+.post-content {
+    width: 700px;
+}
