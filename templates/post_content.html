@@ -28,7 +28,7 @@
             </div>
             <!-- <button onclick="showCreateComment()">YPOSTER2</button> -->
         {{ end }}
-    {{ end }}
+    {{ end }}````
     {{if .Comments}}
         {{ range .Comments }}
                 <div id="{{ .Id_comment }}" class="comments" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
