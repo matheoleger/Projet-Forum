@@ -1,3 +1,8 @@
+button {
+    cursor: pointer;
+}
+
+
 .posts-by-category {
     display: flex;
     flex-direction: column;
@@ -13,7 +18,7 @@
 }
 
 .category-of-posts h1 {
-    
+    color: #fff5e6;
 }
 
 .posts {
@@ -26,13 +31,14 @@
     padding-bottom: 15px;
     border-radius: 10px;
     width : 700px;
-    margin-top: 10px;
+    margin: 1%;
 }
 
 .posts:hover {
     cursor: pointer;
     background-color: #7c7448;
 }
+
 
 .post-user-element {
     display: flex;
@@ -118,7 +124,7 @@
 }
 
 
-.post-list button {
+.btn-for-like button {
     border: none;
     background: none;
 }
@@ -126,6 +132,7 @@
 .btn-for-like {
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .liked-img {

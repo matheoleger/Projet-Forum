@@ -22,11 +22,12 @@ type Post struct {
 }
 
 type Comment struct {
-	Id_comment int
-	Content    string
-	Username   string
-	Post       string
-	LikeInfo   Like
+	Id_comment  int
+	Content     string
+	Username    string
+	Post        string
+	LikeInfo    Like
+	Number_like int
 }
 
 type User struct {

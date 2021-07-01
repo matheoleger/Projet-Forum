@@ -31,29 +31,41 @@
     {{ end }}````
     {{if .Comments}}
         {{ range .Comments }}
-                <div id="{{ .Id_comment }}" class="comments">
-                    <div class="comment-user-element">
-                        <img src="../static/img/user-btn.png"></img>
-                        <h1>{{ .Username }}</h1>
-                        <!-- <h4></h4> -->
+                <div id="{{ .Id_comment }}" class="comments" data-likeState="{{ .LikeInfo.LikeState }}" data-isliked="{{.LikeInfo.IsLiked}}">
+                    <div>
+                        <div class="comment-user-element">
+                            <img src="../static/img/user-btn.png"></img>
+                            <h1>{{ .Username }}</h1>
+                            <!-- <h4></h4> -->
+                        </div>
+                        <p>{{ .Content }}</p>
                     </div>
-                    <p>{{ .Content }}</p>
+                    <div class="btn-for-like">
+                        <button onclick="LikedComment('{{ .Id_comment }}', 'true')">
+                            <img src="../static/img/arrow-like.png" class="like-btn-img liked-img">
+                        </button>
+                        <h2>{{ .Number_like }}</h2>
+                        <button onclick="LikedComment('{{ .Id_comment }}', 'false')">
+                            <img src="../static/img/arrow-dislike.png" class="dislike-btn-img liked-img">    
+                        </button>
+                    </div>
                 </div>
         {{ end }}
     {{ end }}
     {{if .Posts}}
-        {{ range .Posts }}      
+        {{ range .Posts }}
+        <div class="create-comment-form">
+            <h2>Répondre au post</h2>
             <form action="/creationcomment?id_post={{ .Id_post }}" method="POST" class="creationForm2">
-                <div>
-                    <!-- <label for="postId"><b>id</b></label>
-                    <input type="text" name="postId" placeholder="Enter id of post" required> -->              
-                    <label for="postcontent"><b>Content</b></label>
+                <div>             
                     <textarea name="postcontent" placeholder="Enter content of your post" required></textarea> 
                 </div>
                 <button type="submit" id="submit_btn">PublYsh</button>
             </form>
+        </div>      
+
         {{ end }}
-    {{ end }}         
+    {{ end }}           
     </div>
     <div class="page-buttons">
         <button class="paginationbutton" type="submit" onclick="previousPage('page')"> Previous Page </button>

@@ -2,12 +2,30 @@
 
     <h1>Categories</h1>
 
-    {{ if .Categories }}
-        {{ range .Categories }}
-            <div>
-                <a href="/posts?category={{.Name}}&perpage=5&page=0">{{.Name}}</a>
-            </div>
+    <div class="page-select">
+        <select name="Elements par pages" id="perpage">
+            <option disabled selected value> -- Elements per pages -- </option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+        </select>  
+    </div>
+
+    <div class="categories">
+        {{ if .Categories }}
+            {{ range .Categories }}
+                <div class="category" onclick="window.location.href='/posts?category={{.Name}}&perpage=5&page=0'">
+                    <h1 class="category-p">{{.Name}}</h1>
+                </div>
+            {{ end }}
         {{ end }}
-    {{ end }}
+    </div>
+
+    <div class="page-buttons">
+        <button class="paginationbutton" type="submit" onclick="previousPage('page')"> Previous Page </button>
+        <button class="paginationbutton"  type="submit" onclick="nextPage('page')"> Next Page </button>
+    </div>
 
 {{end}}

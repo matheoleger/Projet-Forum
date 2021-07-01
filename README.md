@@ -21,12 +21,52 @@ export CGO_ENABLED=1
 
 # Déployer le forum
 
-Exécuter la commande 
+Pour lancer le forum, exécuter la commande suivante :
 ```bash 
 go run server.go
 ```
 
-# Structure du projet
+Voila le résulta attendu :  
+
+![](./static/img/lancementserv.PNG)
 
 
 # Architecture du projet
+
+Notre projet est constitué de plusieurs dossiers contenant eux même des sous-dossiers
+
+![](./static/img/archi.PNG)
+
+* Le dossier **BDD** contenant notre base de donnée
+
+* le dossier **src** contenant toutes les fonctions du back, en **go**
+
+*  le dossier **static**  contenant toutes les fonctions pour le front, donc en **css, javascript**
+
+* Et pour finir les **templates** en html,  **qui** perment d'afficher le forum 
+
+# Outils 
+
+Les différents outils exploité sont :
+
+> Golang  
+HTML  
+CSS  
+SQLITE  
+JAVASCRIPT
+
+
+# Equipe
+
+Chef de projet :
+
+```bash
+Mathéo léger
+```
+
+Suivi de trois membres :
+
+```bash
+Louis Brochard  
+Kévin GUYODO
+Nicolas Segura
