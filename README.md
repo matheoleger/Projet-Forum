@@ -70,3 +70,6 @@ Suivi de trois membres :
 Louis Brochard  
 Kévin GUYODO
 Nicolas Segura
+```
+
+### Attention : Nicolas a commit avec son compte github mais aussi en anonyme a cause d'un bug github
